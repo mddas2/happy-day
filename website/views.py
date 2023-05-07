@@ -30,7 +30,9 @@ def index(request):
         contact_section = HomeNavigation.objects.filter(page_type='contact').all().first()
         clients = HomeNavigation.objects.filter(page_type='blog')
         customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
-        Categories = Navigation.objects.filter(page_type='sale_group').order_by('position')
+        Categories = Navigation.objects.filter(parent_id=3).order_by('position')
+
+        # print(Categories.last().childs.first().name)
         # sub_category = Navigation.objects.filter(page_type="sale").order_by('position')
         # return HttpResponse(Categories)
         clientsobj = HomeNavigation.objects.filter(name='clients').all().first()
@@ -71,7 +73,7 @@ def index(request):
             'deal_of_the_week':deal_of_the_week,
             'special_offer':special_offer,
             'best_price':best_price,
-            'Categories':Categories,
+            'categories':Categories,
             'page_number':page_number,
             'customers':customers,
             'clients':clients,

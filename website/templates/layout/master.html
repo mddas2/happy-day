@@ -365,569 +365,128 @@
                                                 <div class="megamenu-pattern">
                                                     <div class="container-mega">
                                                         <ul class="megamenu">
-                                                            <li class="item-vertical  with-sub-menu hover">
-                                                                <p class="close-menu"></p>
-                                                                <a href="#" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico10.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Gifts & Toys</span>
-                                                                    <b class="fa-angle-right"></b>
-                                                                </a>
-                                                                <div class="sub-menu" data-subwidth="60">
-                                                                    <div class="content">
-                                                                        <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-4 static-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Apparel</a>
+                                                            <!------category start-->
+                                                            {% for cat in categories %}
+                                                                <li class="item-vertical  with-sub-menu hover">
+                                                                    <p class="close-menu"></p>
+                                                                    <a href="#" class="clearfix">
+                                                                        <img src="{% static 'assets_web/image/catalog/menu/icons/ico10.png' %}"
+                                                                            alt="icon">
+                                                                        <span>{{cat.name}} </span>
+                                                                        <b class="fa-angle-right"></b>
+                                                                    </a>
+                                                                    <div class="sub-menu" data-subwidth="60">
+                                                                        <div class="content">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="row">
+                                                                                        <!--------subcategory start------->
+                                                                                        {% for subcat in cat.childs.all %}
+                                                                                            <div class="col-md-4 static-menu">
+                                                                                                <div class="menu">
                                                                                                     <ul>
-                                                                                                        <li><a href="category.html">Accessories
-                                                                                                                for
-                                                                                                                Tablet
-                                                                                                                PC</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Accessories
-                                                                                                                for i
-                                                                                                                Pad</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Accessories
-                                                                                                                for
-                                                                                                                iPhone</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Bags,
-                                                                                                                Holiday
-                                                                                                                Supplies</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Car
-                                                                                                                Alarms
-                                                                                                                and
-                                                                                                                Security</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Car
-                                                                                                                Audio
-                                                                                                                &amp;
-                                                                                                                Speakers</a>
-                                                                                                        </li>
+                                                                                                        <!----sub sub start-->
+                                                                                                            {% for subsubcat in subcat.childs.all %}
+                                                                                                                <li>
+                                                                                                                    <a href="#"
+                                                                                                                        class="main-menu">Apparel</a>
+                                                                                                                    <ul>
+                                                                                                                        <li><a href="category.html">Accessories
+                                                                                                                                for
+                                                                                                                                Tablet
+                                                                                                                                PC</a>
+                                                                                                                        </li>
+                                                                                                                        <li><a href="category.html">Accessories
+                                                                                                                                for i
+                                                                                                                                Pad</a>
+                                                                                                                        </li>
+                                                                                                                        <li><a href="category.html">Accessories
+                                                                                                                                for
+                                                                                                                                iPhone</a>
+                                                                                                                        </li>
+                                                                                                                        <li><a href="category.html">Bags,
+                                                                                                                                Holiday
+                                                                                                                                Supplies</a>
+                                                                                                                        </li>
+                                                                                                                        <li><a href="category.html">Car
+                                                                                                                                Alarms
+                                                                                                                                and
+                                                                                                                                Security</a>
+                                                                                                                        </li>
+                                                                                                                        <li><a href="category.html">Car
+                                                                                                                                Audio
+                                                                                                                                &amp;
+                                                                                                                                Speakers</a>
+                                                                                                                        </li>
+                                                                                                                    </ul>
+                                                                                                                </li>
+                                                                                                            {% endfor %}
+                                                                                                        <!----sub sub start-->
                                                                                                     </ul>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Cables
-                                                                                                        &amp;
-                                                                                                        Connectors</a>
-                                                                                                    <ul>
-                                                                                                        <li><a href="category.html">Cameras
-                                                                                                                &amp;
-                                                                                                                Photo</a>
-                                                                                                        </li>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Electronics</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Outdoor
-                                                                                                                &amp;
-                                                                                                                Traveling</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-4 static-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Camping
-                                                                                                        &amp; Hiking</a>
-                                                                                                    <ul>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Earings</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Shaving
-                                                                                                                &amp;
-                                                                                                                Hair
-                                                                                                                Removal</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Salon
-                                                                                                                &amp;
-                                                                                                                Spa
-                                                                                                                Equipment</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Smartphone
-                                                                                                        &amp;
-                                                                                                        Tablets</a>
-                                                                                                    <ul>
-                                                                                                        <li><a href="category.html">Sports
-                                                                                                                &amp;
-                                                                                                                Outdoors</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Bath
-                                                                                                                &amp;
-                                                                                                                Body</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Gadgets
-                                                                                                                &amp;
-                                                                                                                Auto
-                                                                                                                Parts</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-4 static-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Bags,
-                                                                                                        Holiday
-                                                                                                        Supplies</a>
-                                                                                                    <ul>
-                                                                                                        <li><a href="category.html"
-                                                                                                                onclick="window.location = '18_46';">Battereries
-                                                                                                                &amp;
-                                                                                                                Chargers</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html"
-                                                                                                                onclick="window.location = '24_64';">Bath
-                                                                                                                &amp;
-                                                                                                                Body</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html"
-                                                                                                                onclick="window.location = '18_45';">Headphones,
-                                                                                                                Headsets</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html"
-                                                                                                                onclick="window.location = '18_30';">Home
-                                                                                                                Audio</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        {% endfor %}
+                                                                                        <!--------subcategory end------->
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="item-vertical">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico1.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Fashion & Accessories</span>
+                                                                </li>
+                                                            {% endfor %}
+                                                            <!-------close  category-->
+                                                            
+                                                    <li class="item-vertical css-menu with-sub-menu hover">
+                                                        <p class="close-menu"></p>
+                                                        <a href="#" class="clearfix">
 
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical  style1 with-sub-menu hover">
-                                                                <p class="close-menu"></p>
-                                                                <a href="#" class="clearfix">
-                                                                    <span class="label"></span>
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico9.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Electronic</span>
-
-                                                                    <b class="fa-angle-right"></b>
-                                                                </a>
-                                                                <div class="sub-menu" data-subwidth="40">
-                                                                    <div class="content">
+                                                            <img src="{% static 'assets_web/image/catalog/menu/icons/ico6.png' %}"
+                                                                alt="icon">
+                                                            <span>Smartphone &amp; Tablets</span>
+                                                            <b class="fa-angle-right"></b>
+                                                        </a>
+                                                        <div class="sub-menu" data-subwidth="20">
+                                                            <div class="content">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
                                                                         <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-12 static-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li><a href="#"
-                                                                                                        class="main-menu">Smartphone</a>
-                                                                                                    <ul>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Esdipiscing</a>
-                                                                                                        </li>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Scanners</a>
-                                                                                                        </li>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Apple</a>
-                                                                                                        </li>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Dell</a>
-                                                                                                        </li>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Scanners</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                                <li><a href="#"
-                                                                                                        class="main-menu">Electronics</a>
-                                                                                                    <ul>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Asdipiscing</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Diam
-                                                                                                                sit</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Labore
-                                                                                                                et</a>
-                                                                                                        </li>
-                                                                                                        <li><a
-                                                                                                                href="category.html">Monitors</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <!-- <div class="col-md-6">
-                                                                                <div class="row banner">
-                                                                                    <a href="#">
-                                                                                        <img src="{% static 'assets_web/image/catalog/menu/megabanner/vbanner1.jpg' %}"
-                                                                                            alt="banner1">
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div> -->
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="item-vertical with-sub-menu hover">
-                                                                <p class="close-menu"></p>
-                                                                <a href="#" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico7.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Health &amp; Beauty</span>
-                                                                    <b class="fa-angle-right"></b>
-                                                                </a>
-                                                                <div class="sub-menu" data-subwidth="60">
-                                                                    <div class="content">
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-4 static-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Car
-                                                                                                        Alarms and
-                                                                                                        Security</a>
-                                                                                                    <ul>
-                                                                                                        <li><a href="category.html">Car
-                                                                                                                Audio
-                                                                                                                &amp;
-                                                                                                                Speakers</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Gadgets
-                                                                                                                &amp;
-                                                                                                                Auto
-                                                                                                                Parts</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Gadgets
-                                                                                                                &amp;
-                                                                                                                Auto
-                                                                                                                Parts</a>
-                                                                                                        </li>
-                                                                                                        <li><a href="category.html">Headphones,
-                                                                                                                Headsets</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="24"
-                                                                                                        onclick="window.location = '24';"
-                                                                                                        class="main-menu">Health
-                                                                                                        &amp; Beauty</a>
-                                                                                                    <ul>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Home
-                                                                                                                Audio</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Helicopters
-                                                                                                                &amp;
-                                                                                                                Parts</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Outdoor
-                                                                                                                &amp;
-                                                                                                                Traveling</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Toys
-                                                                                                                &amp;
-                                                                                                                Hobbies</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-4 static-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Electronics</a>
-                                                                                                    <ul>
-                                                                                                        <li>
-                                                                                                            <a
-                                                                                                                href="category.html">Earings</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Salon
-                                                                                                                &amp;
-                                                                                                                Spa
-                                                                                                                Equipment</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Shaving
-                                                                                                                &amp;
-                                                                                                                Hair
-                                                                                                                Removal</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Smartphone
-                                                                                                                &amp;
-                                                                                                                Tablets</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Sports
-                                                                                                        &amp;
-                                                                                                        Outdoors</a>
-                                                                                                    <ul>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Flashlights
-                                                                                                                &amp;
-                                                                                                                Lamps</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a
-                                                                                                                href="category.html">Fragrances</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a
-                                                                                                                href="category.html">Fishing</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">FPV
-                                                                                                                System
-                                                                                                                &amp;
-                                                                                                                Parts</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-4 static-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">More
-                                                                                                        Car
-                                                                                                        Accessories</a>
-                                                                                                    <ul>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Lighter
-                                                                                                                &amp;
-                                                                                                                Cigar
-                                                                                                                Supplies</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Mp3
-                                                                                                                Players
-                                                                                                                &amp;
-                                                                                                                Accessories</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Men
-                                                                                                                Watches</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Mobile
-                                                                                                                Accessories</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="main-menu">Gadgets
-                                                                                                        &amp; Auto
-                                                                                                        Parts</a>
-                                                                                                    <ul>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Gift
-                                                                                                                &amp;
-                                                                                                                Lifestyle
-                                                                                                                Gadgets</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Gift
-                                                                                                                for
-                                                                                                                Man</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Gift
-                                                                                                                for
-                                                                                                                Woman</a>
-                                                                                                        </li>
-                                                                                                        <li>
-                                                                                                            <a href="category.html">Gift
-                                                                                                                for
-                                                                                                                Woman</a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
+                                                                            <div class="col-sm-12 hover-menu">
+                                                                                <div class="menu">
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <a href="category.html"
+                                                                                                class="main-menu">Headphones,
+                                                                                                Headsets</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="category.html"
+                                                                                                class="main-menu">Home
+                                                                                                Audio</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="category.html"
+                                                                                                class="main-menu">Health
+                                                                                                &amp; Beauty</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="category.html"
+                                                                                                class="main-menu">Helicopters
+                                                                                                &amp; Parts</a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="category.html"
+                                                                                                class="main-menu">Helicopters
+                                                                                                &amp; Parts</a>
+                                                                                        </li>
+                                                                                    </ul>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </li>
-                                                            <li class="item-vertical css-menu with-sub-menu hover">
-                                                                <p class="close-menu"></p>
-                                                                <a href="#" class="clearfix">
-
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico6.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Smartphone &amp; Tablets</span>
-                                                                    <b class="fa-angle-right"></b>
-                                                                </a>
-                                                                <div class="sub-menu" data-subwidth="20">
-                                                                    <div class="content">
-                                                                        <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 hover-menu">
-                                                                                        <div class="menu">
-                                                                                            <ul>
-                                                                                                <li>
-                                                                                                    <a href="category.html"
-                                                                                                        class="main-menu">Headphones,
-                                                                                                        Headsets</a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="category.html"
-                                                                                                        class="main-menu">Home
-                                                                                                        Audio</a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="category.html"
-                                                                                                        class="main-menu">Health
-                                                                                                        &amp; Beauty</a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="category.html"
-                                                                                                        class="main-menu">Helicopters
-                                                                                                        &amp; Parts</a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="category.html"
-                                                                                                        class="main-menu">Helicopters
-                                                                                                        &amp; Parts</a>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="item-vertical">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico5.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Health & Beauty</span>
-
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico4.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Bathroom</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico3.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Metallurgy</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html." class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico2.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Bedroom</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical">
-                                                                <p class="close-menu"></p>
-
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico1.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Health &amp; Beauty</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical" style="display: none;">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico11.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Toys &amp; Hobbies </span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical" style="display: none;">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico12.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Jewelry &amp; Watches</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical" style="display: none;">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico9.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Home &amp; Lights</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="item-vertical" style="display: none;">
-                                                                <p class="close-menu"></p>
-                                                                <a href="category.html" class="clearfix">
-                                                                    <img src="{% static 'assets_web/image/catalog/menu/icons/ico6.png' %}"
-                                                                        alt="icon">
-                                                                    <span>Metallurgy</span>
-                                                                </a>
-                                                            </li>
+                                                            </div>
+                                                        </div>
+                                                    </li>
 
                                                             <li class="loadmore">
                                                                 <i class="fa fa-plus-square-o"></i>
