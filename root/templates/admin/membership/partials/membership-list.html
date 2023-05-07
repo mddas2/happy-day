@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">User Overview</h5>
+                <div class="table-responsive m-t-30">
+                    <table class="table product-overview">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>discount shipping status</th>
+                                <th>is shipping free</th>
+                                <th>discount %</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <style>
+                                .sucessful-update{
+                                    background-color: #00c55899 !important;
+                                }
+                            </style>
+                            {% for membership_type in membership_types %}
+                                <tr {% if request.session.user_id == user.id %} class="sucessful-update" {% endif %}>
+                                <td>{{membership_type.id}}</td>
+                                <td>{{membership_type.name}}</td>
+                                <td><span class="label label-{% if membership_type.discount_shipping_apply == False %}primary{%else%}success{%endif%}">{{membership_type.discount_shipping_apply}}</span></td>
+                                <td><span class="label label-{% if membership_type.is_shipping_free == False %}primary{%else%}success{%endif%}">{{membership_type.is_shipping_free}}</span></td>
+                                <td>{{membership_type.discount}}</td>                        
+                                    <td>
+                                        <a href="{% url 'MemberShipCreate' id=membership_type.id %}" class="text-inverse p-r-10" data-bs-toggle="tooltip" title="" data-original-title="Edit">
+                                            <i class="ti-marker-alt"></i>
+                                        </a> 
+                                        <!-- <form action="{% url 'MemberShipDelete' id=membership_type.id %}" method="POST"> -->
+                                            <!-- <a href="#" id = "{{membership_type.id}}" class="text-inverse membership_type_delete" title="" data-bs-toggle="tooltip" data-original-title="Delete">
+                                                <i class="ti-trash"></i>
+                                            </a>                                       -->
+                                    </td>
+                                </tr>
+                            {% endfor %}                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".membership_type_delete").click(function(){
+        var delete_id = this.id;
+        alert(delete_id)
+    })
+</script>

@@ -1,0 +1,102 @@
+     <!-- Info box Content -->
+                <!-- ============================================================= -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                {%if id_data%}
+                                    <form action="{% url action id=id_data.id %}" method="post" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
+                                    {%else%}
+                                    <form action="{% url action %}" method="post" enctype="multipart/form-data" enctype="multipart/form-data" onSubmit = "return checkPassword(this)">
+                                {%endif%}
+                                {% csrf_token %}
+                                    <div class="form-body">
+                                        <h5 class="card-title">Add Membership</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">Membership Name</label>
+                                                    <input type="text" id="first" name="name" class="form-control" value="{{ id_data.name }}" required>
+                                                </div>
+                                            </div>                                           
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="form-label">Discount Shipping Apply</label>
+                                                    <br/>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline1" name="discount_shipping_apply" id="discount_shipping_apply_id" class="form-check-input discount_shipping_apply" value="1" {% if id_data.discount_shipping_apply == True %} checked {% endif %}>
+                                                        <label class="form-check-label" for="customRadioInline1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline2" name="discount_shipping_apply" class="form-check-input discount_shipping_apply" value="0" {% if id_data.discount_shipping_apply == False %} checked {% endif %} >
+                                                        <label class="form-check-label" for="customRadioInline2">No</label>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                         
+                                            <div class="col-md-3 hide_apply">
+                                                <div class="form-group">
+                                                    <label class="form-label">Is Shipping Free</label>
+                                                    <br/>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" name="is_shipping_free" class="form-check-input is_shipping_free" value="1" {% if id_data.is_shipping_free == True %} checked {% endif %}>
+                                                        <label class="form-check-label" for="customRadioInline1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadioInline2" name="is_shipping_free" class="form-check-input is_shipping_free" value="0" {% if id_data.is_shipping_free == False %} checked {% endif %}>
+                                                        <label class="form-check-label" for="customRadioInline2">No</label>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-md-3 hide_apply">
+                                                <div class="form-group">
+                                                    <label class="form-label">Discount</label>
+                                                    <input type="number"  name="discount" class="form-control" value="{{id_data.discount}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <div class="form-actions m-t-40">
+                                        <button type="submit" class="btn btn-success text-white"> <i class="fa fa-check"></i> Save</button>
+                                        <button type="button" class="btn btn-dark">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+<script>
+    $(".discount_shipping_apply").change(function(){
+        
+        if(this.checked){
+           a = $(this).val()
+           if(a=="0"){
+             $(".hide_apply").hide()
+           }
+           else{
+             $(".hide_apply").show()
+           }
+        }
+    })
+
+    window.onload = function() {
+        const sh = $('input[name="discount_shipping_apply"]:checked').val();
+ 
+        if(sh=="0")
+        {
+            $(".hide_apply").hide()
+        }
+        else{
+            $(".hide_apply").show()
+        }
+    };
+
+    
+</script>
+             
+                
+                
