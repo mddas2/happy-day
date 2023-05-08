@@ -372,7 +372,7 @@
                                                                     <a href="#" class="clearfix">
                                                                         <img src="{% static 'assets_web/image/catalog/menu/icons/ico10.png' %}"
                                                                             alt="icon">
-                                                                        <span>{{cat.name}} </span>
+                                                                        <span>{{cat.name}}</span>
                                                                         <b class="fa-angle-right"></b>
                                                                     </a>
                                                                     <div class="sub-menu" data-subwidth="60">
@@ -381,51 +381,65 @@
                                                                                 <div class="col-sm-12">
                                                                                     <div class="row">
                                                                                         <!--------subcategory start------->
-                                                                                        {% for subcat in cat.childs.all %}
-                                                                                            <div class="col-md-4 static-menu">
-                                                                                                <div class="menu">
-                                                                                                    <ul>
+                                                                                        <!---loop start that describe layer-->
+                                                                                            
                                                                                                         <!----sub sub start-->
-                                                                                                            {% for subsubcat in subcat.childs.all %}
+                                                                                                        {% with compare_loop=0 %}
+                                                                                                        {% for subcat in cat.childs.all %}                                                                                                       
+                                                                                                                {% if forloop.counter|divisibleby:3 or forloop.counter == 1 %}
+                                                                                                                    {% if forloop.counter == 1 %}
+                                                                                                                        <script>alert("1 open {{subcat.name}}")</script>
+                                                                                                                        <div class="col-md-4 static-menu">
+                                                                                                                            <div class="menu">
+                                                                                                                                <ul>
+                                                                                                                    {% endif %}
+                                                                                                                    {% if forloop.counter|divisibleby:3 %}
+                                                                                                                        <script>alert("divisible  by 3 {{forloop.counter}}")</script>
+                                                                                                                        <div class="col-md-4 static-menu">
+                                                                                                                            <div class="menu">
+                                                                                                                                <ul>
+                                                                                                                        {% with compare_loop=6 %}
+                                                                                                                        {% endwith %}
+                                                                                                                        <script>
+                                                                                                                            alert("{{ compare_loop }}")
+                                                                                                                        </script>
+                                                                                                                    {% endif %}
+                                                                                                                   
+                                                                                                                  
+                                                                                                                {%endif%}
                                                                                                                 <li>
                                                                                                                     <a href="#"
-                                                                                                                        class="main-menu">Apparel</a>
+                                                                                                                        class="main-menu">{{subcat.name}}</a>
+                                                                                                                        <script>alert('{{forloop.counter}},compare loop {{compare_loop}}')</script>
                                                                                                                     <ul>
-                                                                                                                        <li><a href="category.html">Accessories
-                                                                                                                                for
-                                                                                                                                Tablet
-                                                                                                                                PC</a>
-                                                                                                                        </li>
-                                                                                                                        <li><a href="category.html">Accessories
-                                                                                                                                for i
-                                                                                                                                Pad</a>
-                                                                                                                        </li>
-                                                                                                                        <li><a href="category.html">Accessories
-                                                                                                                                for
-                                                                                                                                iPhone</a>
-                                                                                                                        </li>
-                                                                                                                        <li><a href="category.html">Bags,
-                                                                                                                                Holiday
-                                                                                                                                Supplies</a>
-                                                                                                                        </li>
-                                                                                                                        <li><a href="category.html">Car
-                                                                                                                                Alarms
-                                                                                                                                and
-                                                                                                                                Security</a>
-                                                                                                                        </li>
-                                                                                                                        <li><a href="category.html">Car
-                                                                                                                                Audio
-                                                                                                                                &amp;
-                                                                                                                                Speakers</a>
-                                                                                                                        </li>
+                                                                                                                        <!----sub sub category---->
+                                                                                                                        {% for subsubcat in subcat.childs.all %}
+                                                                                                                            <li><a href="category.html">{{subsubcat.name}}</a>
+                                                                                                                            </li>                                                                                                                           
+                                                                                                                        {% endfor %}
+                                                                                                                        <!-----end subcategory------>
                                                                                                                     </ul>
                                                                                                                 </li>
-                                                                                                            {% endfor %}
+                                                                                                                {% if forloop.counter|divisibleby:3 or forloop.last %}
+                                                                                                                        {% if forloop.last %}
+                                                                                                                            <script>alert("1 closed")</script>
+                                                                                                                                    </ul>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        {% endif %}     
+                                                                                                                        {% if forloop.counter == compare_loop %} 
+                                                                                                                                        <script>alert("3 closed {{compare_loop}}")</script>
+                                                                                                                                    </ul>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        {% endif %}
+                                                                                                                {%endif%}
+                                                                                                             
+                                                                                                        {% endfor %}
+                                                                                                        {% endwith %}
                                                                                                         <!----sub sub start-->
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        {% endfor %}
+                                                                                                 
+                                                                                        <!---loop end that describe layer-->
                                                                                         <!--------subcategory end------->
                                                                                     </div>
                                                                                 </div>

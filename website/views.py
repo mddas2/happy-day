@@ -32,7 +32,7 @@ def index(request):
         customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
         Categories = Navigation.objects.filter(parent_id=3).order_by('position')
 
-        # print(Categories.last().childs.first().name)
+        print(Categories.last().childs.first().name)
         # sub_category = Navigation.objects.filter(page_type="sale").order_by('position')
         # return HttpResponse(Categories)
         clientsobj = HomeNavigation.objects.filter(name='clients').all().first()
