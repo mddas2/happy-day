@@ -30,6 +30,8 @@ def index(request):
         contact_section = HomeNavigation.objects.filter(page_type='contact').all().first()
         clients = HomeNavigation.objects.filter(page_type='blog')
         customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
+        happy_customer = HomeNavigation.objects.filter(name="Happy_Customers").order_by('-updated_at').first().childs.all()
+        
         Categories = Navigation.objects.filter(parent_id=3).order_by('position')[:7]
 
         # sub_category = Navigation.objects.filter(page_type="sale").order_by('position')
@@ -82,7 +84,8 @@ def index(request):
             'product':product,
             'sliders':sliders,
             'clientschild':clientschild,
-            'pemplatechild':pemplatechild
+            'pemplatechild':pemplatechild,
+            'happy_customer' : happy_customer,
         }
         try:
             temp_id = request.user.c_id
