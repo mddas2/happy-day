@@ -56,102 +56,15 @@
                                               data-items_column1="1" data-items_column2="1" data-items_column3="1"
                                               data-items_column4="1" data-arrows="no" data-lazyload="yes"
                                               data-loop="no" data-buttonpage="top">
-                                              <div class="item ">
-                                                  <div class="product-layout item-inner style1 ">
-                                                      <div class="item-image">
-                                                          <div class="item-img-info">
-                                                              <a href="product.html" target="_self"
-                                                                  title="Mandouille short ">
-                                                                  <img src="{% static 'assets_web/image/catalog/demo/product/80/01.jpg' %}"
-                                                                      alt="Mandouille short">
-                                                              </a>
-                                                          </div>
-
-                                                      </div>
-                                                      <div class="item-info">
-                                                          <div class="item-title">
-                                                              <a href="product.html" target="_self"
-                                                                  title="Mandouille short">Mandouille short </a>
-                                                          </div>
-                                                          <div class="rating">
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star-o fa-stack-2x"></i></span>
-                                                          </div>
-                                                          <div class="content_price price">
-                                                              <span>MRP</span>
-                                                              <span class="price-new product-price">$ 55.00
-                                                              </span>&nbsp;&nbsp;
-
-                                                              <!-- <span class="price-old">$76.00 </span>&nbsp; -->
-                                                              <br>
-                                                              <span>Members Price: $40</span>
-
-                                                          </div>
-                                                      </div>
-                                                      <!-- End item-info -->
-                                                      <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
-                                                  <div class="product-layout item-inner style1 ">
-                                                      <div class="item-image">
-                                                          <div class="item-img-info">
-                                                              <a href="product.html" target="_self"
-                                                                  title="Xancetta bresao ">
-                                                                  <img src="{% static 'assets_web/image/catalog/demo/product/80/02 (1).jpg' %}"
-                                                                      alt="Xancetta bresao">
-                                                              </a>
-                                                          </div>
-
-                                                      </div>
-                                                      <div class="item-info">
-                                                          <div class="item-title">
-                                                              <a href="product.html" target="_self"
-                                                                  title="Xancetta bresao">
-                                                                  Xancetta bresao
-                                                              </a>
-                                                          </div>
-                                                          <div class="rating">
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                              <span class="fa fa-stack"><i
-                                                                      class="fa fa-star fa-stack-2x"></i></span>
-                                                          </div>
-                                                          <div class="content_price price">
-                                                              <span>MPR</span>
-                                                              <span class="price-new product-price">$80.00
-                                                              </span>&nbsp;&nbsp;
-
-                                                              <br>
-                                                              <span>Members Price: $75</span>
-
-
-
-                                                          </div>
-                                                      </div>
-                                                      <!-- End item-info -->
-                                                      <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
+                                              <!---slidder 1-->
+                                              <div class="item ">      
+                                                {% for best_selling in product %}                                      
                                                   <div class="product-layout item-inner style1 ">
                                                       <div class="item-image">
                                                           <div class="item-img-info">
                                                               <a href="product.html" target="_self"
                                                                   title="Sausage cowbee ">
-                                                                  <img src="{% static 'assets_web/image/catalog/demo/product/80/03 (1).jpg' %}"
+                                                                  <img src="{% if best_selling.image1 %} {{best_selling.image1.url}} {% endif %}"
                                                                       alt="Sausage cowbee">
                                                               </a>
                                                           </div>
@@ -188,59 +101,16 @@
                                                       </div>
                                                       <!-- End item-info -->
                                                       <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
-                                                  <div class="product-layout item-inner style1 ">
-                                                      <div class="item-image">
-                                                          <div class="item-img-info">
-                                                              <a href="#" target="_self" title="Chicken swinesha ">
-                                                                  <img src="{% static 'assets_web/image/catalog/demo/product/80/04 (1).jpg' %}"
-                                                                      alt="Chicken swinesha">
-                                                              </a>
-                                                          </div>
-
-                                                      </div>
-                                                      <div class="item-info">
-                                                          <div class="item-title">
-                                                              <a href="#" target="_self" title="Chicken swinesha">
-                                                                  Chicken swinesha
-                                                              </a>
-                                                          </div>
-                                                          <div class="rating">
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                          </div>
-                                                          <div class="content_price price">
-                                                              <span>MPR</span>
-                                                              <span class="price-new product-price">$45.00
-                                                              </span>&nbsp;&nbsp;
-
-                                                              <br>
-                                                              <span>Members Price: $45</span>
-
-
-
-                                                          </div>
-                                                      </div>
-                                                      <!-- End item-info -->
-                                                      <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
+                                                  </div> 
+                                                  {% if foreloop.counter >= 3 %}
+                                                  {% break %}
+                                                {% endfor %} 
+                                                                                           
                                               </div>
+                                              <!----slidder 1 close -->
+                                              <!----slidder 2 start -->
                                               <div class="item ">
+                                                {% for best_selling in product %} 
                                                   <div class="product-layout item-inner style1 ">
                                                       <div class="item-image">
                                                           <div class="item-img-info">
@@ -285,156 +155,11 @@
                                                       </div>
                                                       <!-- End item-info -->
                                                       <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
-                                                  <div class="product-layout item-inner style1 ">
-                                                      <div class="item-image">
-                                                          <div class="item-img-info">
-                                                              <a href="#" target="_self" title="Consecte quichuck ">
-                                                                  <img src="{% static 'assets_web/image/catalog/demo/product/80/06 (1).jpg' %}"
-                                                                      alt="Consecte quichuck">
-                                                              </a>
-                                                          </div>
-
-                                                      </div>
-                                                      <div class="item-info">
-                                                          <div class="item-title">
-                                                              <a href="#" target="_self" title="Consecte quichuck">
-                                                                  Consecte quichuck
-                                                              </a>
-                                                          </div>
-                                                          <div class="rating">
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                          </div>
-                                                          <div class="content_price price">
-                                                              <span>MPR</span>
-                                                              <span class="price-new product-price">$55.00
-                                                              </span>&nbsp;&nbsp;
-
-                                                              <br>
-                                                              <span>Members Price: $50</span>
-
-
-
-                                                          </div>
-                                                      </div>
-                                                      <!-- End item-info -->
-                                                      <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
-                                                  <div class="product-layout item-inner style1 ">
-                                                      <div class="item-image">
-                                                          <div class="item-img-info">
-                                                              <a href="#" target="_self" title="Neatball bresaola ">
-                                                                  <img src="{% static 'assets_web/image/catalog/demo/product/80/07 (1).jpg' %}"
-                                                                      alt="Neatball bresaola">
-                                                              </a>
-                                                          </div>
-
-                                                      </div>
-                                                      <div class="item-info">
-                                                          <div class="item-title">
-                                                              <a href="#" target="_self" title="Neatball bresaola">
-                                                                  Neatball bresaola
-                                                              </a>
-                                                          </div>
-                                                          <div class="rating">
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                          </div>
-                                                          <div class="content_price price">
-                                                              <span>MPR</span>
-                                                              <span class="price-new product-price">$65.00
-                                                              </span>&nbsp;&nbsp;
-
-                                                              <br>
-                                                              <span>Members Price: $50</span>
-
-
-
-                                                          </div>
-                                                      </div>
-                                                      <!-- End item-info -->
-                                                      <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
-                                                  <div class="product-layout item-inner style1 ">
-                                                      <div class="item-image">
-                                                          <div class="item-img-info">
-                                                              <a href="#" target="_self" title="Yutculpa ullamco ">
-                                                                  <img src="{% static 'assets_web/image/catalog/demo/product/80/08 (1).jpg' %}"
-                                                                      alt="Yutculpa ullamco">
-                                                              </a>
-                                                          </div>
-
-                                                      </div>
-                                                      <div class="item-info">
-                                                          <div class="item-title">
-                                                              <a href="#" target="_self" title="Yutculpa ullamco">
-                                                                  Yutculpa ullamco
-                                                              </a>
-                                                          </div>
-                                                          <div class="rating">
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                              <span class="fa fa-stack">
-                                                                  <i class="fa fa-star fa-stack-2x"></i>
-                                                              </span>
-                                                          </div>
-                                                          <div class="content_price price">
-                                                              <span>MPR</span>
-                                                              <span class="price-new product-price">$60.00
-                                                              </span>&nbsp;&nbsp;
-
-                                                              <br>
-                                                              <span>Members Price: $55</span>
-
-
-
-                                                          </div>
-                                                      </div>
-                                                      <!-- End item-info -->
-                                                      <!-- End item-wrap-inner -->
-                                                  </div>
-                                                  <!-- End item-wrap -->
+                                                  </div>       
+                                                {% endfor %}                                     
                                               </div>
+                                              <!----slidder 2 end-->
+
                                           </div>
                                           <!--End extraslider-inner -->
                                       </div>
@@ -935,50 +660,16 @@
                                   data-items_column2="3" data-items_column3="2" data-items_column4="1"
                                   data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no"
                                   data-hoverpause="yes">
-                                  <div class="content-box">
-                                      <div class="image-cat">
-                                          <a href="category.html" title="Electronics">
-                                              <img src="{% static 'assets_web/image/catergories/cate1.jpg' %}" alt="img">
-                                          </a>
-                                      </div>
-                                      <div class="cat-title">
-                                          <a href="category.html" title="Electronics">
-                                              Electronics
-                                          </a>
-                                      </div>
-                                  </div>
-                                  <div class="content-box">
-                                      <div class="image-cat"><a href="category.html" title="Iwatch & Accessories"><img
-                                                  src="{% static 'assets_web/image/catergories/cate1 (1).jpg' %}" alt="img"></a></div>
-                                      <div class="cat-title"><a href="category.html" title="Iwatch & Accessories">Electronics</a>
-                                      </div>
-                                  </div>
-                                  <div class="content-box">
-                                      <div class="image-cat"><a href="category.html" title="Furnicoms"><img
-                                                  src="{% static 'assets_web/image/catergories/cate1.jpg' %}" alt="img"></a></div>
-                                      <div class="cat-title"><a href="category.html" title="Furnicoms">Furnicoms</a></div>
-                                  </div>
-                                  <div class="content-box">
-                                      <div class="image-cat"><a href="category.html" title="Fashion"><img
-                                                  src="{% static 'assets_web/image/catergories/cate2.jpg' %}" alt="img"></a></div>
-                                      <div class="cat-title"><a href="category.html" title="Fashion">Fashion</a></div>
-                                  </div>
-                                  <div class="content-box">
-                                      <div class="image-cat"><a href="category.html" title="Health & Beauty"><img
-                                                  src="{% static 'assets_web/image/catergories/cate3.jpg' %}" alt="img"></a></div>
-                                      <div class="cat-title"><a href="category.html" title="Health & Beauty">Health & Beauty</a>
-                                      </div>
-                                  </div>
-                                  <div class="content-box">
-                                      <div class="image-cat"><a href="category.html" title="Electronics"><img
-                                                  src="{% static 'assets_web/image/catergories/cate4.jpg' %}" alt="img"></a></div>
-                                      <div class="cat-title"><a href="category.html" title="Electronics">Electronics</a></div>
-                                  </div>
-                                  <div class="content-box">
-                                      <div class="image-cat"><a href="category.html" title="Watches"><img
-                                                  src="{% static 'assets_web/image/catergories/cate5.jpg' %}" alt="img"></a></div>
-                                      <div class="cat-title"><a href="category.html" title="Watches">Watches</a></div>
-                                  </div>
+                                  <!--------category------->
+                                   {% for cat in categories %}
+                                        <div class="content-box">
+                                            <div class="image-cat"><a href="category.html" title="Iwatch & Accessories"><img
+                                                        src="{% if cat.banner_image1 %} {{cat.banner_image1.url}} {% endif %}" alt="img"></a></div>
+                                            <div class="cat-title"><a href="{% url 'Category' menu=cat.name %}" title="Iwatch & Accessories">{{cat.name}}</a>
+                                            </div>
+                                        </div> 
+                                    {% endfor %}                                 
+                                  <!--------end category-------->
                               </div>
                           </div>
                       </div>
