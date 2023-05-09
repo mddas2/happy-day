@@ -50,8 +50,8 @@ def index(request):
         
         # most_ordered = Products.objects.filter(status=1).order_by('-most_ordered')[:12]  # #
 
-        best_price = Products.objects.filter(status=1).order_by('-discount')[:6]
-        special_offer = Products.objects.filter(status=1).order_by('-discount','-updated_at')[:12]
+        best_selling = Products.objects.filter(status=1).order_by('-discount')[:6]
+        latest_product = Products.objects.filter(status=1).order_by('-updated_at')[:12]
         # special_deals = Products.objects.filter(status=1).order_by('-most_ordered','-updated_at')[:12]
         camera = Products.objects.filter(status=1).filter(vendor="camera").order_by('-updated_at')[:12] # #
         door_phone = Products.objects.filter(status=1).filter(vendor="door_phone").order_by('-updated_at') # #
@@ -70,8 +70,8 @@ def index(request):
             'camera':camera,
             'door_phone':door_phone,
             'deal_of_the_week':deal_of_the_week,
-            'special_offer':special_offer,
-            'best_price':best_price,
+            'latest_product':latest_product,
+            'best_selling':best_selling,
             'categories':Categories,
             'page_number':page_number,
             'customers':customers,
