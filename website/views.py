@@ -30,7 +30,7 @@ def index(request):
         contact_section = HomeNavigation.objects.filter(page_type='contact').all().first()
         clients = HomeNavigation.objects.filter(page_type='blog')
         customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
-        Categories = Navigation.objects.filter(parent_id=3).order_by('position')[:10]
+        Categories = Navigation.objects.filter(parent_id=3).order_by('position')[:7]
 
         # sub_category = Navigation.objects.filter(page_type="sale").order_by('position')
         # return HttpResponse(Categories)

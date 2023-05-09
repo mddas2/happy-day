@@ -23,18 +23,12 @@
                                       data-items_column2="1" data-items_column3="1" data-items_column4="1"
                                       data-arrows="no" data-pagination="yes" data-lazyload="yes" data-loop="no"
                                       data-hoverpause="yes">
-                                      <div class="yt-content-slide">
-                                          <a href="#"><img src="{% static 'assets_web/image/catalog/slideshow/banner/slider-1 (1).jpg' %}"
-                                                  alt="slider1" class="img-responsive"></a>
-                                      </div>
-                                      <div class="yt-content-slide">
-                                          <a href="#"><img src="{% static 'assets_web/image/catalog/slideshow/banner/slider-2.jpg' %}"
-                                                  alt="slider2" class="img-responsive"></a>
-                                      </div>
-                                      <div class="yt-content-slide">
-                                          <a href="#"><img src="{% static 'assets_web/image/catalog/slideshow/banner/slider-3.jpg' %}"
-                                                  alt="slider3" class="img-responsive"></a>
-                                      </div>
+                                      {% for slider in sliders %}
+                                        <div class="yt-content-slide">
+                                            <a href="#"><img src="{% if slider.banner_image1 %} {{slider.banner_image1.url}} {%endif%} "
+                                                    alt="slider1" class="img-responsive"></a>
+                                        </div>
+                                       {% endfor %}                                    
                                   </div>
 
                                   <div class="loadeding"></div>
@@ -436,7 +430,16 @@
                           </div>
                       </div>
 
+
+                      
                       <div class="module">
+                        <div class="banners banners2">
+                            <div class="banner">
+                                <a href="#"><img src="{% static 'assets_web/image/catalog/banners/banner01.jpg' %}" alt="image"></a>
+                            </div>
+                        </div>
+                    </div>
+                      <!-- <div class="module">
                           <div class="policy-w">
                               <a href="#"><img src="{% static 'assets_web/image/catalog/banners/call-us (1).jpg' %}" alt="image"></a>
                               <ul class="block-infos">
@@ -478,7 +481,7 @@
                                   </li>
                               </ul>
                           </div>
-                      </div>
+                      </div> -->
                       <div class="module testimonials">
                           <h3 class="modtitle"><span>Testimonials</span></h3>
                           <div class="slider-testimonials">
@@ -514,13 +517,13 @@
                       </div>
 
 
-                      <div class="module">
+                      <!-- <div class="module">
                           <div class="banners banners5">
                               <div class="banner">
                                   <a href="#"><img src="{% static 'assets_web/image/catalog/banners/banner22.jpg' %}" alt="image"></a>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
                   </div>
                   <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 main-right">
 
