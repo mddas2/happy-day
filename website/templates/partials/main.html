@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load mathfilters %}
 {%load custom_tags %}
+{% load my_tags %}
 
 
         <!-- Main Container  -->
@@ -58,7 +59,9 @@
                                               data-loop="no" data-buttonpage="top">
                                               <!---slidder 1-->
                                               <div class="item ">      
-                                                {% for best_selling in product %}                                      
+                                                {% for best_selling in product %}            
+                                                  {% if forloop.counter <= 4 %}
+                                                                    
                                                   <div class="product-layout item-inner style1 ">
                                                       <div class="item-image">
                                                           <div class="item-img-info">
@@ -102,8 +105,7 @@
                                                       <!-- End item-info -->
                                                       <!-- End item-wrap-inner -->
                                                   </div> 
-                                                  {% if foreloop.counter >= 3 %}
-                                                  {% break %}
+                                                  {% endif %}
                                                 {% endfor %} 
                                                                                            
                                               </div>
