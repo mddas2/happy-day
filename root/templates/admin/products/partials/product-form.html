@@ -56,8 +56,8 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="form-label">Sub Category</label>
-                                                    <select class="form-control" name="sub_category" id="sub_category" data-placeholder="Choose a Category" tabindex="1" required>
-                                                        <option value="">Choose a Subcategory</option>
+                                                    <select class="form-control" name="sub_category" id="sub_category" data-placeholder="Choose a Category" tabindex="1">
+                                                        <option value="" selected>Choose a Subcategory</option>
                                                         {% comment %} {% for cat in sub_category %}
                                                             <option value="{{cat.id}}" {% if id_data.sub_category == cat.id %}selected{% endif %}>{{cat.name}}</option>
                                                         {% endfor %} {% endcomment %}
@@ -90,6 +90,7 @@
                                                                 }
                                                             });
                                                         }else{
+                                                            
                                                             $('#sub_category').empty();
                                                             $('#sub_category').append('<option value="">Choose a Subcategory</option>');
                                                         }
@@ -104,8 +105,9 @@
                                                                 type: "GET",
                                                                 dataType: "json",
                                                                 success:function(data) {
-                                                                    console.log(data);
-                                                                    $('#sub_category').empty();
+                                                                    // console.log(data);
+                                                                    
+                                                                    // $('#sub_category').empty(); md hide ask with dev or unhide 
                                                                     $.each(data, function(key, value) {
                                                                         $('#sub_category').append('<option value='+ value.id +'  {% if id_data.sub_category == '+value.id+' %}selected{% endif %}  >'+ value.name +'</option>');
                                                                     });
@@ -118,6 +120,7 @@
                                                                 }
                                                             });
                                                         }else{
+                                                            alert("sd")
                                                             $('#sub_category').empty();
                                                             $('#sub_category').append('<option value="">Choose a Subcategory</option>');
                                                         }

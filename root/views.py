@@ -284,7 +284,7 @@ def get_subcategories(request, category_id):
 @login_required(login_url=settings.LOGIN_URL)
 @customized_user_passes_test(is_admin_role)
 def ProductStore(request,pk=None):
-    # return HttpResponse(request.POST['sub_category'])
+    # return HttpResponse(request.POST.items())
     if request.POST:
         # Data come from HTML to View
         #print(request.FILES['image1'])
