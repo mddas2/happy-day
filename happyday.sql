@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 07:20 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Generation Time: May 12, 2023 at 09:34 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,6 @@ CREATE TABLE `account_customuser` (
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
-  `sex` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -46,15 +45,16 @@ CREATE TABLE `account_customuser` (
   `role` smallint(5) UNSIGNED DEFAULT NULL CHECK (`role` >= 0),
   `current_address` varchar(255) DEFAULT NULL,
   `permanent_address` varchar(255) DEFAULT NULL,
-  `c_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `c_id` bigint(20) DEFAULT NULL,
+  `membership_id` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `account_customuser`
 --
 
-INSERT INTO `account_customuser` (`id`, `password`, `last_login`, `is_superuser`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `sex`, `phone`, `email`, `username`, `apply_role_type`, `image`, `role`, `current_address`, `permanent_address`, `c_id`) VALUES
-(1, 'pbkdf2_sha256$390000$uxfpBKLAVp81wwQMCr68sG$ToSmzkvfZwRNE9FuxkEzVo04v6ZW7bOzw7Bicb8AOSo=', '2023-04-30 04:37:14.462512', 0, 'Admin', '', 0, 1, '2023-02-24 08:25:14.290423', NULL, '9829936530', 'admin@gmail.com', 'Devraj', NULL, 'user/profile/admin-sign-laptop-icon-stock-vector-166205404.jpg', 2, NULL, NULL, 160062);
+INSERT INTO `account_customuser` (`id`, `password`, `last_login`, `is_superuser`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `phone`, `email`, `username`, `apply_role_type`, `image`, `role`, `current_address`, `permanent_address`, `c_id`, `membership_id`) VALUES
+(1, 'pbkdf2_sha256$390000$uxfpBKLAVp81wwQMCr68sG$ToSmzkvfZwRNE9FuxkEzVo04v6ZW7bOzw7Bicb8AOSo=', '2023-05-11 19:22:43.890983', 0, 'Admin', '', 0, 1, '2023-02-24 08:25:14.290423', '9829936530', 'admin@gmail.com', 'Devraj', NULL, 'user/profile/admin-sign-laptop-icon-stock-vector-166205404.jpg', 2, NULL, NULL, 160062, 1);
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,7 @@ CREATE TABLE `account_customuser_groups` (
   `id` bigint(20) NOT NULL,
   `customuser_id` bigint(20) NOT NULL,
   `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE `account_customuser_user_permissions` (
   `id` bigint(20) NOT NULL,
   `customuser_id` bigint(20) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,7 @@ CREATE TABLE `account_customuser_user_permissions` (
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `auth_group`
@@ -108,7 +108,7 @@ CREATE TABLE `auth_group_permissions` (
   `id` bigint(20) NOT NULL,
   `group_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `auth_group_permissions`
@@ -128,7 +128,7 @@ CREATE TABLE `auth_permission` (
   `name` varchar(255) NOT NULL,
   `content_type_id` int(11) NOT NULL,
   `codename` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `auth_permission`
@@ -222,7 +222,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (85, 'Can add review', 22, 'add_review'),
 (86, 'Can change review', 22, 'change_review'),
 (87, 'Can delete review', 22, 'delete_review'),
-(88, 'Can view review', 22, 'view_review');
+(88, 'Can view review', 22, 'view_review'),
+(89, 'Can add member ship type', 23, 'add_membershiptype'),
+(90, 'Can change member ship type', 23, 'change_membershiptype'),
+(91, 'Can delete member ship type', 23, 'delete_membershiptype'),
+(92, 'Can view member ship type', 23, 'view_membershiptype');
 
 -- --------------------------------------------------------
 
@@ -241,7 +245,14 @@ CREATE TABLE `axes_accessattempt` (
   `get_data` longtext NOT NULL,
   `post_data` longtext NOT NULL,
   `failures_since_start` int(10) UNSIGNED NOT NULL CHECK (`failures_since_start` >= 0)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `axes_accessattempt`
+--
+
+INSERT INTO `axes_accessattempt` (`id`, `user_agent`, `ip_address`, `username`, `http_accept`, `path_info`, `attempt_time`, `get_data`, `post_data`, `failures_since_start`) VALUES
+(15, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35', '127.0.0.1', 'central@fenfitnepal.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-11 19:22:40.346634', '\n---------\n', 'csrfmiddlewaretoken=9gJksmObozLXhR4sRFH37O7NZ1b2wMtXjE0jp1KxcAAj13TTcIiqEmevVdLmTH0p\nemail=central@fenfitnepal.com\npassword=********************\n---------\ncsrfmiddlewaretoken=emtRGcWgsrhsIbEAERcxMDzdymiYSMxpoKKQDRSCgs6Osnt1ZUNUjbGVuySifH4R\nemail=central@fenfitnepal.com\npassword=********************', 2);
 
 -- --------------------------------------------------------
 
@@ -258,7 +269,7 @@ CREATE TABLE `axes_accessfailurelog` (
   `path_info` varchar(255) NOT NULL,
   `attempt_time` datetime(6) NOT NULL,
   `locked_out` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -275,7 +286,7 @@ CREATE TABLE `axes_accesslog` (
   `path_info` varchar(255) NOT NULL,
   `attempt_time` datetime(6) NOT NULL,
   `logout_time` datetime(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `axes_accesslog`
@@ -357,7 +368,16 @@ INSERT INTO `axes_accesslog` (`id`, `user_agent`, `ip_address`, `username`, `htt
 (73, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '127.0.0.1', 'staff@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-04-05 06:37:17.663698', NULL),
 (74, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-04-05 06:38:01.016684', NULL),
 (75, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-04-23 08:56:02.390495', NULL),
-(76, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-04-30 04:37:14.467510', NULL);
+(76, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-04-30 04:37:14.467510', NULL),
+(77, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.64', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-04-30 01:27:57.477123', NULL),
+(78, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.64', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-01 01:46:49.596537', NULL),
+(79, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.64', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-02 04:35:30.985848', NULL),
+(80, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.68', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-04 04:45:15.304104', NULL),
+(81, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.68', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-05 04:54:26.352684', NULL),
+(82, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.68', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-05 16:59:39.132409', NULL),
+(83, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-08 05:16:41.885413', NULL),
+(84, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-09 07:13:45.885561', NULL),
+(85, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.35', '127.0.0.1', 'admin@gmail.com', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', '/account/login', '2023-05-11 19:22:43.972162', NULL);
 
 -- --------------------------------------------------------
 
@@ -374,7 +394,7 @@ CREATE TABLE `django_admin_log` (
   `change_message` longtext NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -386,7 +406,7 @@ CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `django_content_type`
@@ -406,6 +426,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (9, 'root', 'excelfileupload'),
 (10, 'root', 'globalsettings'),
 (17, 'root', 'homenavigation'),
+(23, 'root', 'membershiptype'),
 (11, 'root', 'navigation'),
 (16, 'root', 'order'),
 (6, 'root', 'pagetype'),
@@ -427,7 +448,7 @@ CREATE TABLE `django_migrations` (
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `django_migrations`
@@ -487,7 +508,12 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (51, 'root', '0019_alter_review_product', '2023-04-23 09:18:14.711684'),
 (52, 'root', '0020_alter_wishlist_user', '2023-04-23 09:18:41.385041'),
 (53, 'root', '0021_alter_wishlist_product_alter_wishlist_user', '2023-04-23 09:19:15.622406'),
-(54, 'root', '0022_products_sub_category', '2023-04-23 10:40:50.791089');
+(54, 'root', '0022_products_sub_category', '2023-04-23 10:40:50.791089'),
+(55, 'root', '0023_membershiptype', '2023-05-04 04:47:11.064783'),
+(56, 'root', '0024_alter_membershiptype_discount', '2023-05-04 06:32:42.440521'),
+(57, 'root', '0025_membershiptype_code_name_and_more', '2023-05-05 05:46:46.849906'),
+(58, 'account', '0005_remove_customuser_sex_customuser_membership', '2023-05-05 17:04:26.894674'),
+(59, 'root', '0026_remove_products_link_remove_products_most_ordered_and_more', '2023-05-06 17:46:10.775505');
 
 -- --------------------------------------------------------
 
@@ -499,27 +525,25 @@ CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('0uklsxi51fhyi8nzqhz0bgo8chgzw5pl', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pXbN1:yOaMLES3ShT6lqd1FbUTBz8UQjBX8mcxDrS_9EB3KCc', '2023-03-16 05:20:47.986130'),
-('0xkatexrq00z6j8xyqq2rignwdslp9im', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pi8k6:At_iq7almJ-0nEujeBYCit9tROAw_NcbofTrIb7eCfg', '2023-04-14 07:00:10.551192'),
 ('1z5etrvff80mmbn1mcpnan1xzkcoekfk', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1psyoE:DoEzT4kF06gX7lwbcfC9EZ2AZ0OqLLoCgHzPiRsT3YQ', '2023-05-14 04:37:14.477502'),
 ('2brdxbipq8vhj7636pc4o1jvjt47g8q6', '.eJxVjsEKwjAQRP8lZwnZlHQ3Hr37DWGTbE1VWmjak_jvplBEjzPzZpiXCrytJWxVljBmdVagTr9e5PSQaQ_ynafbrNM8rcsY9Y7oI636Omd5Xg72b6BwLa1tUnIAw9AToiXP1KFjA-A9OussCQsCkSMvVtg0RdGjz9i5zhro2-j3I7w_Wv86Og:1psKAX:S2Kp0sAxLhStQZj0sZ_1BSAC_KJzL5GFZXjoPgUV1sk', '2023-05-12 09:13:33.910352'),
-('30fo6sqjwjoa55xm9mho9jqzehzlyz3v', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pXx8e:czUXXpzM6b95wmLRB1InFM4UVhS9DOto7j3qx0kSE3g', '2023-03-17 04:35:24.636515'),
-('8z80ex4v4pyp1egpg3myo8fkyq9j8y3h', '.eJxVjEEOwiAQRe_C2pDKDAFcuvcMzcwAUjWQlHbVeHdt0oVu_3vvb2qkdSnj2tM8TlFdlFOn341JnqnuID6o3puWVpd5Yr0r-qBd31pMr-vh_h0U6uVbiwOwg1iDZ6JoABlBDHsKQ7YJgzXBQ3SJI2ZIhtlbERoyEBpCAvX-ANzxOBs:1phUB7:aJ3i4jbXOkfMcBsmLp9zIF4JaQ8fGuhjwfQvaBH0JNI', '2023-04-12 11:41:21.636029'),
-('aesli5mjyyk99ziqrcfvzuryotm6t6s5', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1perUn:L9cWT2aTVf8EehZcG4F2pUUwqAzf8YTNhZBI-74iby4', '2023-04-05 05:58:49.687155'),
-('g00koamhawu0dan979000jb3pfygmrln', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pjEeP:CtN_Bc-0seqKmQczxxuTYBxvjv5uvlaXnwfwUO0Ka54', '2023-04-17 07:30:49.389630'),
-('j2uj7w5oieeilk5gj90qdz5fotwylgc5', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pVTOZ:B7DBdxa7Fe3Pwnjjfa_QFIp3XPqvhRUYp-k4korAY88', '2023-03-10 08:25:35.153229'),
-('lh9h9opaxj55t71qv02fi79bo5omwvt4', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pbclI:rFRBX1n00jBMVaX0le9xV55b-yV3zulSJiK-GW5wx9c', '2023-03-27 07:38:28.163869'),
-('lnyb7mettwjuzio5jo2zx77jbhfhh98h', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pjwmP:J3EBFMtDGoetl8hMB4lFIGlAwuuh7h3O4jpD_S2TkAU', '2023-04-19 06:38:01.023680'),
-('m1zs7rbuuwabtrj9q1kgxob21o7pasnp', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pd8Is:LWP2YFAKfyGlsIjgVcRYWcxV2k5aPgLxtrBWP03ldVg', '2023-03-31 11:31:22.941705'),
-('o1lf8bshib45e6p7unopyrbo25zdylmf', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pe9F7:FXO6hQoVVezVv31aZdPxNF7ZNvvjIjb6S-aur89K-hY', '2023-04-03 06:43:41.237436'),
-('qqtr1m4bt670q3k5sjjcloytnruzg42u', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pXF18:TWYP9fr9uYZP0xeUOlhSPQxrXLHlmzWFjB8ozE-HdDg', '2023-03-15 05:28:42.303096');
+('50lpk3vlzmfr5iflao1qbiftv0wuppsl', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1psvr4:Md64-gt0V55_Ktqpmb1iFWolN_BOIh7jH6sOLBk5aj0', '2023-05-14 01:27:58.077477'),
+('6ln21czil7ctamgmyavenyavel4gs3o6', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pwHXd:7WIIwa3jhIhDgDvW6ON4ruKFG2GrKYdIGhqSOv3Dvns', '2023-05-23 07:13:45.971531'),
+('95n5h8iwplcel7udb8mgn89vhezqzzis', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pthjf:u1b8f36J-ElD83pI1G8BXVP-KSfOHYCw9nmV0WrT_K4', '2023-05-16 04:35:31.146611'),
+('brc0tnoyf6gcr374rx9jz32dk9b84lpk', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pxBsC:uFlYKFch4l3f3QruejQcY6XEtli3PPMM8vNqoBGGC0g', '2023-05-25 19:22:44.127310'),
+('iryef1lfna8zggkuj3z966xt1agciqsk', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1ptIcr:UnbyuXEOcdfcD6N647wUuFY-2NACe5uACB7YS4onCCI', '2023-05-15 01:46:49.697898'),
+('ixakm62sd1weuvs221vswbpsigsbkopq', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1puQqB:NRFgF9CXkADoI19Kam-eFeKI6Bmzlh5ofqHK2GmriAo', '2023-05-18 04:45:15.408484'),
+('jehwvyak6zsnzn8zey7nde64cgkgp411', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1punSc:KOOibWFR3WMy6n8mwGPtRxCOEwEZyTAnJUCinorDja0', '2023-05-19 04:54:26.481338'),
+('k57rvm7cco8loipx623tulbrqgxcioad', 'e30:1psvp4:wnvrO9qrex7Lr46UlC7kUaCYfF0SDV5_hgAx3l94--k', '2023-05-14 01:25:54.449516'),
+('x4lrajyfebg8ps8algig81p94eejqimb', '.eJxVjMEOwiAQRP-FsyEshO7i0bvf0GxhK1UDSWlPjf9um_Sgx5n3ZjbV87rkfm0y91NSVwXq8tsNHF9SDpCeXB5Vx1qWeRr0oeiTNn2vSd630_07yNzyvjYxeoBx7AjRUmBy6NkAhIDeekvCgkDkKYgVNnuiIWBI6LyzBjr1-QK2LTZ0:1pvtEn:vZS82nXBQ3EK_AjPAldva3r4fg9VhvCal7Q7hL05N5g', '2023-05-22 05:16:41.990492'),
+('zr16pipnpnihlto5xk5gg3g7d59nlmxa', '.eJxVjsEKwjAQRP8lZwnZlHQ3Hr37DWGTbE1VWmjak_jvplBEjzPzZpiXCrytJWxVljBmdVagTr9e5PSQaQ_ynafbrNM8rcsY9Y7oI636Omd5Xg72b6BwLa1tUnIAw9AToiXP1KFjA-A9OussCQsCkSMvVtg0RdGjz9i5zhro2-j3I7w_Wv86Og:1pvBzi:6g1Vka9oQdw5DCae0oKBtON9EmsYxd1usZzmsi_f4M0', '2023-05-20 07:06:14.758763');
 
 -- --------------------------------------------------------
 
@@ -538,7 +562,7 @@ CREATE TABLE `root_blog` (
   `icon_image` varchar(100) DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `main_title` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -554,7 +578,7 @@ CREATE TABLE `root_contactus` (
   `message` longtext DEFAULT NULL,
   `read_unread` tinyint(1) NOT NULL,
   `updated_at` datetime(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_contactus`
@@ -578,7 +602,7 @@ CREATE TABLE `root_excelfileupload` (
   `id` bigint(20) NOT NULL,
   `excel_file_upload` varchar(100) NOT NULL,
   `updated_at` datetime(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -619,7 +643,7 @@ CREATE TABLE `root_globalsettings` (
   `Image7` varchar(100) DEFAULT NULL,
   `Image8` varchar(100) DEFAULT NULL,
   `Image9` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_globalsettings`
@@ -653,7 +677,7 @@ CREATE TABLE `root_homenavigation` (
   `created_at` datetime(6) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `parent_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_homenavigation`
@@ -665,7 +689,7 @@ INSERT INTO `root_homenavigation` (`id`, `name`, `parent_page_id`, `caption`, `s
 (5, 'slider2', 3, 'Slider2', 1, 'sale', '', '', '<div>\r\n<div><span style=\"font-size: 26px; color: #000000;\">TOP BRANDS</span></div>\r\n</div>\r\n<div>\r\n<div><span style=\"color: #000000;\"><strong><span style=\"font-size: 62px;\">New Collections</span></strong></span></div>\r\n<div>\r\n<div>\r\n<div><span style=\"font-size: 18px; color: #000000;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></div>\r\n</div>\r\n</div>\r\n</div>', '', '', 2, 'home/banner1/slider1.png', '', '', '2023-03-01 05:55:52.928795', '2023-03-01 05:55:52.928795', 3),
 (6, 'clients', 0, 'Clients', 1, 'group', '', '', '', '', '', 2, '', '', '', '2023-03-02 09:04:04.330634', '2023-03-02 09:04:04.330634', NULL),
 (7, 'Happy_Customers', 0, 'Happy Customers', 1, 'group', '', '', '', '', '', 3, '', '', '', '2023-03-02 09:07:21.530460', '2023-03-02 09:07:21.530460', NULL),
-(8, 'John Doe', 7, 'ABC Company', 1, 'normal', '', '', '<p><em>\"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat.<em>\"</em></p>', '', '', 1, 'home/banner1/member1.png', '', '', '2023-03-02 09:09:27.857809', '2023-03-02 09:09:27.857809', 7),
+(8, 'John Doe', 7, 'ABC Company', 1, 'normal', '', '', '<p>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat</p>', '', '', 1, 'home/banner1/member1.png', '', '', '2023-05-09 08:09:56.222626', '2023-05-09 08:09:56.222626', 7),
 (9, 'Stephen Doe', 7, 'Xperia Designs', 1, 'normal', '', '', '<p><em>\"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat.<em>\"</em></p>', '', '', 2, 'home/banner1/member2.png', '', '', '2023-03-02 09:09:58.611716', '2023-03-02 09:09:58.611716', 7),
 (10, 'Saraha Smith', 7, 'Data Scientist', 1, 'normal', '', '', '<p><em>\"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer. Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat.<em>\"</em></p>', '', '', 3, 'home/banner1/member3.png', '', '', '2023-03-02 09:10:39.693149', '2023-03-02 09:10:39.693149', 7),
 (11, 'client1', 6, '', 1, 'blog', '', '', '', '', '', 1, 'home/banner1/algolia.svg', '', '', '2023-03-02 11:47:09.251323', '2023-03-02 11:47:09.251323', 6),
@@ -677,6 +701,30 @@ INSERT INTO `root_homenavigation` (`id`, `name`, `parent_page_id`, `caption`, `s
 (17, 'client7', 6, '', 1, 'blog', '', '', '', '', '', 7, 'home/banner1/todoist_iCDk6u2.svg', '', '', '2023-03-02 11:49:15.770886', '2023-03-02 11:49:15.770886', 6),
 (18, 'client8', 6, '', 1, 'blog', '', '', '', '', '', 8, 'home/banner1/yahoo_l4uiZ3e.svg', '', '', '2023-03-02 11:49:31.169517', '2023-03-02 11:49:31.169517', 6),
 (19, 'client9', 6, '', 1, 'blog', '', '', '', '', '', 9, 'home/banner1/vimeo_SjlfteE.svg', '', '', '2023-03-02 11:49:46.480166', '2023-03-02 11:49:46.480166', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `root_membershiptype`
+--
+
+CREATE TABLE `root_membershiptype` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `discount` int(11) DEFAULT NULL,
+  `is_shipping_free` tinyint(1) NOT NULL,
+  `discount_shipping_apply` tinyint(1) NOT NULL,
+  `code_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `root_membershiptype`
+--
+
+INSERT INTO `root_membershiptype` (`id`, `name`, `discount`, `is_shipping_free`, `discount_shipping_apply`, `code_name`) VALUES
+(1, 'Business To Business Membership', 400, 0, 1, 'b2b_membership'),
+(2, 'Platinum Membership', 0, 1, 1, 'platinum'),
+(3, 'Free Membership', 0, 0, 1, 'free');
 
 -- --------------------------------------------------------
 
@@ -703,7 +751,7 @@ CREATE TABLE `root_navigation` (
   `created_at` datetime(6) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `parent_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_navigation`
@@ -713,21 +761,36 @@ INSERT INTO `root_navigation` (`id`, `name`, `parent_page_id`, `caption`, `statu
 (1, 'New-Arrival', 0, 'New Arrival', 1, 'product', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', '<div class=\"big-text\">BIG SALE</div>\r\n<div class=\"excerpt hidden-sm hidden-md\">Save up to 39% off</div>', '', '', 1, 'navigation/banner1/cat-banner-1.jpg', '', '', '2023-03-03 06:38:29.036098', '2023-03-03 06:38:29.036098', NULL),
 (2, 'partners', 0, 'Partners', 1, 'group', '', '<h4>Laptop/PC Repair</h4>\r\n<p>Do you want to fix your laptop or computer right away but don\'t want to get scammed? If this is a problem for you, we will take care of it. We will do everything possible to resolve your issue as quickly as possible while maintaining complete transparency.</p>', '<h4>Upgrade hardware/Software</h4>\r\n<p>Data recovery is the process of gaining access to and retrieving data from digital media that is inaccessible by conventional means. This service is required in a variety of circumstances, including user error and deletion, as well as mechanical and physical damage to your storage device. If you are going through this problem, stop worrying and contact us immediately.</p>', '', '', 2, 'navigation/banner1/0f391-aboutus_image2.jpg', 'navigation/banner2/0f391-aboutus_image2.jpg', '', '2023-04-07 07:23:11.128582', '2023-04-07 07:23:11.128582', NULL),
 (3, 'product-categories', 0, 'Categories', 0, 'group', '', '', '', '', '', 3, '', '', '', '2023-04-28 08:59:47.010565', '2023-04-28 08:59:47.011568', NULL),
-(4, 'analog-turbo-hd-dvrs', 3, 'Analog Turbo HD DVRs', 1, 'sale_group', '', '', '', '', '', 1, '', '', '', '2023-04-23 10:51:28.908820', '2023-04-23 10:51:28.908820', 3),
-(5, 'HD1080p-EXIR-&-True-WDR-Series', 3, 'HD1080p EXIR & True WDR Series', 1, 'sale_group', '', '', '', '', '', 2, '', '', '', '2023-04-23 10:51:38.775894', '2023-04-23 10:51:38.775894', 3),
-(6, 'IP-Network-NVR', 3, 'IP Network NVR', 1, 'sale_group', '', '', '', '', '', 3, '', '', '', '2023-04-23 10:51:49.320901', '2023-04-23 10:51:49.320901', 3),
-(7, 'IP-Cameras', 3, 'IP Cameras', 1, 'sale_group', '', '', '', '', '', 4, '', '', '', '2023-04-23 10:33:37.511420', '2023-04-23 10:33:37.511420', 3),
-(8, 'PTZ-IP-Camera', 3, 'PTZ IP Camera', 1, 'sale_group', '', '', '', '', '', 5, '', '', '', '2023-04-23 10:52:00.303307', '2023-04-23 10:52:00.303307', 3),
-(9, 'POE-Switch', 3, 'POE Switch', 1, 'sale_group', '', '', '', '', '', 6, '', '', '', '2023-04-23 10:52:10.267929', '2023-04-23 10:52:10.267929', 3),
-(10, 'Hard-Disc', 3, 'Hard Disc', 1, 'sale_group', '', '', '', '', '', 7, '', '', '', '2023-04-23 10:52:19.778487', '2023-04-23 10:52:19.779489', 3),
-(11, 'Moniter', 3, 'Moniter', 1, 'sale_group', '', '', '', '', '', 8, '', '', '', '2023-04-23 10:52:32.211994', '2023-04-23 10:52:32.211994', 3),
-(12, 'Video-Door-phone', 3, 'Video Door phone', 1, 'sale_group', '', '', '', '', '', 9, '', '', '', '2023-04-23 10:52:41.713785', '2023-04-23 10:52:41.713785', 3),
+(4, 'analog-turbo-hd-dvrs-1', 3, 'Analog Turbo HD DVRs', 1, 'sale_group', '', '', '', '', '', 1, 'navigation/banner1/cate1_1.jpg', '', '', '2023-05-11 19:23:22.764977', '2023-05-11 19:23:22.764977', 3),
+(5, 'HD1080p-EXIR-&-True-WDR-Series-1', 3, 'HD1080p EXIR & True WDR Series', 1, 'sale_group', '', '', '', '', '', 2, 'navigation/banner1/cate1.jpg', '', '', '2023-05-11 19:23:31.077816', '2023-05-11 19:23:31.077816', 3),
+(6, 'IP-Network-NVR-1', 3, 'IP Network NVR', 1, 'sale_group', '', '', '', '', '', 3, 'navigation/banner1/cate2.jpg', '', '', '2023-05-11 19:23:43.855301', '2023-05-11 19:23:43.855301', 3),
+(7, 'IP-Cameras-1', 3, 'IP Cameras', 1, 'sale_group', '', '', '', '', '', 4, 'navigation/banner1/cate3.jpg', '', '', '2023-05-11 19:23:58.561852', '2023-05-11 19:23:58.561852', 3),
+(8, 'PTZ-IP-Camera-1', 3, 'PTZ IP Camera', 1, 'sale_group', '', '', '', '', '', 5, 'navigation/banner1/cate3_ScZnVbO.jpg', '', '', '2023-05-11 19:24:45.519247', '2023-05-11 19:24:45.519247', 3),
+(9, 'POE-Switch-1', 3, 'POE Switch', 1, 'sale_group', '', '', '', '', '', 6, 'navigation/banner1/cate5_N3kBr5g.jpg', '', '', '2023-05-11 19:24:56.366354', '2023-05-11 19:24:56.366354', 3),
+(10, 'Hard-Disc-1', 3, 'Hard Disc', 1, 'sale_group', '', '', '', '', '', 7, 'navigation/banner1/cate1_S4RsLOP.jpg', '', '', '2023-05-11 19:25:09.100932', '2023-05-11 19:25:09.100932', 3),
+(11, 'Moniter-1', 3, 'Moniter', 1, 'sale_group', '', '', '', '', '', 8, 'navigation/banner1/cate4.jpg', '', '', '2023-05-11 19:25:18.887915', '2023-05-11 19:25:18.887915', 3),
+(12, 'Video-Door-phone-1', 3, 'Video Door phone', 1, 'sale_group', '', '', '', '', '', 9, 'navigation/banner1/cate1_tS6oQ9h.jpg', '', '', '2023-05-11 19:25:30.710780', '2023-05-11 19:25:30.710780', 3),
 (13, 'about-us', 0, 'About-Us', 0, 'contact', '', '', '', '', '', 4, '', '', '', '2023-03-22 06:12:34.861568', '2023-03-22 06:12:34.861568', NULL),
-(26, 'sub_cat', 7, 'Sub Category', 1, 'sale', '', '', '', '', '', 1, '', '', '', '2023-04-23 10:36:04.869994', '2023-04-23 10:36:04.869994', 7),
-(27, 'test_sub_cat', 7, 'Test Sub Cat', 1, 'sale', '', '', '', '', '', 2, '', '', '', '2023-04-24 06:18:35.744719', '2023-04-24 06:18:35.744719', 7),
+(26, 'sub_cat-1', 7, 'Sub Category', 1, 'sale', '', '', '', '', '', 1, 'navigation/banner1/cate3_5DFp9y8.jpg', '', '', '2023-05-11 19:24:09.955304', '2023-05-11 19:24:09.955304', 7),
+(27, 'test_sub_cat-1', 7, 'Test Sub Cat', 1, 'sale', '', '', '', '', '', 2, 'navigation/banner1/cate5.jpg', '', '', '2023-05-11 19:24:17.200297', '2023-05-11 19:24:17.200297', 7),
 (28, 'about-us-description', 13, 'Welcome To Shop', 1, 'normal', '', '', '<p><span>Nulla auctor mauris ut dui luctus semper. In hac habitasse platea dictumst. Duis pellentesque ligula a risus suscipit dignissim. Nunc non nisl lacus. Integer pharetra lacinia dapibus. Donec eu dolor dui, vel posuere mauris.</span><br /><br /><span>Pellentesque semper congue sodales. In consequat, metus eget con sequat ornare, augue dolor blandit purus, vitae lacinia nisi tellus in erat. Nulla ac justo eget massa aliquet sodales. Maecenas mattis male suada sem, in fringilla massa dapibus quis. Suspendisse aliquam leo id neque auctor molestie. Etiam at nulla tellus.</span><br /><br /><span>Nulla auctor mauris ut dui luctus semper. In hac habitasse platea dictumst. Duis pellentesque ligula a risus suscipit dignissim.</span></p>', '', '', 1, 'navigation/banner1/about-us1.jpg', '', '', '2023-04-30 04:55:08.609692', '2023-04-30 04:55:08.609692', 13),
 (29, 'our-members', 13, 'Our Member', 1, 'group', '', '', '<p><span>Consectetur adipiscing elit. Donec pellentesque venenatis elit, quis aliquet mauris malesuada vel. Donec vitae libero dolor, eget dapibus justo.</span><br /><span>Aenean facilisis aliquet feugiat. Suspendisse lacinia congue est ac semper. Nulla ut elit magna, vitae volutpat magna.</span></p>', '', '', 2, '', '', '', '2023-04-30 04:55:50.968916', '2023-04-30 04:55:50.969915', 13),
-(30, 'asdfasdf', 29, 'asdfasdfasdf', 1, 'team', 'asdf', '', '', '', '', 1, '', '', '', '2023-04-30 05:02:48.849521', '2023-04-30 05:02:48.849521', 29);
+(30, 'asdfasdf', 29, 'asdfasdfasdf', 1, 'team', 'asdf', '', '', '', '', 1, '', '', '', '2023-04-30 05:02:48.849521', '2023-04-30 05:02:48.849521', 29),
+(51, 'Fashion-1-1', 3, 'Fashion', 1, 'sale_group', '', '', '', '', '', 10, 'navigation/banner1/cate5_44FU994.jpg', '', '', '2023-05-11 19:25:38.916231', '2023-05-11 19:25:38.916231', 3),
+(52, 'Artificial Jewellary-1-1', 51, 'fashion gift fake jewellary', 1, 'sale_group', '', '', '', '', '', 1, 'navigation/banner1/cate3_BHVZpRH.jpg', '', '', '2023-05-11 19:25:50.890502', '2023-05-11 19:25:50.890502', 51),
+(53, 'Nose Ring', 52, '', 1, 'sale_group', '', '', '', '', '', 1, '', '', '', '2023-05-08 05:39:27.684725', '2023-05-08 05:39:27.684725', 52),
+(54, 'Ear Ring', 52, '', 1, 'group', '', '', '', '', '', 2, '', '', '', '2023-05-08 05:39:49.596351', '2023-05-08 05:39:49.596351', 52),
+(55, 'Face Jwelery', 52, '', 1, 'group', '', '', '', '', '', 3, '', '', '', '2023-05-08 05:40:02.650243', '2023-05-08 05:40:02.650243', 52),
+(56, 'Women Jwellery-1-1', 51, '', 1, 'sale_group', '', '', '', '', '', 2, 'navigation/banner1/cate4_WkMM7No.jpg', '', '', '2023-05-11 19:25:57.971271', '2023-05-11 19:25:57.971271', 51),
+(57, 'Nose Ring - 1', 56, '', 1, 'group', '', '', '', '', '', 1, '', '', '', '2023-05-08 05:42:29.131721', '2023-05-08 05:42:29.131721', 56),
+(58, 'ear-ring 1', 56, '', 1, 'group', '', '', '', '', '', 2, '', '', '', '2023-05-08 05:42:37.871797', '2023-05-08 05:42:37.871797', 56),
+(59, 'Boy-Jwelery-1', 51, '', 1, 'group', '', '', '', '', '', 3, 'navigation/banner1/cate5_nxjBqZA.jpg', '', '', '2023-05-11 19:26:06.421850', '2023-05-11 19:26:06.421850', 51),
+(60, 'kid-jwelery', 51, '', 1, 'group', '', '', '', '', '', 4, '', '', '', '2023-05-08 05:46:15.806703', '2023-05-08 05:46:15.806703', 51),
+(61, 'adult-jwelery-1', 51, '', 1, 'group', '', '', '', '', '', 5, 'navigation/banner1/cate1_1_caYCwPU.jpg', '', '', '2023-05-11 19:26:14.895972', '2023-05-11 19:26:14.895972', 51),
+(62, 'old-jwelery-1', 51, '', 1, 'group', '', '', '', '', '', 6, 'navigation/banner1/cate2_oHNKgLi.jpg', '', '', '2023-05-11 19:26:23.584346', '2023-05-11 19:26:23.584346', 51),
+(63, 'nose', 59, '', 1, 'group', '', '', '', '', '', 1, '', '', '', '2023-05-08 05:47:06.703124', '2023-05-08 05:47:06.703124', 59),
+(64, 'ear', 59, '', 1, 'group', '', '', '', '', '', 2, '', '', '', '2023-05-08 05:47:12.489350', '2023-05-08 05:47:12.489350', 59),
+(65, 'Face Jwelery-1', 59, '', 1, 'group', '', '', '', '', '', 3, '', '', '', '2023-05-08 05:47:20.648877', '2023-05-08 05:47:20.648877', 59);
 
 -- --------------------------------------------------------
 
@@ -748,7 +811,7 @@ CREATE TABLE `root_order` (
   `get_shipping_address_id` bigint(20) DEFAULT NULL,
   `product_id` bigint(20) DEFAULT NULL,
   `email` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_order`
@@ -773,7 +836,7 @@ CREATE TABLE `root_pagetype` (
   `status` tinyint(1) NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_pagetype`
@@ -821,8 +884,6 @@ CREATE TABLE `root_products` (
   `ftn` varchar(50) NOT NULL,
   `category_id` bigint(20) DEFAULT NULL,
   `long_contents` longtext DEFAULT NULL,
-  `most_ordered` bigint(20) DEFAULT NULL,
-  `most_viewed` bigint(20) DEFAULT NULL,
   `color` varchar(255) NOT NULL,
   `star` varchar(50) NOT NULL,
   `image5` varchar(100) DEFAULT NULL,
@@ -830,20 +891,23 @@ CREATE TABLE `root_products` (
   `image7` varchar(100) DEFAULT NULL,
   `image8` varchar(100) DEFAULT NULL,
   `image9` varchar(100) DEFAULT NULL,
-  `link` varchar(300) DEFAULT NULL,
-  `sub_category_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `sub_category_id` bigint(20) DEFAULT NULL,
+  `b2b_membership_price` int(11) DEFAULT NULL,
+  `free_membership_price` int(11) DEFAULT NULL,
+  `platinum_membership_price` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_products`
 --
 
-INSERT INTO `root_products` (`id`, `name`, `price`, `discount_type`, `discount`, `quantity`, `vendor`, `payment_type`, `size`, `title`, `discription`, `meta_title`, `keyword`, `brand`, `status`, `image1`, `image2`, `image3`, `image4`, `created_at`, `updated_at`, `ftn`, `category_id`, `long_contents`, `most_ordered`, `most_viewed`, `color`, `star`, `image5`, `image6`, `image7`, `image8`, `image9`, `link`, `sub_category_id`) VALUES
-(1, 'DS-7104HGHI-F1 4-CHANNEL1', '1500', '25%', '375', 1, 'door_phone', '', '', '', '<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"313\" height=\"111\">\r\n<tbody>\r\n<tr height=\"35\">\r\n<td height=\"35\" style=\"width: 312px;\">16 Turbo HD<span>/AHD/Analog interface</span><span>&nbsp;input,<br />16-ch video&amp;1-ch audio input,<br />1 SATA interface,<br />1280&times;720P: 25(P)/30(N) fps/ch,<br />mini 1U case</span></td>\r\n</tr>\r\n</tbody>\r\n</table>', '', '', '', 1, 'uploads/download_1.jpeg', 'uploads/download.jpeg', 'uploads/images_1.jpeg', 'uploads/images_2.jpeg', '2023-03-17 11:09:37.784023', '2023-03-17 11:09:37.784023', 'n', 4, '', 0, NULL, '', '3', 'uploads/download_b7ZBijS.jpeg', 'uploads/images.jpeg', 'uploads/images_6.jpeg', 'uploads/images_5.jpeg', 'uploads/images_3.jpeg', 'https://www.website.com/produt-link', NULL),
-(4, 'DS-7108HQHI-F1/N 8-Channel', '2000', '15%', '300', 75, '', '', '', '', '<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"318\" height=\"83\">\r\n<tbody>\r\n<tr height=\"34\">\r\n<td height=\"34\" style=\"width: 317px;\">8 Turbo HD/AHD/Analog interface input,<br />8-ch video&amp;1-ch audio input,<br />1 SATA interface,<br />1920&times;1080P: 12 fps/ch</td>\r\n</tr>\r\n</tbody>\r\n</table>', '', '', '', 1, 'uploads/download.jpg', 'uploads/images_1_15tKjtw.jpeg', '', '', '2023-03-13 10:29:12.051207', '2023-03-13 10:29:12.051207', 'n', 4, '', 0, NULL, '', '0', '', '', '', '', '', 'https://www.website.com/produt-link', NULL),
-(5, 'DS-7216HGHI-F1 16-Channel', '3000', '50%', '1500', 12, 'door_phone', '', '', '', '<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"331\" height=\"133\">\r\n<tbody>\r\n<tr height=\"39\">\r\n<td height=\"39\" style=\"width: 330px;\">16 Turbo HD<span>/AHD/Analog interface input,<br />16-ch video&amp;4-ch audio input,<br />1 SATA interface,<br />1280&times;720P: 25(P)/30(N) fps/ch,<br />260 1U case</span></td>\r\n</tr>\r\n</tbody>\r\n</table>', '', '', '', 1, 'uploads/DS-7216HGHI-F1.jpg', 'uploads/download_7.jpeg', '', '', '2023-03-13 10:28:12.469587', '2023-03-13 10:28:12.469587', 'n', 4, '', 0, NULL, '', '0', '', '', '', '', '', 'https://www.website.com/produt-link', NULL),
-(6, 'asdf', '12321', '3%', '369.63', 0, 'door_phone', '', '', 'asdf', '', '', '', '', 1, 'uploads/WhatsApp_Image_2023-03-10_at_9.19.00_PM.jpeg', 'uploads/WhatsApp_Image_2023-03-10_at_9.18.59_PM.jpeg', '', '', '2023-04-05 09:10:35.523626', '2023-04-05 09:10:35.523626', 'n', 4, '', 0, NULL, '', '1', '', '', '', '', '', 'https://www.website.com/produt-link', NULL),
-(7, 'test1', '330', '', '', 0, '', '', '', 'Tets 2', '', '', '', '', 1, 'uploads/2.png', 'uploads/hand.png', '', '', '2023-04-24 10:03:44.946196', '2023-04-24 10:03:44.946196', 'n', 7, '', 0, NULL, '', '0', '', '', '', '', '', 'https://www.website.com/produt-link-test', 27);
+INSERT INTO `root_products` (`id`, `name`, `price`, `discount_type`, `discount`, `quantity`, `vendor`, `payment_type`, `size`, `title`, `discription`, `meta_title`, `keyword`, `brand`, `status`, `image1`, `image2`, `image3`, `image4`, `created_at`, `updated_at`, `ftn`, `category_id`, `long_contents`, `color`, `star`, `image5`, `image6`, `image7`, `image8`, `image9`, `sub_category_id`, `b2b_membership_price`, `free_membership_price`, `platinum_membership_price`) VALUES
+(1, 'DS-7104HGHI-F1 4-CHANNEL1', '1500', '25%', '375', 1, 'door_phone', '', '', '', '<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"313\" height=\"111\">\r\n<tbody>\r\n<tr height=\"35\">\r\n<td height=\"35\" style=\"width: 312px;\">16 Turbo HD<span>/AHD/Analog interface</span><span>&nbsp;input,<br />16-ch video&amp;1-ch audio input,<br />1 SATA interface,<br />1280&times;720P: 25(P)/30(N) fps/ch,<br />mini 1U case</span></td>\r\n</tr>\r\n</tbody>\r\n</table>', '', '', '', 1, 'uploads/cate1_ICUF61q.jpg', 'uploads/cate3_BzBYVrp.jpg', 'uploads/images_1.jpeg', 'uploads/images_2.jpeg', '2023-05-11 19:42:40.722588', '2023-05-11 19:42:40.722588', 'n', 4, '', '', '3', 'uploads/download_b7ZBijS.jpeg', 'uploads/images.jpeg', 'uploads/images_6.jpeg', 'uploads/images_5.jpeg', 'uploads/images_3.jpeg', NULL, 0, 0, 0),
+(4, 'DS-7108HQHI-F1/N 8-Channel', '2000', '15%', '300', 75, '', '', '', '', '<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"318\" height=\"83\">\r\n<tbody>\r\n<tr height=\"34\">\r\n<td height=\"34\" style=\"width: 317px;\">8 Turbo HD/AHD/Analog interface input,<br />8-ch video&amp;1-ch audio input,<br />1 SATA interface,<br />1920&times;1080P: 12 fps/ch</td>\r\n</tr>\r\n</tbody>\r\n</table>', '', '', '', 1, 'uploads/download.jpg', 'uploads/images_1_15tKjtw.jpeg', '', '', '2023-03-13 10:29:12.051207', '2023-03-13 10:29:12.051207', 'n', 4, '', '', '0', '', '', '', '', '', NULL, 0, 0, 0),
+(5, 'DS-7216HGHI-F1 16-Channel', '3000', '50%', '1500', 12, 'door_phone', '', '', '', '<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"331\" height=\"133\">\r\n<tbody>\r\n<tr height=\"39\">\r\n<td height=\"39\" style=\"width: 330px;\">16 Turbo HD<span>/AHD/Analog interface input,<br />16-ch video&amp;4-ch audio input,<br />1 SATA interface,<br />1280&times;720P: 25(P)/30(N) fps/ch,<br />260 1U case</span></td>\r\n</tr>\r\n</tbody>\r\n</table>', '', '', '', 1, 'uploads/cate4.jpg', 'uploads/cate2_ldDRfPG.jpg', '', '', '2023-05-11 19:43:28.733172', '2023-05-11 19:43:28.733172', 'n', 4, '', '', '0', '', '', '', '', '', NULL, 0, 0, 0),
+(6, 'asdf', '12321', '3%', '369.63', 0, 'door_phone', '', '', 'asdf', '', '', '', '', 1, 'uploads/cate1_NcI2neK.jpg', 'uploads/cate2.jpg', '', '', '2023-05-11 19:42:25.362354', '2023-05-11 19:42:25.362354', 'n', 4, '', '', '1', '', '', '', '', '', NULL, 0, 0, 0),
+(7, 'test1', '330', '', '', 0, '', '', '', 'Tets 2', '', '', '', '', 1, 'uploads/cate3.jpg', 'uploads/hand.png', '', '', '2023-05-11 19:27:19.563865', '2023-05-11 19:27:19.563865', 'n', 7, '', '', '0', '', '', '', '', '', 26, 0, 0, 0),
+(8, 'ear rings', '500', '10%', '50', 0, '', '', '', 'ear rings', '<p><span>M.R.P. : NRs. 600/-</span><br /><span>P.M.P : NRs. 450/-</span><br /><span>(Discounted Price)</span><br /><br /><span>DM for Purchase</span><br /><br /><span>Product Code : AJ-009</span><br /><span>Color : Black</span></p>', '', '', '', 1, 'uploads/cate1_1.jpg', 'uploads/cate1.jpg', 'uploads/ear_2U9cMVs.jpg', 'uploads/ear_Akitf83.jpg', '2023-05-11 19:42:55.285877', '2023-05-11 19:42:55.285877', 'n', 51, '', '', '0', '', '', '', '', '', NULL, 350, 550, 455);
 
 -- --------------------------------------------------------
 
@@ -858,7 +922,7 @@ CREATE TABLE `root_review` (
   `user_id` bigint(20) DEFAULT NULL,
   `created_at` datetime(6) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_review`
@@ -881,7 +945,7 @@ CREATE TABLE `root_shipping` (
   `phone` varchar(205) NOT NULL,
   `email` varchar(205) NOT NULL,
   `shpping_address` varchar(2055) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_shipping`
@@ -909,7 +973,7 @@ CREATE TABLE `root_team` (
   `short_description` varchar(255) DEFAULT NULL,
   `long_contents` longtext DEFAULT NULL,
   `profile_picture` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -926,7 +990,7 @@ CREATE TABLE `root_wishlist` (
   `temp_id` bigint(20) DEFAULT NULL,
   `product_id` bigint(20) NOT NULL,
   `user_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `root_wishlist`
@@ -958,7 +1022,8 @@ INSERT INTO `root_wishlist` (`id`, `ishere`, `color`, `size`, `quantity`, `temp_
 --
 ALTER TABLE `account_customuser`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `account_customuser_membership_id_cb05726f_fk_root_memb` (`membership_id`);
 
 --
 -- Indexes for table `account_customuser_groups`
@@ -1086,6 +1151,12 @@ ALTER TABLE `root_homenavigation`
   ADD KEY `root_homenavigation_parent_id_ae7e4585_fk_root_homenavigation_id` (`parent_id`);
 
 --
+-- Indexes for table `root_membershiptype`
+--
+ALTER TABLE `root_membershiptype`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `root_navigation`
 --
 ALTER TABLE `root_navigation`
@@ -1180,13 +1251,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `axes_accessattempt`
 --
 ALTER TABLE `axes_accessattempt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `axes_accessfailurelog`
@@ -1198,7 +1269,7 @@ ALTER TABLE `axes_accessfailurelog`
 -- AUTO_INCREMENT for table `axes_accesslog`
 --
 ALTER TABLE `axes_accesslog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `django_admin_log`
@@ -1210,13 +1281,13 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `root_blog`
@@ -1249,10 +1320,16 @@ ALTER TABLE `root_homenavigation`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `root_membershiptype`
+--
+ALTER TABLE `root_membershiptype`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `root_navigation`
 --
 ALTER TABLE `root_navigation`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `root_order`
@@ -1270,7 +1347,7 @@ ALTER TABLE `root_pagetype`
 -- AUTO_INCREMENT for table `root_products`
 --
 ALTER TABLE `root_products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `root_review`
@@ -1299,6 +1376,12 @@ ALTER TABLE `root_wishlist`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `account_customuser`
+--
+ALTER TABLE `account_customuser`
+  ADD CONSTRAINT `account_customuser_membership_id_cb05726f_fk_root_memb` FOREIGN KEY (`membership_id`) REFERENCES `root_membershiptype` (`id`);
 
 --
 -- Constraints for table `account_customuser_groups`

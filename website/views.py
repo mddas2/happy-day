@@ -166,13 +166,13 @@ def SubCategory(request, menu , submenu ):
     return SubcategoryAction(request,page_type,page_detail,c_id,submenu)   
     # return SubcategoryAction(request,page_type,menu,submenu)
 
-def ProductDetail(request,id):
+def SingleProductView(request,product_name):
     try:
         c_id = request.COOKIES['c_id']
     except:
         return redirect('website.index')
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
-    product = Products.objects.get(id=id,status=1) 
+    product = Products.objects.get(name=product_name,status=1) 
     
     customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
     best_price = Products.objects.filter(status=1).order_by('-discount')[:3]
@@ -192,7 +192,7 @@ def ProductDetail(request,id):
 
 
     data = {'product':product,'global_data':global_data,'customers':customers,'Categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
-    return render(request, 'main/product-details.html',data)
+    return render(request, 'main/product.html',data)
 
 def BlogDetail(request,id):
     try:

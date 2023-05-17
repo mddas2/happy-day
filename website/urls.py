@@ -8,7 +8,9 @@ urlpatterns = [
     path('contact-us/', views.Contactus, name='Contactus'),
     path('rate/<int:p_id>', views.RateProduct, name='RateProduct'),
 
-    path('product-details/<int:id>', views.ProductDetail, name='ProductDetail'),
+    path('product-view/<str:product_name>', views.SingleProductView, name='SingleProductViews'),
+    path('product-quick-view/<str:product_name>', views.SingleProductView, name='SingleProductQuickViews'),
+
     path('blog-details/<int:id>', views.BlogDetail, name='BlogDetail'),
     # # ishere field 1 =>wishlist |||| 0 => cart ||| 2=> order
     path('wish-list/', views.WishList, name='WishList'),
@@ -37,8 +39,11 @@ urlpatterns = [
     path('register', user_auth.SignUp, name='user_register'),
     path('register/<int:id>', user_auth.SignUp, name='user_register'),
     path('user-logout',user_auth.Logout,name='user_logout'),
+
+    
     
     path('<str:menu>', views.Category, name='Category'),#127.0.0.1:8000/dhanusha here is only one slug.slug name is dhanusha . which is menu
     path('<str:menu>/<str:submenu>', views.SubCategory, name='SubCategory'),#127.0.0.1:8000/dhanusha/janakpur . here is two slug . main slug(menu) is dhanusha. and second slug(submenu) is janakpur.
+
 
 ]
