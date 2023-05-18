@@ -9,7 +9,7 @@ urlpatterns = [
     path('rate/<int:p_id>', views.RateProduct, name='RateProduct'),
 
     path('product-view/<str:product_name>', views.SingleProductView, name='SingleProductViews'),
-    path('product-quick-view/<str:product_name>', views.SingleProductView, name='SingleProductQuickViews'),
+    path('product-quick-view/<str:product_name>', views.SingleProductQuickViews, name='SingleProductQuickViews'),
 
     path('blog-details/<int:id>', views.BlogDetail, name='BlogDetail'),
     # # ishere field 1 =>wishlist |||| 0 => cart ||| 2=> order

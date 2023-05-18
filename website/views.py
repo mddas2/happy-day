@@ -194,6 +194,35 @@ def SingleProductView(request,product_name):
     data = {'product':product,'global_data':global_data,'customers':customers,'Categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
     return render(request, 'main/product.html',data)
 
+def SingleProductQuickViews(request,product_name):
+    try:
+        c_id = request.COOKIES['c_id']
+    except:
+        return redirect('website.index')
+    menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
+    product = Products.objects.get(name=product_name,status=1) 
+    
+    customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
+    best_price = Products.objects.filter(status=1).order_by('-discount')[:3]
+    Categories = Navigation.objects.filter(page_type='sale_group').order_by('position')
+
+
+    sizes = product.size.split(',')
+    colors = product.color.split(',')
+    related_product = Products.objects.filter(category_id=product.category_id,status=1).order_by('-updated_at')
+    # print(product.category_id)
+    global_data = GlobalSettings.objects.first()
+
+    wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
+    cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
+    wishvalue = len(wishvalue)
+    cartvalue = len(cartvalue)
+
+
+    data = {'product':product,'global_data':global_data,'customers':customers,'Categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
+    return render(request, 'main/quickview.html',data)
+    
+
 def BlogDetail(request,id):
     try:
         c_id = request.COOKIES['c_id']
