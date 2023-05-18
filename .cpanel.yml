@@ -1,6 +1,6 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/maximacom/maxima/
+    - export DEPLOYPATH=/home/radijmdg/happyday/
     - /bin/cp -r website $DEPLOYPATH
     - /bin/cp -r root $DEPLOYPATH
     - /bin/cp -r account $DEPLOYPATH
