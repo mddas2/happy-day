@@ -54,6 +54,8 @@ def index(request):
 
         best_selling = Products.objects.filter(status=1).order_by('-discount')[:6]
         latest_product = Products.objects.filter(status=1).order_by('-updated_at')[:12]
+
+        technology_product = Products.objects.filter(status=1).order_by('-updated_at')[:12]
         # special_deals = Products.objects.filter(status=1).order_by('-most_ordered','-updated_at')[:12]
         camera = Products.objects.filter(status=1).filter(vendor="camera").order_by('-updated_at')[:12] # #
         door_phone = Products.objects.filter(status=1).filter(vendor="door_phone").order_by('-updated_at') # #
@@ -86,6 +88,7 @@ def index(request):
             'clientschild':clientschild,
             'pemplatechild':pemplatechild,
             'happy_customer' : happy_customer,
+            'technology_product':technology_product,
         }
         try:
             temp_id = request.user.c_id

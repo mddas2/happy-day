@@ -59,7 +59,7 @@
                                                   <div class="product-layout item-inner style1 ">
                                                       <div class="item-image">
                                                           <div class="item-img-info">
-                                                              <a href="product.html" target="_self"
+                                                              <a href="{% url 'SingleProductViews' product_name=best_selling.name %}" target="_self"
                                                                   title="Sausage cowbee ">
                                                                   <img src="{% if best_selling.image1 %} {{best_selling.image1.url}} {% endif %}"
                                                                       alt="Sausage cowbee">
@@ -69,7 +69,7 @@
                                                       </div>
                                                       <div class="item-info">
                                                           <div class="item-title">
-                                                              <a href="product.html" target="_self"
+                                                              <a href="{% url 'SingleProductViews' product_name=best_selling.name %}" target="_self"
                                                                   title="Sausage cowbee">
                                                                   Sausage cowbee
                                                               </a>
@@ -195,16 +195,17 @@
                                           <div class="product-layout item-inner style1 ">
                                               <div class="item-image">
                                                   <div class="item-img-info">
-                                                      <a href="product.html" target="_self"
+                                                      <a href="{% url 'SingleProductViews' product_name=product.name %}" target="_self"
                                                           title="Sausage cowbee "><img
-                                                              src="{% static 'assets_web/image/catalog/demo/product/80/04 (1).jpg' %}"
+                                                              src="{{product.image1.url}}"
                                                               alt="Sausage cowbee"></a>
                                                   </div>
+                                             
 
                                               </div>
                                               <div class="item-info">
                                                   <div class="item-title">
-                                                      <a href="product.html" target="_self"
+                                                      <a href="{% url 'SingleProductViews' product_name=product.name %}" target="_self"
                                                           title="Sausage cowbee">{{product.name}}</a>
                                                   </div>
                                                   <div class="rating">
@@ -648,8 +649,7 @@
                               <div class="page-top">
                                   <div class="page-title-categoryslider">Technology</div>
                                   <div class="item-sub-cat">
-                                      <ul>
-                                         
+                                      <ul>                                         
                                           <li><a href="category.html" title="Hitech" target="_self">View All</a></li>
                                       </ul>
                                   </div>
@@ -669,27 +669,29 @@
                                       data-items_column4="1" data-arrows="yes" data-pagination="no"
                                       data-lazyload="yes" data-loop="yes" data-hoverpause="yes">
 
+                                      {% for product in technology_product %}
                                       <div class="item">
                                           <div class="item-inner product-layout transition product-grid">
                                               <div class="product-item-container">
                                                   <div class="left-block left-b">
 
+                                                   
                                                       <div class="product-image-container second_img">
-                                                          <a href="product.html" target="_self"
-                                                              title="Lastrami bacon">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e01.jpg' %}"
-                                                                  class="img-1 img-responsive" alt="image1">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e10.jpg' %}"
-                                                                  class="img-2 img-responsive" alt="image2">
-                                                          </a>
-                                                      </div>
+                                                        <a href="{% url 'SingleProductViews' product_name=product.name %}" target="_self"
+                                                            title="Pastrami bacon">
+                                                            <img src="{{product.image1.url}}"
+                                                                class="img-1 img-responsive" alt="image1">
+                                                            <img src="{{product.image2.url}}"
+                                                                class="img-2 img-responsive" alt="image2">
+                                                        </a>
+                                                    </div>
                                                       <!--quickview-->
                                                       <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                              href="quickview.html" title="Quick view"
-                                                              data-fancybox-type="iframe"><i
-                                                                  class="fa fa-eye"></i><span>Quick view</span></a>
-                                                      </div>
+                                                        <a class="iframe-link btn-button quickview quickview_handler visible-lg"
+                                                            href="{% url 'SingleProductQuickViews' product_name=product.name %}" title="Quick view"
+                                                            data-fancybox-type="iframe"><i
+                                                                class="fa fa-eye"></i><span>Quick view</span></a>
+                                                    </div>
                                                       <!--end quickview-->
 
 
@@ -730,410 +732,19 @@
                                                               <span class="rating-num">( 2 )</span>
                                                           </div>
                                                           <h4><a href="product.html" title="Pastrami bacon"
-                                                                  target="_self">Lastrami bacon</a></h4>
+                                                                  target="_self">{{product.name}}</a></h4>
 
                                                       </div>
                                                       <p class="price">
-                                                          <span>MPR</span>
-                                                          <span class="price-new">$80.00</span>
+                                                          <span>Platinum Price:</span>
+                                                          <span class="price-new">{{product.platinum_membership_price}}</span>
 
 
                                                       </p>
                                                       <p class="price">
-                                                          <span class="">Member Price: $50</span>
+                                                          <span class="">Free Member Price: {{product.free_membership_price}}</span>
 
 
-
-                                                      </p>
-                                                  </div>
-
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="item">
-                                          <div class="item-inner product-layout transition product-grid">
-                                              <div class="product-item-container">
-                                                  <div class="left-block left-b">
-                                                      <div class="box-label">
-                                                          <span class="label-product label-sale">-15%</span>
-                                                      </div>
-                                                      <div class="product-image-container second_img">
-                                                          <a href="product.html" target="_self"
-                                                              title="Exceeur sint occaecat">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e2.jpg' %}"
-                                                                  class="img-1 img-responsive" alt="image1">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e9.jpg' %}"
-                                                                  class="img-2 img-responsive" alt="image2">
-                                                          </a>
-                                                      </div>
-                                                      <!--quickview-->
-                                                      <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                              href="quickview.html" title="Quick view"
-                                                              data-fancybox-type="iframe"><i
-                                                                  class="fa fa-eye"></i><span>Quick view</span></a>
-                                                      </div>
-                                                      <!--end quickview-->
-
-                                                  </div>
-                                                  <div class="right-block">
-                                                      <div class="button-group so-quickview cartinfo--left">
-                                                          <button type="button" class="addToCart" title="Add to cart"
-                                                              onclick="cart.add('60 ');">
-                                                              <span>Add to cart </span>
-                                                          </button>
-                                                          <button type="button" class="wishlist btn-button"
-                                                              title="Add to Wish List"
-                                                              onclick="wishlist.add('60');"><i
-                                                                  class="fa fa-heart-o"></i><span>Add to Wish
-                                                                  List</span>
-                                                          </button>
-                                                          <button type="button" class="compare btn-button"
-                                                              title="Compare this Product "
-                                                              onclick="compare.add('60');"><i
-                                                                  class="fa fa-retweet"></i><span>Compare this
-                                                                  Product</span>
-                                                          </button>
-
-                                                      </div>
-                                                      <div class="caption hide-cont">
-                                                          <div class="ratings">
-                                                              <div class="rating-box"> <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                              </div>
-                                                              <span class="rating-num">( 3 )</span>
-                                                          </div>
-                                                          <h4><a href="product.html" title="Pastrami bacon"
-                                                                  target="_self">Exceeur sint occaecat</a></h4>
-
-                                                      </div>
-                                                      <p class="price">
-                                                          <span>MPR</span>
-                                                          <span class="price-new">$50.00</span>
-                                                          <span class="price-old">$59.00</span>
-                                                      </p>
-                                                      <p class="price">
-                                                          <span class="price-new">Member Price: $40</span>
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="item">
-                                          <div class="item-inner product-layout transition product-grid">
-                                              <div class="product-item-container">
-                                                  <div class="left-block left-b">
-
-                                                      <div class="product-image-container second_img">
-                                                          <a href="product.html" target="_self"
-                                                              title="Mapicola incidid">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e3.jpg' %}"
-                                                                  class="img-1 img-responsive" alt="image1">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e8.jpg' %}"
-                                                                  class="img-2 img-responsive" alt="image2">
-                                                          </a>
-                                                      </div>
-                                                      <!--quickview-->
-                                                      <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                              href="quickview.html" title="Quick view"
-                                                              data-fancybox-type="iframe"><i
-                                                                  class="fa fa-eye"></i><span>Quick view</span></a>
-                                                      </div>
-                                                      <!--end quickview-->
-
-
-                                                  </div>
-                                                  <div class="right-block">
-                                                      <div class="button-group so-quickview cartinfo--left">
-                                                          <button type="button" class="addToCart" title="Add to cart"
-                                                              onclick="cart.add('60 ');">
-                                                              <span>Add to cart </span>
-                                                          </button>
-                                                          <button type="button" class="wishlist btn-button"
-                                                              title="Add to Wish List"
-                                                              onclick="wishlist.add('60');"><i
-                                                                  class="fa fa-heart-o"></i><span>Add to Wish
-                                                                  List</span>
-                                                          </button>
-                                                          <button type="button" class="compare btn-button"
-                                                              title="Compare this Product "
-                                                              onclick="compare.add('60');"><i
-                                                                  class="fa fa-retweet"></i><span>Compare this
-                                                                  Product</span>
-                                                          </button>
-
-                                                      </div>
-                                                      <div class="caption hide-cont">
-                                                          <div class="ratings">
-                                                              <div class="rating-box"> <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star-o fa-stack-2x"></i></span>
-                                                              </div>
-                                                              <span class="rating-num">( 5 )</span>
-                                                          </div>
-                                                          <h4><a href="product.html" title="Pastrami bacon"
-                                                                  target="_self">Mapicola incidid</a></h4>
-
-                                                      </div>
-                                                      <p class="price">
-                                                          <span>MPR</span>
-                                                          <span class="price-new">$60.00</span>
-
-                                                      </p>
-                                                      <p class="price">
-                                                          <span class="price-new"> Member Price: $50</span>
-
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="item">
-                                          <div class="item-inner product-layout transition product-grid">
-                                              <div class="product-item-container">
-                                                  <div class="left-block left-b">
-                                                      <div class="box-label">
-                                                          <span class="label-product label-new">New</span>
-                                                      </div>
-                                                      <div class="product-image-container second_img">
-                                                          <a href="product.html" target="_self"
-                                                              title="Duis aute irure ">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e4.jpg' %}"
-                                                                  class="img-1 img-responsive" alt="image1">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e7.jpg' %}"
-                                                                  class="img-2 img-responsive" alt="image2">
-                                                          </a>
-                                                      </div>
-                                                      <!--quickview-->
-                                                      <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                              href="quickview.html" title="Quick view"
-                                                              data-fancybox-type="iframe"><i
-                                                                  class="fa fa-eye"></i><span>Quick view</span></a>
-                                                      </div>
-                                                      <!--end quickview-->
-
-
-                                                  </div>
-                                                  <div class="right-block">
-                                                      <div class="button-group so-quickview cartinfo--left">
-                                                          <button type="button" class="addToCart" title="Add to cart"
-                                                              onclick="cart.add('60 ');">
-                                                              <span>Add to cart </span>
-                                                          </button>
-                                                          <button type="button" class="wishlist btn-button"
-                                                              title="Add to Wish List"
-                                                              onclick="wishlist.add('60');"><i
-                                                                  class="fa fa-heart-o"></i><span>Add to Wish
-                                                                  List</span>
-                                                          </button>
-                                                          <button type="button" class="compare btn-button"
-                                                              title="Compare this Product "
-                                                              onclick="compare.add('60');"><i
-                                                                  class="fa fa-retweet"></i><span>Compare this
-                                                                  Product</span>
-                                                          </button>
-
-                                                      </div>
-                                                      <div class="caption hide-cont">
-                                                          <div class="ratings">
-                                                              <div class="rating-box"> <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                              </div>
-                                                              <span class="rating-num">( 2 )</span>
-                                                          </div>
-                                                          <h4><a href="product.html" title="Pastrami bacon"
-                                                                  target="_self">Duis aute irure </a></h4>
-
-                                                      </div>
-                                                      <p class="price">
-                                                          <span>More</span>
-                                                          <span class="price-new">$48.00</span>
-
-                                                      </p>
-                                                      <p class="price">
-                                                          <span>Member Price: $40</span>
-
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="item">
-                                          <div class="item-inner product-layout transition product-grid">
-                                              <div class="product-item-container">
-                                                  <div class="left-block left-b">
-
-                                                      <div class="product-image-container second_img">
-                                                          <a href="product.html" target="_self"
-                                                              title="Excepteur sint occ">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e6.jpg' %}"
-                                                                  class="img-1 img-responsive" alt="image1">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/cat7.png' %}' %}"
-                                                                  class="img-2 img-responsive" alt="image2">
-                                                          </a>
-                                                      </div>
-                                                      <!--quickview-->
-                                                      <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                              href="quickview.html" title="Quick view"
-                                                              data-fancybox-type="iframe"><i
-                                                                  class="fa fa-eye"></i><span>Quick view</span></a>
-                                                      </div>
-                                                      <!--end quickview-->
-
-
-                                                  </div>
-                                                  <div class="right-block">
-                                                      <div class="button-group so-quickview cartinfo--left">
-                                                          <button type="button" class="addToCart" title="Add to cart"
-                                                              onclick="cart.add('60 ');">
-                                                              <span>Add to cart </span>
-                                                          </button>
-                                                          <button type="button" class="wishlist btn-button"
-                                                              title="Add to Wish List"
-                                                              onclick="wishlist.add('60');"><i
-                                                                  class="fa fa-heart-o"></i><span>Add to Wish
-                                                                  List</span>
-                                                          </button>
-                                                          <button type="button" class="compare btn-button"
-                                                              title="Compare this Product "
-                                                              onclick="compare.add('60');"><i
-                                                                  class="fa fa-retweet"></i><span>Compare this
-                                                                  Product</span>
-                                                          </button>
-
-                                                      </div>
-                                                      <div class="caption hide-cont">
-                                                          <div class="ratings">
-                                                              <div class="rating-box"> <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                              </div>
-                                                              <span class="rating-num">( 4 )</span>
-                                                          </div>
-                                                          <h4><a href="product.html" title="Pastrami bacon"
-                                                                  target="_self">Excepteur sint occ</a></h4>
-
-                                                      </div>
-                                                      <p class="price">
-                                                          <span class="price-new">$90.00</span>
-
-                                                      </p>
-                                                      <p class="price">
-                                                          <span class="price-new">Member Price: $76</span>
-
-                                                      </p>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="item">
-                                          <div class="item-inner product-layout transition product-grid">
-                                              <div class="product-item-container">
-                                                  <div class="left-block left-b">
-
-                                                      <div class="product-image-container second_img">
-                                                          <a href="product.html" target="_self"
-                                                              title="PCenison meatloa">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e7.jpg' %}"
-                                                                  class="img-1 img-responsive" alt="image1">
-                                                              <img src="{% static 'assets_web/image/catalog/demo/category/e6.jpg' %}"
-                                                                  class="img-2 img-responsive" alt="image2">
-                                                          </a>
-                                                      </div>
-                                                      <!--quickview-->
-                                                      <div class="so-quickview">
-                                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                              href="quickview.html" title="Quick view"
-                                                              data-fancybox-type="iframe"><i
-                                                                  class="fa fa-eye"></i><span>Quick view</span></a>
-                                                      </div>
-                                                      <!--end quickview-->
-
-
-                                                  </div>
-                                                  <div class="right-block">
-                                                      <div class="button-group so-quickview cartinfo--left">
-                                                          <button type="button" class="addToCart" title="Add to cart"
-                                                              onclick="cart.add('60 ');">
-                                                              <span>Add to cart </span>
-                                                          </button>
-                                                          <button type="button" class="wishlist btn-button"
-                                                              title="Add to Wish List"
-                                                              onclick="wishlist.add('60');"><i
-                                                                  class="fa fa-heart-o"></i><span>Add to Wish
-                                                                  List</span>
-                                                          </button>
-                                                          <button type="button" class="compare btn-button"
-                                                              title="Compare this Product "
-                                                              onclick="compare.add('60');"><i
-                                                                  class="fa fa-retweet"></i><span>Compare this
-                                                                  Product</span>
-                                                          </button>
-
-                                                      </div>
-                                                      <div class="caption hide-cont">
-                                                          <div class="ratings">
-                                                              <div class="rating-box"> <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star fa-stack-2x"></i></span>
-                                                                  <span class="fa fa-stack"><i
-                                                                          class="fa fa-star-o fa-stack-2x"></i></span>
-                                                              </div>
-                                                              <span class="rating-num">( 6 )</span>
-                                                          </div>
-                                                          <h4><a href="product.html" title="Pastrami bacon"
-                                                                  target="_self">Cenison meatloa</a></h4>
-
-                                                      </div>
-                                                      <p class="price">
-                                                          <span class="price-new">$90.00</span>
-
-                                                      </p>
-                                                      <p class="price">
-                                                          <span class="price-new">Member Price: $75</span>
 
                                                       </p>
                                                   </div>
@@ -1141,9 +752,7 @@
                                               </div>
                                           </div>
                                       </div>
-
-
-
+                                      {% endfor %}
                                   </div>
                               </div>
                           </div>
@@ -1210,7 +819,7 @@
                                                           <div class="left-block left-b">
 
                                                               <div class="product-image-container second_img">
-                                                                  <a href="product.html" target="_self"
+                                                                  <a href="{% url 'SingleProductViews' product_name=pror.name %}" target="_self"
                                                                       title="Eiusmod tempor incid">
                                                                       <img src="{% if pror.image1 %} {{pror.image1.url}} {% endif %}"
                                                                           class="img-1 img-responsive" alt="image1">
@@ -1221,7 +830,7 @@
                                                               <!--quickview-->
                                                               <div class="so-quickview">
                                                                   <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                                      href="quickview.html" title="Quick view"
+                                                                      href="{% url 'SingleProductQuickViews' product_name=pror.name %}" title="Quick view"
                                                                       data-fancybox-type="iframe"><i
                                                                           class="fa fa-eye"></i><span>Quick
                                                                           view</span></a>
@@ -1267,11 +876,11 @@
 
                                                               </div>
                                                               <p class="price">
-                                                                  <span class="price-new">$76.00</span>
+                                                                  <span class="price-new">Platinum Price: {{pror.platinum_membership_price}}</span>
 
                                                               </p>
                                                               <p class="price">
-                                                                  <span>Member Price: $70</span>
+                                                                  <span>Free Member Price: {{pror.free_membership_price}}</span>
 
                                                               </p>
                                                           </div>
