@@ -2,6 +2,7 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/radijmdg/happyday/
     - /bin/cp -r website $DEPLOYPATH
+    - /bin/cp -r Mainproject $DEPLOYPATH
     - /bin/cp -r root $DEPLOYPATH
     - /bin/cp -r account $DEPLOYPATH
     - /bin/cp -r media $DEPLOYPATH
