@@ -65,7 +65,6 @@ def CategoryAction(request,page_type,page_detail,c_id=None):
                 data['page'] = "product"
             return render(request,'main/'+page_type+'.html',data)
 
-      
     return redirect('website.index')
             # return reverse("SubNavigationCreate", args=[id])
 

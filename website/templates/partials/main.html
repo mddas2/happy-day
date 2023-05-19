@@ -484,9 +484,9 @@
                                   <!--------category------->
                                    {% for cat in categories %}
                                         <div class="content-box">
-                                            <div class="image-cat"><a href="category.html" title="Iwatch & Accessories"><img
+                                            <div class="image-cat"><a href="{% url 'Category' category_name=cat.name %}" title="Iwatch & Accessories"><img
                                                         src="{% if cat.banner_image1 %} {{cat.banner_image1.url}} {% endif %}" alt="img"></a></div>
-                                            <div class="cat-title"><a href="{% url 'Category' menu=cat.name %}" title="Iwatch & Accessories">{{cat.name}}</a>
+                                            <div class="cat-title"><a href="{% url 'Category' category_name=cat.name %}" title="Iwatch & Accessories">{{cat.name}}</a>
                                             </div>
                                         </div> 
                                     {% endfor %}                                 

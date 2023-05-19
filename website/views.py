@@ -139,7 +139,7 @@ def index(request):
                 a = render(request, 'index.html',data)
                 a.set_cookie(key="c_id", value=rand_num,max_age=100000000)
                 return a
-def Category(request, menu):
+def Menu(request, menu):
     try:
         c_id = request.COOKIES['c_id']
     except:
@@ -152,7 +152,7 @@ def Category(request, menu):
     # return HttpResponse(page_type)
     return CategoryAction(request,page_type,page_detail,c_id)   
 
-def SubCategory(request, menu , submenu ):
+def SubMenu(request, menu , submenu ):
     if menu=='admin':
         return redirect('/') #if user(client) input admin as menu then redirect to home
     else:
@@ -170,6 +170,32 @@ def SubCategory(request, menu , submenu ):
     page_type = Navigation.objects.filter(name=submenu).first().page_type
     return SubcategoryAction(request,page_type,page_detail,c_id,submenu)   
     # return SubcategoryAction(request,page_type,menu,submenu)
+
+def Category(request,category_name):
+    try:
+        c_id = request.COOKIES['c_id']
+    except:
+        return redirect('website.index')
+    menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
+    product = Products.objects.all()
+    
+    customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
+    best_price = Products.objects.filter(status=1).order_by('-discount')[:3]    
+    Categories = Navigation.objects.filter(parent_id=3).order_by('position')[:7]
+
+
+    related_product = Products.objects.filter(category_id=1,status=1).order_by('-updated_at')
+    # print(product.category_id)
+    global_data = GlobalSettings.objects.first()
+
+    wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
+    cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
+    wishvalue = len(wishvalue)
+    cartvalue = len(cartvalue)
+    category_collapse = True
+
+    data = {'category_collapse':category_collapse,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product}
+    return render(request, 'main/sale_group.html',data)
 
 def SingleProductView(request,product_name):
     try:
