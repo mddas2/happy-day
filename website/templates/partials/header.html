@@ -290,6 +290,7 @@
                                                                 <span>{{cat.name}}</span>
                                                                 <b class="fa-angle-right"></b>
                                                             </a>
+                                                            {% if cat.childs.all.count %}
                                                             <div class="sub-menu" data-subwidth="60">
                                                                 <div class="content">
                                                                     <div class="row">
@@ -339,6 +340,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            {% endif %}
                                                         </li>
                                                     {% endfor %}
                                                     <!-------close  category-->
