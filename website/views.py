@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # Create your views here.
 def index(request):        
         # return render(request, 'index.html')
+        category_collapse = False
         menus = Navigation.objects.filter(parent_page_id=0, status=1).order_by('position')
         blog = Blog.objects.filter(status=1).order_by('-updated_at')[:3]
         sliders = HomeNavigation.objects.filter(page_type='sale')
@@ -89,6 +90,7 @@ def index(request):
             'pemplatechild':pemplatechild,
             'happy_customer' : happy_customer,
             'technology_product':technology_product,
+            'category_collapse':category_collapse,
         }
         try:
             temp_id = request.user.c_id
@@ -178,9 +180,8 @@ def SingleProductView(request,product_name):
     product = Products.objects.get(name=product_name,status=1) 
     
     customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
-    best_price = Products.objects.filter(status=1).order_by('-discount')[:3]
-    Categories = Navigation.objects.filter(page_type='sale_group').order_by('position')
-
+    best_price = Products.objects.filter(status=1).order_by('-discount')[:3]    
+    Categories = Navigation.objects.filter(parent_id=3).order_by('position')[:7]
 
     sizes = product.size.split(',')
     colors = product.color.split(',')
@@ -192,9 +193,9 @@ def SingleProductView(request,product_name):
     cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
     wishvalue = len(wishvalue)
     cartvalue = len(cartvalue)
+    category_collapse = True
 
-
-    data = {'product':product,'global_data':global_data,'customers':customers,'Categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
+    data = {'category_collapse':category_collapse,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
     return render(request, 'main/product.html',data)
 
 def SingleProductQuickViews(request,product_name):

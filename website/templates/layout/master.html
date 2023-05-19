@@ -78,8 +78,12 @@
     {% endblock %}
   </head>
 
+  {% if category_collapse %}
+    <body class="res layout-subpage layout-1 banners-effect-5">
+  {% else %}
   <body class="common-home res layout-1">
-    <!-- <body class="res layout-subpage layout-1 banners-effect-5"> -->
+  {% endif %}
+    
 
     <div id="wrapper" class="wrapper-fluid banners-effect-3">
 
