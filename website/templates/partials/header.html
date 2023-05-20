@@ -284,7 +284,7 @@
                                                     {% for cat in categories %}
                                                         <li class="item-vertical  with-sub-menu hover">
                                                             <p class="close-menu"></p>
-                                                            <a href="#" class="clearfix">
+                                                            <a href="{% url 'Category' category_name=cat.name %}" class="clearfix">
                                                                 <img src="{% static 'assets_web/image/catalog/menu/icons/ico10.png' %}"
                                                                     alt="icon">
                                                                 <span>{{cat.name}}</span>
@@ -311,13 +311,13 @@
                                                                                         {%endif%}
                                                                                         
                                                                                         <li>
-                                                                                            <a href="#"
+                                                                                            <a href="{% url 'Category' category_name=subcat.name %}"
                                                                                                 class="main-menu">{{subcat.name}}</a>
                                                                                                 
                                                                                             <ul>
                                                                                                 <!----sub sub category---->
                                                                                                 {% for subsubcat in subcat.childs.all %}
-                                                                                                    <li><a href="category.html">{{subsubcat.name}}</a>
+                                                                                                    <li><a href="{% url 'Category' category_name=subsubcat.name %}">{{subsubcat.name}}</a>
                                                                                                     </li>                                                                                                                           
                                                                                                 {% endfor %}
                                                                                                 <!-----end subcategory------>
