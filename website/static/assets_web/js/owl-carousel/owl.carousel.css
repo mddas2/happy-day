@@ -133,6 +133,12 @@
     /*display: block;*/
     /*width: 100%;*/
     -webkit-transform-style: preserve-3d;
+    /* width: auto; */
+    /* object-fit: contain; */
+        max-height: 420px;
+        /* min-height: 420px; */
+    width: 100%;
+    
 }
 
 .owl2-carousel.owl2-text-select-on .owl2-item {
