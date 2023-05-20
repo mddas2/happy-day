@@ -310,12 +310,12 @@
                                 <div class="product-layout col-lg-15 col-md-4 col-sm-6 col-xs-12">
                                     <div class="product-item-container">
                                         <div class="left-block left-b">
-
                                             <div class="product-image-container second_img">
-                                                <a href="product.html" target="_self" title="Lastrami bacon">
-                                                    <img src="{% static 'assets_web/image/catalog/demo/product/270/e1 (1).jpg' %} "
+                                                <a href="{% url 'SingleProductViews' product_name=product.name %}" target="_self"
+                                                    title="Pastrami bacon">
+                                                    <img src="{{product.image1.url}}"
                                                         class="img-1 img-responsive" alt="image1">
-                                                    <img src="{% static 'assets_web/image/catalog/demo/product/270/e2 (1).jpg' %}"
+                                                    <img src="{{product.image2.url}}"
                                                         class="img-2 img-responsive" alt="image2">
                                                 </a>
                                             </div>
@@ -360,16 +360,15 @@
                                                     </div>
                                                     <span class="rating-num">( 2 )</span>
                                                 </div>
-                                                <h4><a href="product.html" title="Pastrami bacon" target="_self">Lastrami
-                                                        bacon</a></h4>
+                                                <h4><a href="product.html" title="Pastrami bacon" target="_self">{{product.name}}</a></h4>
 
                                             </div>
                                             <p class="price">
-                                                <span class="price-new">MRP $80.00</span>
+                                                <span class="price-new">Platinum price {{product.platinum_membership_price}}</span>
 
                                             </p>
                                             <p class="price">
-                                                <span> Members Price: $75</span>
+                                                <span>Free Membership: {{product.free_membership_price}}</span>
 
                                             </p>
                                             <div class="description item-desc">
