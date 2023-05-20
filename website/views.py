@@ -211,6 +211,8 @@ def SingleProductView(request,product_name):
         return redirect('website.index')
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
     product = Products.objects.get(name=product_name,status=1) 
+
+    latest_product = Products.objects.all()[:4]
     
     customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
     best_price = Products.objects.filter(status=1).order_by('-discount')[:3]    
@@ -228,7 +230,7 @@ def SingleProductView(request,product_name):
     cartvalue = len(cartvalue)
     body_type = "category_collapse"
 
-    data = {'body_type':body_type,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
+    data = {'latest_product':latest_product,'body_type':body_type,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
     return render(request, 'main/product.html',data)
 
 def SingleProductQuickViews(request,product_name):
