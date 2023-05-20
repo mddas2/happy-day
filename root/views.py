@@ -334,7 +334,6 @@ def ProductStore(request,pk=None):
             'long_contents' : long_contents,
             'meta_title' : meta_title,
             'keyword' : keyword,
-            'most_ordered' : 0
         }
         data = {**data,**images}   #merging two dictionary       
         # return HttpResponse(data['size'])

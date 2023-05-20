@@ -178,8 +178,15 @@ def Category(request,category_name):
     except:
         return redirect('website.index')
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
-    product = Products.objects.all()
-    
+
+    #*************************get all related products of all child of child*****************
+    electronics_category = Navigation.objects.get(name=category_name)
+    product_categories = get_all_child_categories(electronics_category)
+    product_categories |= Navigation.objects.filter(id=electronics_category.id)
+    products = Products.objects.filter(category__in=product_categories)
+    #**********************end******************************************
+
+   
     customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
     best_price = Products.objects.filter(status=1).order_by('-discount')[:3]    
     Categories = Navigation.objects.filter(parent_id=3).order_by('position')[:7]
@@ -194,7 +201,7 @@ def Category(request,category_name):
     wishvalue = len(wishvalue)
     cartvalue = len(cartvalue)
 
-    data = {'body_type':body_type,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product}
+    data = {'body_type':body_type,'products':products,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product}
     return render(request, 'main/sale_group.html',data)
 
 def SingleProductView(request,product_name):
@@ -571,4 +578,8 @@ def Signup(request):
 
 
       
-   
+def get_all_child_categories(category):
+    child_categories = category.childs.all()
+    for child_category in child_categories:
+        child_categories |= get_all_child_categories(child_category)
+    return child_categories

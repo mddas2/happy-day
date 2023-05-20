@@ -16,7 +16,6 @@ class PageType(models.Model):
         return "{page_name:"+self.page_name+","+"status:"+str(self.status)+"}"
 
 class Navigation(models.Model):
-    # product = models.ForeignKey('Products',on_delete=models.CASCADE,null=True)
     parent = models.ForeignKey('self', related_name="childs",on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=255)
     parent_page_id = models.IntegerField(default=0)
