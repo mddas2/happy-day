@@ -219,5 +219,61 @@
 </body>
 
 {% endblock %}
+{% block jscontents %}
+{% load staticfiles %}
+   <!-- Include Libs & Plugins
+    ============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="{% static 'assets_web/js/jquery-2.2.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/owl-carousel/owl.carousel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/slick-slider/slick.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/themejs/libs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/unveil/jquery.unveil.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/countdown/jquery.countdown.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/datetimepicker/moment.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/modernizr/modernizr-2.6.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/minicolors/jquery.miniColors.min.js' %}"></script>
+
+    <!-- Theme files
+    ============================================ -->
+
+    <script type="text/javascript" src="{% static 'assets_web/js/themejs/application.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'assets_web/js/themejs/homepage.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'assets_web/js/themejs/toppanel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/themejs/so_megamenu.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets_web/js/themejs/addtocart.js' %}"></script>
+
+    <script>
+      //---------------------Stars Start----------------------------------
+      // Select all elements with the "i" tag and store them in a NodeList called "stars"
+      const stars = document.querySelectorAll(".stars i");
+    
+      // Loop through the "stars" NodeList
+      stars.forEach((star, index1) => {
+        // Add an event listener that runs a function when the "click" event is triggered
+        star.addEventListener("click", () => {
+          var count_stars = 0;
+          // Loop through the "stars" NodeList Again
+          stars.forEach((star, index2) => {
+            // Add the "active" class to the clicked star and any stars with a lower index
+            // and remove the "active" class from any stars with a higher index
+            index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+            if(index1 >= index2)
+              count_stars++
+            });
+            //alert(count_stars);
+            document.getElementById("n_stars").value = count_stars-20;
+        });
+      });
+
+      //---------------------Stars Start End----------------------------------
+    </script>
+{% endblock %}
 
  

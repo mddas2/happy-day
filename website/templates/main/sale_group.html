@@ -319,10 +319,11 @@
                                                         class="img-2 img-responsive" alt="image2">
                                                 </a>
                                             </div>
+                                        
                                             <!--quickview-->
                                             <div class="so-quickview">
                                                 <a class="iframe-link btn-button quickview quickview_handler visible-lg"
-                                                    href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i
+                                                    href="{% url 'SingleProductQuickViews' product_name=product.name %}" title="Quick view" data-fancybox-type="iframe"><i
                                                         class="fa fa-eye"></i><span>Quick view</span></a>
                                             </div>
                                             <!--end quickview-->
