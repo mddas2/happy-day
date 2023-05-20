@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # Create your views here.
 def index(request):        
         # return render(request, 'index.html')
-        category_collapse = False
+        body_type = 'category_collapse_fixed'
         menus = Navigation.objects.filter(parent_page_id=0, status=1).order_by('position')
         blog = Blog.objects.filter(status=1).order_by('-updated_at')[:3]
         sliders = HomeNavigation.objects.filter(page_type='sale')
@@ -90,7 +90,7 @@ def index(request):
             'pemplatechild':pemplatechild,
             'happy_customer' : happy_customer,
             'technology_product':technology_product,
-            'category_collapse':category_collapse,
+            'body_type':body_type,
         }
         try:
             temp_id = request.user.c_id
@@ -172,6 +172,7 @@ def SubMenu(request, menu , submenu ):
     # return SubcategoryAction(request,page_type,menu,submenu)
 
 def Category(request,category_name):
+    body_type = "category_listining_and_category_collapse"
     try:
         c_id = request.COOKIES['c_id']
     except:
@@ -192,9 +193,8 @@ def Category(request,category_name):
     cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
     wishvalue = len(wishvalue)
     cartvalue = len(cartvalue)
-    category_collapse = True
 
-    data = {'category_collapse':category_collapse,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product}
+    data = {'body_type':body_type,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product}
     return render(request, 'main/sale_group.html',data)
 
 def SingleProductView(request,product_name):
@@ -219,9 +219,9 @@ def SingleProductView(request,product_name):
     cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
     wishvalue = len(wishvalue)
     cartvalue = len(cartvalue)
-    category_collapse = True
+    body_type = "category_collapse"
 
-    data = {'category_collapse':category_collapse,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
+    data = {'body_type':body_type,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
     return render(request, 'main/product.html',data)
 
 def SingleProductQuickViews(request,product_name):

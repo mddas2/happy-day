@@ -78,14 +78,17 @@
     {% endblock %}
   </head>
 
-  {% if category_collapse %}
+  {% if body_type == 'category_collapse' %}
     <body class="res layout-subpage layout-1 banners-effect-5">
+  {% elif body_type == 'category_collapse_fixed' %}
+  <body class="common-home res layout-1">
+  {% elif body_type == 'category_listining_and_category_collapse' %}
+  <body class="res layout-1 listing-page">
   {% else %}
   <body class="common-home res layout-1">
   {% endif %}
- 
 
-    <div id="wrapper" class="wrapper-fluid banners-effect-3">
+  <div id="wrapper" class="wrapper-fluid banners-effect-3">
 
         <!-- Header Container  -->
         {% block header %}
