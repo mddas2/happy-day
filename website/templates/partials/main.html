@@ -650,7 +650,7 @@
                                   <div class="page-title-categoryslider">Technology</div>
                                   <div class="item-sub-cat">
                                       <ul>                                         
-                                          <li><a href="category.html" title="Hitech" target="_self">View All</a></li>
+                                          <li><a href="#" title="Hitech" target="_self">View All</a></li>
                                       </ul>
                                   </div>
                               </div>
@@ -673,9 +673,30 @@
                                       <div class="item">
                                           <div class="item-inner product-layout transition product-grid">
                                               <div class="product-item-container">
-                                                  <div class="left-block left-b">
+                                                <div class="left-block left-b">
+                                                    <div class="box-label">
+                                                        <span class="label-product label-sale">{{product.discount}}</span>
+                                                    </div>
+                                                    <div class="product-image-container second_img">
+                                                        <a href="{% url 'SingleProductViews' product_name=product.name %}" target="_self"
+                                                            title="Pastrami bacon">
+                                                            <img src="{{product.image1.url}}"
+                                                                class="img-1 img-responsive" alt="image1">
+                                                            <img src="{{product.image2.url}}"
+                                                                class="img-2 img-responsive" alt="image2">
+                                                        </a>
+                                                    </div>
+                                                    <!--quickview-->
+                                                    <div class="so-quickview">
+                                                        <a class="iframe-link btn-button quickview quickview_handler visible-lg"
+                                                            href="{% url 'SingleProductQuickViews' product_name=product.name %}" title="Quick view"
+                                                            data-fancybox-type="iframe"><i
+                                                                class="fa fa-eye"></i><span>Quick view</span></a>
+                                                    </div>
+                                                    <!--end quickview-->
 
-                                                  </div>
+
+                                                </div>
                                                   <div class="right-block">
                                                       <div class="button-group so-quickview cartinfo--left">
                                                           <button type="button" class="addToCart" title="Add to cart"
