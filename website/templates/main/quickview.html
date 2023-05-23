@@ -45,7 +45,7 @@
 
 					   <div class="content-product-right col-md-7 col-sm-12 col-xs-12">
 						   <div class="title-product">
-							   <h1>Chicken swinesha</h1>
+							   <h1>{{product.name}}</h1>
 						   </div>
 						   <!-- Review ---->
 						   <div class="box-review form-group">
@@ -65,8 +65,8 @@
 
 						   <div class="product-label form-group">
 							   <div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
-								   <span class="price-new" itemprop="price">$114.00</span>
-								   <span class="price-old">$122.00</span>
+								   <span class="price-new" itemprop="price">Platinum Price Rs. {{product.platinum_membership_price}}</span></br>
+								   <span class="price-new" itemprop="price">Free Membership Price Rs. {{product.free_membership_price}}</span>
 							   </div>
 							   <div class="stock"><span>Availability:</span> <span class="status-stock">In Stock</span></div>
 						   </div>

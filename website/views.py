@@ -188,7 +188,7 @@ def Category(request,category_name):
 
    
     customers = HomeNavigation.objects.filter(page_type='normal').order_by('-updated_at')[:3]
-    best_price = Products.objects.filter(status=1).order_by('-discount')[:3]    
+    latest_product = Products.objects.filter(status=1).order_by('-created_at')[:4]    
     Categories = Navigation.objects.filter(parent_id=3).order_by('position')[:7]
 
 
@@ -200,8 +200,9 @@ def Category(request,category_name):
     cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
     wishvalue = len(wishvalue)
     cartvalue = len(cartvalue)
+   
 
-    data = {'body_type':body_type,'products':products,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product}
+    data = {'body_type':body_type,'products':products,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'latest_products':latest_product,'menus':menus,'c_id':c_id,'related_product':related_product}
     return render(request, 'main/sale_group.html',data)
 
 def SingleProductView(request,product_name):
