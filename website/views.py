@@ -26,6 +26,7 @@ def index(request):
         # return render(request, 'index.html')
         body_type = 'category_collapse_fixed'
         menus = Navigation.objects.filter(parent_page_id=0, status=1).order_by('position')
+        # return HttpResponse(menus.first().name)
         blog = Blog.objects.filter(status=1).order_by('-updated_at')[:3]
         sliders = HomeNavigation.objects.filter(page_type='sale')
         contact_section = HomeNavigation.objects.filter(page_type='contact').all().first()
