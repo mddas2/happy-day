@@ -66,7 +66,7 @@
                                         
                                             <div class="item-info">
                                                 <div class="item-title">
-                                                    <a href="#" target="_self" title="Mandouille short">Mandouille short </a>
+                                                    <a href="{% url 'SingleProductViews' product_name=product.name %}" target="_self" title="Mandouille short">{{product.name}}</a>
                                                 </div>
                                                 <div class="rating">
                                                     <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
