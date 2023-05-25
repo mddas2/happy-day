@@ -161,7 +161,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Login url for Authorization
 LOGIN_URL='Login'
-CLIENT_LOGIN_URL='user_login'
+CLIENT_LOGIN_URL='ClientLogin'
 
 
 # Default primary key field type

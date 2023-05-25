@@ -4,6 +4,8 @@ from . import views
 from .includes import Action,search,user_auth,user_account
 
 urlpatterns = [  
+    path('login',views.Login,name='ClientLogin'),
+
     path('', views.index, name='website.index'),
     path('contact-us/', views.Contactus, name='Contactus'),
     path('rate/<int:p_id>', views.RateProduct, name='RateProduct'),

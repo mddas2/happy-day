@@ -7,6 +7,8 @@ from root.models import *
 from account.models import *
 from website.includes.Action import *
 from datetime import datetime, timedelta
+from django.contrib.auth import authenticate,login,logout
+from axes.models import AccessAttempt
 
 
 #Mail
@@ -575,7 +577,28 @@ def RateProduct(request):
 
 
 def Login(request):
-    return render(request, 'main/login.html')
+    data = {'login_attempt_left':settings.AXES_FAILURE_LIMIT}
+    login_attempt_left = 20
+    if request.POST:
+        # return HttpResponse(request.POST)
+
+        email = request.POST['email']
+        password =  request.POST['password']
+        user = authenticate(request=request,username=email, password=password)
+        if user is not None:
+            login(request,user,backend='django.contrib.auth.backends.ModelBackend') 
+            return redirect('website.index') 
+        else:
+            try:
+                user_login_attempt = AccessAttempt.objects.filter(username=email).first().failures_since_start
+                login_attempt_left = settings.AXES_FAILURE_LIMIT-user_login_attempt
+            except:
+                login_attempt_left =  settings.AXES_FAILURE_LIMIT
+
+            # return HttpResponse(login_attempt_left)
+            messages.error(request, "incorrect user or password")
+
+    return render(request, 'main/login.html',data)
 
 
 def Signup(request):

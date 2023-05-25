@@ -48,4 +48,5 @@ urlpatterns = [
     path('mail-compose', mailapp.MailCompose, name='MailCompose'),
 
     #****************category************************************
+
     ]
