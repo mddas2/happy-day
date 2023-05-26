@@ -577,7 +577,16 @@ def RateProduct(request):
 
 
 def Login(request):
-    data = {'login_attempt_left':settings.AXES_FAILURE_LIMIT}
+    body_type = "category_listining_and_category_collapse"
+    menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
+    categories = Navigation.objects.filter(parent_id=3).order_by('position')[:7]
+    data = {
+        'login_attempt_left':settings.AXES_FAILURE_LIMIT,
+        'body_type':body_type,
+        'menus':menus,
+        'categories':categories,
+
+        }
     login_attempt_left = 20
     if request.POST:
         # return HttpResponse(request.POST)
@@ -598,7 +607,7 @@ def Login(request):
             # return HttpResponse(login_attempt_left)
             messages.error(request, "incorrect user or password")
 
-    return render(request, 'main/login.html',data)
+    return render(request, 'client_dashboard/login.html',data)
 
 
 def Signup(request):
