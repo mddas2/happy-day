@@ -17,31 +17,29 @@
 			   <div class="product-view row quickview-w">
 				   <div class="left-content-product">
 			   
-					   <div class="content-product-left class-honizol col-md-5 col-sm-12 col-xs-12">
-						   <div class="large-image  ">
-							   <img itemprop="image" class="product-image-zoom" src="{% static 'assets_web/image/catalog/demo/product/fashion/detail-img.jpg' %}" data-zoom-image="image/catalog/demo/product/fashion/detail-img.jpg' %}" title="Chicken swinesha" alt="Chicken swinesha">
-						   </div>
-						   <a class="thumb-video pull-left" href=""><i class="fa fa-youtube-play"></i></a>
-						   
-						   <div id="thumb-slider" class="yt-content-slider full_slider owl-drag"  data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="10" data-items_column0="4" data-items_column1="3" data-items_column2="4"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
-							   <a data-index="0" class="img thumbnail " data-image="image/catalog/demo/product/fashion/f1.jpg' %}" title="Chicken swinesha">
-								   <img src="{% static 'assets_web/image/catalog/demo/product/fashion/f1.jpg' %}" title="Chicken swinesha" alt="Chicken swinesha">
-							   </a>
-							   <a data-index="1" class="img thumbnail " data-image="image/catalog/demo/product/fashion/f2.jpg' %}" title="Chicken swinesha">
-								   <img src="{% static 'assets_web/image/catalog/demo/product/fashion/f2.jpg' %}" title="Chicken swinesha" alt="Chicken swinesha">
-							   </a>
-							   <a data-index="2" class="img thumbnail " data-image="image/catalog/demo/product/fashion/f3.jpg' %}" title="Chicken swinesha">
-								   <img src="{% static 'assets_web/image/catalog/demo/product/fashion/f3.jpg' %}" title="Chicken swinesha" alt="Chicken swinesha">
-							   </a>
-							   <a data-index="3" class="img thumbnail " data-image="image/catalog/demo/product/fashion/f4.jpg' %}" title="Chicken swinesha">
-								   <img src="{% static 'assets_web/image/catalog/demo/product/fashion/f4.jpg' %}" title="Chicken swinesha" alt="Chicken swinesha">
-							   </a>
-							   <a data-index="4" class="img thumbnail " data-image="image/catalog/demo/product/fashion/f5.jpg' %}" title="Chicken swinesha">
-								   <img src="{% static 'assets_web/image/catalog/demo/product/fashion/f5.jpg' %}" title="Chicken swinesha" alt="Chicken swinesha">
-							   </a>
-						   </div>
-						   
-					   </div>
+					<div class="content-product-left class-honizol col-md-5 col-sm-12 col-xs-12">
+						<div class="large-image  ">
+							<img itemprop="image" class="product-image-zoom" src="{% if product.image1 %} {{product.image1.url}} {% elif product.image2 %} {{product.image2.url}} {% else %} {{product.image3.url}} {% endif %}"  title="Chicken swinesha" alt="Chicken swinesha">
+						</div>
+						<a class="thumb-video pull-left" href=""><i class="fa fa-youtube-play"></i></a>
+						
+						<div id="thumb-slider" class="yt-content-slider full_slider owl-drag" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="10" data-items_column00="4" data-items_column0="4" data-items_column1="3" data-items_column2="4"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+							<a data-index="0" class="img thumbnail " data-image="{% if product.image3 %} {{product.image3.url}} {% elif product.image2 %} {{product.image2.url}} {% else %} {{product.image1.url}} {% endif %}" title="Chicken swinesha">
+								<img src="{% if product.image3 %} {{product.image3.url}} {% elif product.image2 %} {{product.image2.url}} {% else %} {{product.image1.url}} {% endif %}" title="Chicken swinesha" alt="Chicken swinesha">
+							</a>
+							<a data-index="1" class="img thumbnail " data-image="{% if product.image2 %} {{product.image2.url}} {% elif product.image1 %} {{product.image1.url}} {% else %} {{product.image3.url}} {% endif %}" title="Chicken swinesha">
+								<img src="{% if product.image2 %} {{product.image2.url}} {% elif product.image1 %} {{product.image1.url}} {% else %} {{product.image3.url}} {% endif %}" title="Chicken swinesha" alt="Chicken swinesha">
+							</a>
+							<a data-index="1" class="img thumbnail " data-image="{% if product.image2 %} {{product.image2.url}} {% elif product.image1 %} {{product.image1.url}} {% else %} {{product.image3.url}} {% endif %}" title="Chicken swinesha">
+								<img src="{% if product.image2 %} {{product.image2.url}} {% elif product.image1 %} {{product.image1.url}} {% else %} {{product.image3.url}} {% endif %}" title="Chicken swinesha" alt="Chicken swinesha">
+							</a>
+							<a data-index="1" class="img thumbnail " data-image="{% if product.image2 %} {{product.image2.url}} {% elif product.image1 %} {{product.image1.url}} {% else %} {{product.image3.url}} {% endif %}" title="Chicken swinesha">
+								<img src="{% if product.image2 %} {{product.image2.url}} {% elif product.image1 %} {{product.image1.url}} {% else %} {{product.image3.url}} {% endif %}" title="Chicken swinesha" alt="Chicken swinesha">
+							</a>
+							
+						</div>
+						
+					</div>
 
 					   <div class="content-product-right col-md-7 col-sm-12 col-xs-12">
 						   <div class="title-product">
