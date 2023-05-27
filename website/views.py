@@ -609,6 +609,10 @@ def Login(request):
 
     return render(request, 'client_dashboard/login.html',data)
 
+def Logout(request):
+    logout(request)
+    return redirect('Login') 
+
 
 def Signup(request):
     return render(request, 'main/register.html')

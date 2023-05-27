@@ -5,6 +5,7 @@ from .includes import Action,search,user_auth,user_account
 
 urlpatterns = [  
     path('login',views.Login,name='ClientLogin'),
+    path('logout',views.logout,name='ClientLogout'),
 
     path('', views.index, name='website.index'),
     path('contact-us/', views.Contactus, name='Contactus'),

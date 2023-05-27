@@ -415,6 +415,6 @@ def SignUp(request):
     return render(request , 'admin/authentication/register.html',data)
 def Logout(request):
     logout(request)
-    return redirect('Login') 
+    return redirect('website.index') 
 
 

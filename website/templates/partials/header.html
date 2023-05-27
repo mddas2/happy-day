@@ -112,28 +112,27 @@
                 <!-- //end Search -->
                 <div class="middle-right col-lg-3 col-md-3 col-sm-3">
                     <!--cart-->
+                    
                     <div class="shopping_cart">
                         <div id="cart" class="btn-shopping-cart">
 
-                            <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle"
-                                data-toggle="dropdown" aria-expanded="true">
-                                <div class="shopcart">
-                                    <span class="icon-c">
-                                        <i class="fa fa-shopping-bag"></i>
-                                    </span>
-                                    <div class="shopcart-inner">
-                                        <p class="text-shopping-cart">
+                        
+                             <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle"
+                                 data-toggle="dropdown" aria-expanded="true">
+                                 <div class="shopcart">
+                                     <span class="icon-c">
+                                       <i class="fa fa-shopping-basket"></i>
+                                     </span>
+                                     <div class="shopcart-inner">
+                                        
 
-                                            My cart
-                                        </p>
-
-                                        <span class="total-shopping-cart cart-total-full">
-                                            <span class="items_cart">02</span><span class="items_cart2">
-                                                item(s)</span><span class="items_carts">( $162.00 )</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
+                                         <span class="total-shopping-cart cart-total-full">
+                                             <span class="items_cart">02</span><span class="items_cart2">
+                                                 
+                                         </span>
+                                     </div>
+                                 </div>
+                             </a>
 
                             <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
                                 <li>
@@ -142,7 +141,7 @@
                                             <tr>
                                                 <td class="text-center" style="width:70px">
                                                     <a href="product.html">
-                                                        <img src="{% static 'assets_web/image/catalog/demo/product/80/03 (1).jpg' %}"
+                                                        <img src="image/catalog/demo/product/80/03 (1).jpg"
                                                             style="width:70px" alt="Yutculpa ullamcon"
                                                             title="Yutculpa ullamco" class="preview">
                                                     </a>
@@ -163,7 +162,7 @@
                                             <tr>
                                                 <td class="text-center" style="width:70px">
                                                     <a href="product.html">
-                                                        <img src="{% static 'assets_web/image/catalog/demo/product/80/05 (1).jpg' %}"
+                                                        <img src="image/catalog/demo/product/80/05 (1).jpg"
                                                             style="width:70px" alt="Xancetta bresao"
                                                             title="Xancetta bresao" class="preview">
                                                     </a>
@@ -222,20 +221,36 @@
 
                     </div>
                     <!--//cart-->
+                     <div class="shopping_cart user_profile_icon" style="margin-right: 20px;">
+                         <div id="cart" class="btn-shopping-cart">
+
+                             <a href="my-account.html" data-loading-text="Loading... " class="btn-group top_cart ">
+                                 <div class="shopcart">
+                                    {% if user.is_authenticated %}
+                                     <span class="icon-c">
+                                         <i class="fa fa-user"></i>
+                                     </span>
+                                     {% endif %}
+                                 </div>
+                             </a>
+
+                         </div>
+
+                     </div>
+                     
 
                     <ul class="wishlist-comp hidden-md hidden-sm hidden-xs">
-                        <li class="compare hidden-xs"><a href="compare.html" class="top-link-compare" title="Compare "><i
-                                    class="fa fa-refresh"></i></a>
+                        <li class="compare hidden-xs"><a href="compare.html" class="top-link-compare"
+                                title="Compare "><i class="fa fa-refresh"></i></a>
                         </li>
-                        <li class="wishlist hidden-xs"><a href="wishlist.html" id="wishlist-total" class="top-link-wishlist"
-                                title="Wish List (0) "><i class="fa fa-heart"></i></a>
+                        <li class="wishlist hidden-xs"><a href="wishlist.html" id="wishlist-total"
+                                class="top-link-wishlist" title="Wish List (0) "><i class="fa fa-heart"></i></a>
                         </li>
                     </ul>
 
 
 
                 </div>
-
             </div>
 
         </div>
@@ -525,12 +540,21 @@
                             <li><a href="#"><i class="fa fa-phone-square"></i>Hotline 000000</a></li>
                         </ul>
                     </div>
+                    {% if not user.is_authenticated %}
                     <div class="signin-w hidden-md hidden-sm hidden-xs">
                         <ul class="signin-link blank">
                             <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg"
                                     href="{% url 'ClientLogin' %}">Login </a> <a href="register.html" class="hidden-lg">Register</a></li>
                         </ul>
                     </div>
+                    {% else %}
+                    <div class="signin-w hidden-md hidden-sm hidden-xs">
+                        <ul class="signin-link blank">
+                            <li class="log login"><i class="fa fa-lock"></i> <a class="link-lg"
+                                    href="{% url 'Admin.Logout' %}">logout </a> <a href="register.html" class="hidden-lg">Register</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
                 </div>
 
             </div>
