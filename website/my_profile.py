@@ -39,6 +39,13 @@ def Logout(request):
     logout(request)
     return redirect('Login') 
 
+def ViewOrderHistory(request):
+    data = {}
+    return render(request,'client_dashboard/order_history.html',data)
+
+def ViewWishList(request):
+    data = {}
+    return render(request,'client_dashboard/wish_list.html',data)
 
 def Signup(request):
-    return render(request, 'main/register.html')
+    return render(request, 'client_dashboard/register.html')

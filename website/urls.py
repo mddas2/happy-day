@@ -5,9 +5,14 @@ from .includes import Action,search,user_auth,user_account
 
 
 urlpatterns = [  
-    path('account/login',my_profile.Login,name='ClientLogin'),
-    path('account/logout',my_profile.logout,name='ClientLogout'),
-    path('account/profile',my_profile.profile,name='Profile'),
+    path('client-account/login',my_profile.Login,name='ClientLogin'),
+    path('client-account/logout',my_profile.logout,name='ClientLogout'),
+    path('client-account/profile',my_profile.profile,name='Profile'),
+
+    path('client-account/register', my_profile.Signup, name='user_register'),
+    path('client-account/order-history', my_profile.ViewOrderHistory, name='ViewOrderHistory'),
+    path('client-account/wishlist', my_profile.ViewWishList, name='ViewWishList'),
+    path('client-account/register/<int:id>', my_profile.Signup, name='user_register'),
 
 
     path('', views.index, name='website.index'),
@@ -42,8 +47,6 @@ urlpatterns = [
     path('custom-product',views.Custom,name="Custom"),
 
     path('login', user_auth.Login, name='user_login'),
-    path('register', user_auth.SignUp, name='user_register'),
-    path('register/<int:id>', user_auth.SignUp, name='user_register'),
     path('user-logout',user_auth.Logout,name='user_logout'),
 
     
