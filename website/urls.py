@@ -1,11 +1,14 @@
 from django.urls import path
 
-from . import views
+from . import views,my_profile
 from .includes import Action,search,user_auth,user_account
 
+
 urlpatterns = [  
-    path('login',views.Login,name='ClientLogin'),
-    path('logout',views.logout,name='ClientLogout'),
+    path('account/login',my_profile.Login,name='ClientLogin'),
+    path('account/logout',my_profile.logout,name='ClientLogout'),
+    path('account/profile',my_profile.profile,name='Profile'),
+
 
     path('', views.index, name='website.index'),
     path('contact-us/', views.Contactus, name='Contactus'),
