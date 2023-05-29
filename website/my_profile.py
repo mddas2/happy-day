@@ -51,3 +51,8 @@ def Signup(request):
     if request.POST:
         return HttpResponse("this is user create")
     return render(request, 'client_dashboard/signup.html')
+
+def ShippingAddress(request):
+    if request.POST:
+        return HttpResponse("this is user create")
+    return render(request, 'client_dashboard/user_shipping_detail.html')

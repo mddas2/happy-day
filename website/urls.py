@@ -9,7 +9,10 @@ urlpatterns = [
     path('client-account/logout',my_profile.logout,name='ClientLogout'),
     path('client-account/profile',my_profile.profile,name='Profile'),
 
-    path('client-account/register', my_profile.Signup, name='user_register'),
+    path('client-account/signup', my_profile.Signup, name='Signup'),
+
+    path('client-account/shipping-address', my_profile.ShippingAddress, name='ShippingAddress'),
+    
     path('client-account/order-history', my_profile.ViewOrderHistory, name='ViewOrderHistory'),
     path('client-account/wishlist', my_profile.ViewWishList, name='ViewWishList'),
     path('client-account/register/<int:id>', my_profile.Signup, name='user_register'),

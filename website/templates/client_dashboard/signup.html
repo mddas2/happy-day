@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="login-from">
-                            <form action="{% url 'ClientLogin' %}" method="POST" class="login-page-area">
+                            <form action="{% url 'Signup' %}" method="POST" class="login-page-area">
                                 {% csrf_token %}
                                 <div class="con">
                                     <header class="head-form">
@@ -162,14 +162,32 @@
                                     </header>
                                     <br>
                                     <div class="field-set">
-                                        <div class="sign-in-titile">Sign-In</div>
+                                        <div class="sign-in-titile">Create Account</div>
+
                                         <span class="input-item">
                                             <i class="fa fa-user-circle"></i>
                                         </span>
-                                        <input class="form-input" type="email" name="email" id="txt-input" type="text" placeholder="@UserName"
+                                        <input class="form-input" type="text" name="full_name" id="txt-input" type="text" placeholder="Full Name"
                                             required>
 
                                         <br>
+
+                                        <span class="input-item">
+                                            <i class="fa fa-user-circle"></i>
+                                        </span>
+                                        <input class="form-input" type="number" name="mobile_number" id="txt-input" type="text" placeholder="Mobile Number"
+                                            required>
+
+                                        <br>
+
+                                        <span class="input-item">
+                                            <i class="fa fa-user-circle"></i>
+                                        </span>
+                                        <input class="form-input" type="email" name="email" id="txt-input" type="text" placeholder="Email"
+                                            required>
+
+                                        <br>
+
                                         <span class="input-item">
                                             <i class="fa fa-key"></i>
                                         </span>
@@ -185,15 +203,15 @@
                                     </div>
 
                                     <div class="other">
-                                        <button class="btn submits sign-up">Sign Up
+                                        <a href="{% url 'ClientLogin' %}" class="btn submits sign-up">Sign in
                                             <i class="fa fa-user-plus" aria-hidden="true"></i>
-                                        </button>
-                                        <button class="btn submits frgt-pass">Forgot Password</button>
+                                        </a>
+                                        <a class="btn submits frgt-pass">Forgot Password</a>
 
                                     </div>
-                                    <button class="log-in log-in-button"> <i class="fa fa-google-plus"></i>Login with
+                                    <a href="#" class="log-in log-in-button"> <i class="fa fa-google-plus"></i>Sign Up with
                                         Google
-                                    </button>
+                                    </a>
 
                                 </div>
 
