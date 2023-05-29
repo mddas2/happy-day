@@ -6,11 +6,6 @@ from django.contrib import messages
 from django.conf import settings
 
 
-def profile(request):
-    data = {}
-    return render(request,'client_dashboard/profile.html',data)
-    return HttpResponse("profile")
-
 def Login(request):   
     data = {}
     login_attempt_left = 20
@@ -55,4 +50,4 @@ def Signup(request):
 def ShippingAddress(request):
     if request.POST:
         return HttpResponse("this is user create")
-    return render(request, 'client_dashboard/user_shipping_detail.html')
+    return render(request, 'client_dashboard/profile.html')
