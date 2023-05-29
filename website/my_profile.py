@@ -48,4 +48,6 @@ def ViewWishList(request):
     return render(request,'client_dashboard/wish_list.html',data)
 
 def Signup(request):
-    return render(request, 'client_dashboard/register.html')
+    if request.POST:
+        return HttpResponse("this is user create")
+    return render(request, 'client_dashboard/signup.html')

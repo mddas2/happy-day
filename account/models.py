@@ -6,6 +6,11 @@ class CustomUser(AbstractUser):
     phone = models.CharField(max_length=255 , null=True)
     permanent_address = models.CharField(max_length=255 , null=True)
     current_address = models.CharField(max_length=255 , null=True)
+
+    first_name = models.CharField(max_length=255 , null=True)
+    last_name = models.CharField(max_length=255 , null=True)
+
+
     email = models.EmailField(max_length=255, unique=True)
     username = models.EmailField(max_length=255, unique=False)  
     apply_role_type = models.IntegerField(null=True) 
@@ -40,3 +45,10 @@ class CustomUser(AbstractUser):
         else:
             return 'None'
 
+class ShippingAddress(models.Model):
+    country = models.CharField(max_length=255 , null=True)
+    district = models.CharField(max_length=255 , null=True)
+    state = models.CharField(max_length=255 , null=True)
+    city = models.CharField(max_length=255 , null=True)
+    company_name = models.CharField(max_length=255 , null=True)
+    mobile_number = models.CharField(max_length=255 , null=True)
