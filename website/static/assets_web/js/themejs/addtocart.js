@@ -11,7 +11,7 @@
 	// Cart add remove functions
 	var cart = {
 		'add': function(product_id, quantity) {
-			addProductNotice('Product added to Cart', '<img src="image/demo/shop/product/e11.jpg" alt="">', '<h3><a href="#">Apple Cinema 30"</a> added to <a href="#">shopping cart</a>!</h3>', 'success');
+			addProductNotice('Product added to Carts', '<img src="static/assets_web/image/demo/shop/product/e11.jpg" alt="">', '<h3><a href="#">Apple Cinema 30 md"</a> added to <a href="#">shopping cart</a>!</h3>', 'success');
 		}
 	}
 

@@ -93,58 +93,9 @@ def index(request):
             'technology_product':technology_product,
             'body_type':body_type,
         }
-        try:
-            temp_id = request.user.c_id
-            c_id = None
-        except:
-            try: 
-                c_id = request.COOKIES['c_id']
-            except:
-                c_id = None
-            temp_id = None
+        return render(request, 'index.html',data)
 
-        if c_id:
-            cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
-            wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
-            cartvalue = len(cartvalue)
-            wishvalue = len(wishvalue)
-            data['c_id'] = c_id
-            data['cartvalue'] = cartvalue
-            data['wishvalue'] = wishvalue
-            return render(request, 'index.html',data)
-        else:  
-            if temp_id:  
-                try: 
-                    c_id = request.COOKIES['c_id']
-                except:
-                    c_id = None
-
-                if c_id:
-                    Wishlist.objects.filter(temp_id=c_id).update(temp_id=temp_id)
-                
-                cartvalue = Wishlist.objects.filter(temp_id=temp_id,ishere=False)
-                wishvalue = Wishlist.objects.filter(temp_id=temp_id,ishere=True)
-                cartvalue = len(cartvalue)
-                wishvalue = len(wishvalue)
-                data['cartvalue'] = cartvalue
-                data['wishvalue'] = wishvalue
-                data['c_id'] = temp_id
-
-                a = render(request, 'index.html',data)
-                a.set_cookie(key="c_id", value=temp_id,max_age=100000000)
-                return a
-            else:
-                rand_num = random.randint(100000,1000000)
-                data['c_id'] = rand_num
-
-                a = render(request, 'index.html',data)
-                a.set_cookie(key="c_id", value=rand_num,max_age=100000000)
-                return a
 def Menu(request, menu):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
     page_detail = Navigation.objects.filter(name=menu).first() ##to display contants
     if Navigation.objects.filter(name=menu).first():
         page_type = Navigation.objects.filter(name=menu).first().page_type
@@ -159,10 +110,6 @@ def SubMenu(request, menu , submenu ):
     else:
         if Navigation.objects.filter(name=submenu).first()==None: #if user input rough url then redirect to home
             return redirect('/')
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
     page_detail = Navigation.objects.filter(name=submenu).first()
     if Navigation.objects.filter(name=submenu).first():
         page_type = Navigation.objects.filter(name=submenu).first().page_type
@@ -174,10 +121,7 @@ def SubMenu(request, menu , submenu ):
 
 def Category(request,category_name):
     body_type = "category_listining_and_category_collapse"
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
+
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
 
     #*************************get all related products of all child of child*****************
@@ -207,10 +151,7 @@ def Category(request,category_name):
     return render(request, 'main/sale_group.html',data)
 
 def SingleProductView(request,product_name):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
+ 
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
     product = Products.objects.get(name=product_name,status=1) 
 
@@ -237,10 +178,7 @@ def SingleProductView(request,product_name):
     return render(request, 'main/product.html',data)
 
 def SingleProductQuickViews(request,product_name):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
+ 
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
     product = Products.objects.get(name=product_name,status=1) 
     
@@ -266,10 +204,7 @@ def SingleProductQuickViews(request,product_name):
     
 
 def BlogDetail(request,id):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
+    
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
     blog = Blog.objects.get(id=id) 
     global_data = GlobalSettings.objects.first()
@@ -281,10 +216,7 @@ def BlogDetail(request,id):
     return render(request, 'main/normal.html',data)
 
 def WishList(request, p_id=None ,c_id=None):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
+
     if p_id and c_id :
         if request.POST:
             data = {
@@ -314,58 +246,32 @@ def WishList(request, p_id=None ,c_id=None):
     data['cartvalue'] = len(cartvalue)
     return render(request, 'main/wish-list.html', data)
 
-def Cart(request, p_id=None ,c_id=None):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('website.index')
-    if p_id and c_id :
-        if request.POST: 
-            data = {
-                # 'size' : request.POST['size'],/
-                'quantity' :  request.POST['number'],
-                # 'color' : request.POST['color'], 
-                'product_id' : p_id,
-                'temp_id' : c_id,
-                'user_id' : request.user.id,
-                'ishere' : False
-            }
-            # prod = Products.objects.filter(id=p_id).get()
-            # if prod.quantity < int(request.POST['number']):
-            #     messages.warning(request,"Given Quantity Not available.") 
-            #     data['quantity'] = prod.quantity
-            # else:
-            #     data['quantity'] =  request.POST['number']
-            addingwishes = Wishlist.objects.update_or_create(temp_id=c_id,product_id=p_id,ishere=False,defaults=data)
-            return redirect('Cart')
-        else:
-            data = {
-                'product_id' : p_id,
-                'temp_id' : c_id,
-                'ishere' : False,
-                'quantity' :  1,
-            }
-            # prod = Products.objects.filter(id=p_id).get()
-            # if prod.quantity < int(p_id):
-            #     messages.warning(request,"Given Quantity Not available.") 
-            #     data['quantity'] = prod.quantity
-            # else:
-            #     data['quantity'] =  p_id
-            addingwishes = Wishlist.objects.update_or_create(temp_id=c_id,product_id=p_id,ishere=False,defaults=data)
-            deleteifcolide = Wishlist.objects.filter(temp_id=c_id,product_id=p_id,ishere=True)
-            deleteifcolide.delete()
-            return redirect(request.META.get('HTTP_REFERER'))
-    menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
-    wishlist = Wishlist.objects.filter(temp_id=c_id,ishere=False)
-    global_data = GlobalSettings.objects.first()
-    Categories = Navigation.objects.filter(page_type='sale_group').order_by('position')
+from django.http import HttpResponse
 
-    data = {'menus':menus,'global_data':global_data, 'wishlist':wishlist,'c_id':c_id,'Categories':Categories}
-    wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
-    cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
-    data['wishvalue'] = len(wishvalue)
-    data['cartvalue'] = len(cartvalue)
-    return render(request, 'main/cart.html', data)
+def Cart(request):
+    import json
+    # Retrieve the existing cart data from the cookie
+    cart_data_str = request.COOKIES.get('cart')
+    cart_data = json.loads(cart_data_str) if cart_data_str else []
+
+    # Get the new item data (product ID, quantity, etc.)
+    product_id = request.POST.get('product_id')
+    quantity = request.POST.get('quantity')
+
+    # Update the cart data with the new item
+    cart_data.append({'product_id': product_id, 'quantity': quantity})
+
+    # Serialize the updated cart data to a string
+    cart_data_str = json.dumps(cart_data)
+
+    # Create a response
+    response = HttpResponse()
+
+    # Set the updated cart data as a cookie
+    response.set_cookie('cart', cart_data_str)
+
+    return response
+
 
 def cartQuantityUpdate(request):
     try:

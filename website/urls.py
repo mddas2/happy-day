@@ -29,8 +29,10 @@ urlpatterns = [
     path('wish-list/', views.WishList, name='WishList'),
     path('wish-list/<int:p_id>', views.WishList, name='WishList'),
     path('wish-delete/<int:p_id>/<int:pk>/<str:next>', views.WishListDelete, name='WishListDelete'),
+
     path('cart/', views.Cart, name='Cart'),
-    path('cart/<int:p_id>/<int:c_id>', views.Cart, name='Cart'),
+    path('cart/<int:p_id>/', views.Cart, name='Cart'),
+
     path('cartQuantityUpdate', views.cartQuantityUpdate, name="cartQuantityUpdate"), #ajax
     path('checkout/', views.CheckOut, name='CheckOut'),
     # # path('checkout/<int:id>', views.CheckOut, name='CheckOut'), #not importent before userlogin
