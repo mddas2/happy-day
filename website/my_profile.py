@@ -47,7 +47,7 @@ def Signup(request):
         return HttpResponse("this is user create")
     return render(request, 'client_dashboard/signup.html')
 
-def ShippingAddress(request):
+def Profile(request):
     if request.POST:
         return HttpResponse("this is user create")
     return render(request, 'client_dashboard/profile.html')
