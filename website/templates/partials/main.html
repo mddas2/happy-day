@@ -554,10 +554,12 @@
                                                   </div>
                                                   <div class="right-block">
                                                       <div class="button-group so-quickview cartinfo--left">
+                                                        <a href="{% url 'Cart' p_id=flash_product.id %}">
                                                           <button type="button" class="addToCart" title="Add to cart"
-                                                              onclick="cart.add('60');">
+                                                              onclick="cart.add('{{flash_product.id}}','{{flash_product.name}}','{{flash_product.image1.url}}');">
                                                               <span>Add to carts </span>
                                                           </button>
+                                                        </a>
                                                           <button type="button" class="wishlist btn-button"
                                                               title="Add to Wish List"
                                                               onclick="wishlist.add('60');"><i

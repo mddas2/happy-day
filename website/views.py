@@ -248,7 +248,8 @@ def WishList(request, p_id=None ,c_id=None):
 
 from django.http import HttpResponse
 
-def Cart(request):
+def Cart(request,p_id):
+    return HttpResponse(p_id)
     import json
     # Retrieve the existing cart data from the cookie
     cart_data_str = request.COOKIES.get('cart')
