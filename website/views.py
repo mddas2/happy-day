@@ -277,7 +277,7 @@ def Cart(request):
             break
     else:
         # Product does not exist in the cart, add it
-        cart_data.append({'product_id': product_id, 'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url})
+        cart_data.append({'product_id': product_id, 'free_membership_price':product_obj.free_membership_price,'platinum_membership_price':product_obj.platinum_membership_price ,'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url})
 
     # Serialize the updated cart data to a string
     cart_data_str = json.dumps(cart_data)
@@ -292,11 +292,11 @@ def Cart(request):
 
     cart_data_str = request.COOKIES.get('cart')
     cart_data = json.loads(cart_data_str) if cart_data_str else []
-    return HttpResponse(cart_data)
+    # return HttpResponse(cart_data)
 
-    # response = HttpResponse("Cookie cleared!")
-    # response.delete_cookie('cart')  # Replace 'cookie_name' with the name of the cookie you want to clear
-    # return response
+    response = HttpResponse("Cookie cleared!")
+    response.delete_cookie('cart')  # Replace 'cookie_name' with the name of the cookie you want to clear
+    return response
 
    
 

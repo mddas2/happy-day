@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load my_tags %}
 <header id="header" class=" typeheader-1">
     <!-- Header Top -->
     <div class="header-top hidden-compact">
@@ -148,10 +149,10 @@
                                                         </a>
                                                     </td>
                                                     <td class="text-left"> <a class="cart_product_name"
-                                                            href="product.html">{{cart.name}}</a>
+                                                            href="product.html">{{cart.product_name}}</a>
                                                     </td>
-                                                    <td class="text-center">x1</td>
-                                                    <td class="text-center">$80.00</td>
+                                                    <td class="text-center">{{cart.quantity}}</td>
+                                                    <td class="text-center">Rs.{{cart.free_membership_price}}</td>
                                                     <td class="text-right">
                                                         <a href="product.html" class="fa fa-edit"></a>
                                                     </td>
@@ -171,22 +172,24 @@
                                                 <tr>
                                                     <td class="text-left"><strong>Sub-Total</strong>
                                                     </td>
-                                                    <td class="text-right">$140.00</td>
+                                                    <td class="text-right">
+                                                        {% calculate_cart_price cart_data %}
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><strong>Eco Tax (-2.00)</strong>
+                                                    <td class="text-left"><strong>Eco Tax 0</strong>
                                                     </td>
-                                                    <td class="text-right">$2.00</td>
+                                                    <td class="text-right">0</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left"><strong>VAT (20%)</strong>
+                                                    <td class="text-left"><strong>VAT</strong>
                                                     </td>
-                                                    <td class="text-right">$20.00</td>
+                                                    <td class="text-right">0</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left"><strong>Total</strong>
                                                     </td>
-                                                    <td class="text-right">$162.00</td>
+                                                    <td class="text-right">{% calculate_cart_price cart_data %}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
