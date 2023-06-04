@@ -10,7 +10,10 @@
 
 	// Cart add remove functions
 	var cart = {
-		'add': function(product_id,product_name,product_image) {
+		'add': function(product_id,product_name,product_image,quantity) {
+			
+			AddToCartAjax(product_id,quantity)
+		
 			addProductNotice('Product added to Cart', '<img src="'+product_image+'" alt="">', '<h3><a href="#">'+product_name+'</a> added to <a href="#">shopping cart</a>!</h3>', 'success');
 		}
 	}
@@ -42,3 +45,25 @@
 		});
 	}
 
+	function AddToCartAjax(product_id,quantity)
+	{
+		
+		$.ajax({
+			url: '/cart/', // URL of the server endpoint
+			type: 'GET',
+			dataType: 'json', // Expected data type of the response
+			contentType: 'application/json', // Content type of the request payload
+			data: {product_id:product_id,quantity:quantity}, // Convert your data to JSON format
+			success: function(response) {
+			  // Handle the response data
+			  
+			  console.log(response);
+			},
+			error: function(error) {
+				
+			  // Handle any errors that occurred during the request
+			  console.error('Error:', error);
+			}
+		  });
+		  
+	}

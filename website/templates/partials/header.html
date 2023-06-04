@@ -138,48 +138,29 @@
                                 <li>
                                     <table class="table table-striped">
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center" style="width:70px">
-                                                    <a href="product.html">
-                                                        <img src="image/catalog/demo/product/80/03 (1).jpg"
-                                                            style="width:70px" alt="Yutculpa ullamcon"
-                                                            title="Yutculpa ullamco" class="preview">
-                                                    </a>
-                                                </td>
-                                                <td class="text-left"> <a class="cart_product_name"
-                                                        href="product.html">Yutculpa ullamco</a>
-                                                </td>
-                                                <td class="text-center">x1</td>
-                                                <td class="text-center">$80.00</td>
-                                                <td class="text-right">
-                                                    <a href="product.html" class="fa fa-edit"></a>
-                                                </td>
-                                                <td class="text-right">
-                                                    <a onclick="cart.remove('2');"
-                                                        class="fa fa-times fa-delete"></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width:70px">
-                                                    <a href="product.html">
-                                                        <img src="image/catalog/demo/product/80/05 (1).jpg"
-                                                            style="width:70px" alt="Xancetta bresao"
-                                                            title="Xancetta bresao" class="preview">
-                                                    </a>
-                                                </td>
-                                                <td class="text-left"> <a class="cart_product_name"
-                                                        href="product.html">Xancetta bresao</a>
-                                                </td>
-                                                <td class="text-center">x1</td>
-                                                <td class="text-center">$60.00</td>
-                                                <td class="text-right">
-                                                    <a href="product.html" class="fa fa-edit"></a>
-                                                </td>
-                                                <td class="text-right">
-                                                    <a onclick="cart.remove('1');"
-                                                        class="fa fa-times fa-delete"></a>
-                                                </td>
-                                            </tr>
+                                            {% for cart in cart_data %}
+                                                <tr>
+                                                    <td class="text-center" style="width:70px">
+                                                        <a href="product.html">
+                                                            <img src="{{cart.image}}"
+                                                                style="width:70px" alt="Yutculpa ullamcon"
+                                                                title="Yutculpa ullamco" class="preview">
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-left"> <a class="cart_product_name"
+                                                            href="product.html">{{cart.name}}</a>
+                                                    </td>
+                                                    <td class="text-center">x1</td>
+                                                    <td class="text-center">$80.00</td>
+                                                    <td class="text-right">
+                                                        <a href="product.html" class="fa fa-edit"></a>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <a onclick="cart.remove('2');"
+                                                            class="fa fa-times fa-delete"></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </li>

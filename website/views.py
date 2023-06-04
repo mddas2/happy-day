@@ -70,6 +70,10 @@ def index(request):
         product = product.get_page(page_number) # #
 
         global_data = GlobalSettings.objects.first()
+
+        cart_data_str = request.COOKIES.get('cart')
+        cart_data = json.loads(cart_data_str) if cart_data_str else []
+
         data = {
             'page':"index",
             'global_data':global_data,
@@ -92,6 +96,7 @@ def index(request):
             'happy_customer' : happy_customer,
             'technology_product':technology_product,
             'body_type':body_type,
+            'cart_data' : cart_data,
         }
         return render(request, 'index.html',data)
 
@@ -101,8 +106,9 @@ def Menu(request, menu):
         page_type = Navigation.objects.filter(name=menu).first().page_type
     else:
         page_type = None
+    c_id = 1
     # return HttpResponse(page_type)
-    return CategoryAction(request,page_type,page_detail,c_id)   
+    return CategoryAction(request,page_type,page_detail,1)   
 
 def SubMenu(request, menu , submenu ):
     if menu=='admin':
@@ -116,6 +122,7 @@ def SubMenu(request, menu , submenu ):
     else:
         page_type = None
     page_type = Navigation.objects.filter(name=submenu).first().page_type
+    c_id = 1
     return SubcategoryAction(request,page_type,page_detail,c_id,submenu)   
     # return SubcategoryAction(request,page_type,menu,submenu)
 
@@ -140,7 +147,7 @@ def Category(request,category_name):
     related_product = Products.objects.filter(category_id=1,status=1).order_by('-updated_at')
     # print(product.category_id)
     global_data = GlobalSettings.objects.first()
-
+    c_id = 1
     wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
     cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
     wishvalue = len(wishvalue)
@@ -168,13 +175,10 @@ def SingleProductView(request,product_name):
     # print(product.category_id)
     global_data = GlobalSettings.objects.first()
 
-    wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
-    cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
-    wishvalue = len(wishvalue)
-    cartvalue = len(cartvalue)
+
     body_type = "category_collapse"
 
-    data = {'related_products':related_products,'latest_product':latest_product,'body_type':body_type,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
+    data = {'related_products':related_products,'latest_product':latest_product,'body_type':body_type,'product':product,'global_data':global_data,'customers':customers,'categories':Categories,'best_price':best_price,'menus':menus,'related_product':related_product,'sizes':sizes,'colors':colors}
     return render(request, 'main/product.html',data)
 
 def SingleProductQuickViews(request,product_name):
@@ -193,13 +197,10 @@ def SingleProductQuickViews(request,product_name):
     # print(product.category_id)
     global_data = GlobalSettings.objects.first()
 
-    wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
-    cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
-    wishvalue = len(wishvalue)
-    cartvalue = len(cartvalue)
 
 
-    data = {'product':product,'global_data':global_data,'customers':customers,'Categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'best_price':best_price,'menus':menus,'c_id':c_id,'related_product':related_product,'sizes':sizes,'colors':colors}
+
+    data = {'product':product,'global_data':global_data,'customers':customers,'Categories':Categories, 'best_price':best_price,'menus':menus,'related_product':related_product,'sizes':sizes,'colors':colors}
     return render(request, 'main/quickview.html',data)
     
 
@@ -248,31 +249,56 @@ def WishList(request, p_id=None ,c_id=None):
 
 from django.http import HttpResponse
 
-def Cart(request,p_id):
-    return HttpResponse(p_id)
-    import json
-    # Retrieve the existing cart data from the cookie
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+import json
+
+def Cart(request):
     cart_data_str = request.COOKIES.get('cart')
     cart_data = json.loads(cart_data_str) if cart_data_str else []
 
     # Get the new item data (product ID, quantity, etc.)
-    product_id = request.POST.get('product_id')
-    quantity = request.POST.get('quantity')
+    product_id = request.GET.get('product_id')
+    quantity = request.GET.get('quantity')
 
-    # Update the cart data with the new item
-    cart_data.append({'product_id': product_id, 'quantity': quantity})
+    # Check if product_id and quantity are provided
+    if not product_id or not quantity:
+        return JsonResponse({'error': 'Product ID and quantity are required.'}, status=400)
+
+    try:
+        product_obj = Products.objects.get(id=product_id)
+    except ObjectDoesNotExist:
+        return JsonResponse({'error': 'Product does not exist.'}, status=404)
+
+    # Check if the product already exists in the cart
+    for item in cart_data:
+        if item['product_id'] == product_id:
+            item['quantity'] = quantity
+            break
+    else:
+        # Product does not exist in the cart, add it
+        cart_data.append({'product_id': product_id, 'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url})
 
     # Serialize the updated cart data to a string
     cart_data_str = json.dumps(cart_data)
 
-    # Create a response
-    response = HttpResponse()
+    # Create a JSON response
+    response = JsonResponse({'message': 'Cart updated successfully.'})
 
     # Set the updated cart data as a cookie
     response.set_cookie('cart', cart_data_str)
 
     return response
 
+    cart_data_str = request.COOKIES.get('cart')
+    cart_data = json.loads(cart_data_str) if cart_data_str else []
+    return HttpResponse(cart_data)
+
+    # response = HttpResponse("Cookie cleared!")
+    # response.delete_cookie('cart')  # Replace 'cookie_name' with the name of the cookie you want to clear
+    # return response
+
+   
 
 def cartQuantityUpdate(request):
     try:
