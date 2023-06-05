@@ -18,12 +18,33 @@ def calculate_cart_price(request):
    cart_data_str = request.COOKIES.get('cart')
    cart_data = json.loads(cart_data_str) if cart_data_str else []
 
-   total_price = 0
+   total_free_membership_price = 0
+   total_platinum_membership_price = 0
+   total_b2b_membership_price = 0
+
    for data in cart_data:
       quantity = data['quantity']
-      price = data['free_membership_price']
-      total_price = int(quantity)*(price+total_price)
-   return total_price
+
+      free_membership_price = data['free_membership_price']
+      total_free_membership_price = int(quantity)*(int(free_membership_price)+total_free_membership_price)
+
+      platinum_membership_price = data['platinum_membership_price']
+      total_platinum_membership_price = int(quantity)*(int(platinum_membership_price)+total_platinum_membership_price)
+
+      
+      b2b_membership_price = data['b2b_membership_price']
+      total_b2b_membership_price = int(quantity)*(int(b2b_membership_price)+total_b2b_membership_price)
+   
+   data = {
+      'total_b2b_membership_price':total_b2b_membership_price,
+      'total_platinum_membership_price':total_platinum_membership_price,
+      'total_free_membership_price':total_free_membership_price
+   }
+
+   # print(data)
+
+   return data
+
 
 @register.simple_tag
 def is_greater_cart(request):

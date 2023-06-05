@@ -1,6 +1,8 @@
 {% load staticfiles %}
 {% load my_tags %}
 {% getCartData request as cart_data %}
+{% calculate_cart_price request as cart_price %}
+
 <header id="header" class=" typeheader-1">
     <!-- Header Top -->
     <div class="header-top hidden-compact">
@@ -176,7 +178,7 @@
                                                         <td class="text-left"><strong>Sub-Total</strong>
                                                         </td>
                                                         <td class="text-right">
-                                                            {% calculate_cart_price request %}
+                                                            {{cart_price.total_free_membership_price}}
                                                         </td>
                                                     </tr>
                                                     <!-- <tr>
@@ -192,14 +194,14 @@
                                                     <tr>
                                                         <td class="text-left"><strong>Total</strong>
                                                         </td>
-                                                        <td class="text-right">{% calculate_cart_price request %}</td>
+                                                        <td class="text-right">{{cart_price.total_free_membership_price}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <p class="text-right"> <a class="btn view-cart" href="cart.html"><i
+                                            <p class="text-right"> <a class="btn view-cart" href="{% url 'ViewCart' %}"><i
                                                         class="fa fa-shopping-cart"></i>View
                                                     Cart</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart"
-                                                    href="checkout.html"><i class="fa fa-share"></i>Checkout</a>
+                                                    href="{% url 'CheckOut' %}"><i class="fa fa-share"></i>Checkout</a>
                                             </p>
                                         </div>
                                     </li>

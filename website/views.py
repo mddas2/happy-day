@@ -209,6 +209,7 @@ def BlogDetail(request,id):
     menus = Navigation.objects.filter(parent_page_id=0,status=1).order_by('position')
     blog = Blog.objects.get(id=id) 
     global_data = GlobalSettings.objects.first()
+    c_id = 1
     wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
     cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
     wishvalue = len(wishvalue)
@@ -277,7 +278,7 @@ def Cart(request):
             break
     else:
         # Product does not exist in the cart, add it
-        cart_data.append({'product_id': product_id, 'free_membership_price':product_obj.free_membership_price,'platinum_membership_price':product_obj.platinum_membership_price ,'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url})
+        cart_data.append({'product_id': product_id,'brand':product_obj.brand, 'free_membership_price':product_obj.free_membership_price,'platinum_membership_price':product_obj.platinum_membership_price,'b2b_membership_price':product_obj.b2b_membership_price ,'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url})
 
     # Serialize the updated cart data to a string
     cart_data_str = json.dumps(cart_data)
@@ -299,9 +300,13 @@ def Cart(request):
     return response
 
 def ViewCart(request):
-    return HttpResponse("hello")
-    return render(request,"")
-
+    # return HttpResponse("hello")
+    cart_data_str = request.COOKIES.get('cart')
+    cart_data = json.loads(cart_data_str) if cart_data_str else []
+    data = {
+         'cart_data':cart_data,
+    }
+    return render(request, 'main/cart.html',data)
    
 
 def cartQuantityUpdate(request):
@@ -333,56 +338,13 @@ def read_template(filename):
  # ishere field [ 1(TRUE) =>wishlist) ], [ 0(false) => cart)]  , 2=> order
 @login_required(login_url=settings.CLIENT_LOGIN_URL)
 def CheckOut(request):
-    try:
-        c_id = request.COOKIES['c_id']
-    except:
-        return redirect('index_ecom')
-    if Wishlist.objects.filter(temp_id=c_id,ishere=False):
-        if request.POST:        
-            for i in Wishlist.objects.filter(temp_id=c_id,ishere=False) :
-                shipping_data = {
-                    'user_id' : request.user.id,
-                    'name'    : request.POST['name'],
-                    'phone'   : request.POST['phone'],
-                    'email'   : request.POST['email'],
-                    'shpping_address' : request.POST['address'],
-                }
-                ship =  Shipping.objects.create(**shipping_data)
-                data = {
-                    'user_detail' : request.POST['name'],
-                    'phone' :  request.POST['phone'],
-                    'shipping_address' : request.POST['address'], 
-                    'user_id' : request.user.id, 
-                    'product_id' : i.product_id,
-                    'product_details' : i.quantity,
-                    'get_shipping_address_id' : ship.id,
-                }
-             
-                Order.objects.create(**data)
-                prod = Products.objects.filter(id=i.product_id).get()
-                if(prod.quantity > i.quantity):
-                    temp = prod.quantity - i.quantity
-                    if(temp >= 0):
-                        prod.quantity = temp
-                        prod.save()
-                # Order.objects.update_or_create(product_id=data['product_id'],user_id=c_id,defaults=data)
-            messages.info(request,"Successfully Orderd ! We will contact you very Soon. ")
-            Wishlist.objects.filter(temp_id=c_id,ishere=False).update(ishere=2)
-            return redirect('Cart')            
-        menus = Navigation.objects.filter(parent_page_id=0).order_by('position')
-        global_data = GlobalSettings.objects.first()
-        Categories = Navigation.objects.filter(page_type='sale_group').order_by('position')
- 
-        data = {'global_data':global_data,'menus':menus,'Categories':Categories}  
-        wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
-        cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
-        data['wishvalue'] = len(wishvalue)
-        data['cartvalue'] = len(cartvalue)
-        return render(request, 'main/checkout.html', data)
 
-    else:
-        messages.error(request,"Please add to Cart. Before Checkout")
-        return redirect('Cart')
+    cart_data_str = request.COOKIES.get('cart')
+    cart_data = json.loads(cart_data_str) if cart_data_str else []
+    data = {
+         'cart_data':cart_data,
+    }
+    return render(request, 'main/checkout.html',data)
 
 def Custom(request):
     try:
