@@ -255,6 +255,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import json
 
 def Cart(request):
+    new_item = {}
     cart_data_str = request.COOKIES.get('cart')
     cart_data = json.loads(cart_data_str) if cart_data_str else []
 
@@ -278,7 +279,9 @@ def Cart(request):
             break
     else:
         # Product does not exist in the cart, add it
-        cart_data.append({'product_id': product_id,'brand':product_obj.brand, 'free_membership_price':product_obj.free_membership_price,'platinum_membership_price':product_obj.platinum_membership_price,'b2b_membership_price':product_obj.b2b_membership_price ,'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url})
+        new_item = {'product_id': product_id,'brand':product_obj.brand, 'free_membership_price':product_obj.free_membership_price,'platinum_membership_price':product_obj.platinum_membership_price,'b2b_membership_price':product_obj.b2b_membership_price ,'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url}
+        cart_data.append(new_item)
+    new_item = {'product_id': product_id,'brand':product_obj.brand, 'free_membership_price':product_obj.free_membership_price,'platinum_membership_price':product_obj.platinum_membership_price,'b2b_membership_price':product_obj.b2b_membership_price ,'product_name':product_obj.name , 'quantity': quantity,'image':product_obj.image1.url}
 
     # Serialize the updated cart data to a string
     cart_data_str = json.dumps(cart_data)
@@ -289,11 +292,16 @@ def Cart(request):
     # Set the updated cart data as a cookie
     response.set_cookie('cart', cart_data_str)
 
-    return response
+    # return response
 
-    cart_data_str = request.COOKIES.get('cart')
-    cart_data = json.loads(cart_data_str) if cart_data_str else []
-    # return HttpResponse(cart_data)
+    # cart_data_str = request.COOKIES.get('cart')
+    # cart_data = json.loads(cart_data_str) if cart_data_str else []
+    response.content = json.dumps({
+        'message': 'Cart updated successfully.',
+        'cart_data': cart_data
+    })
+    # response.data['cart_data'] = cart_data
+    return response
 
     response = HttpResponse("Cookie cleared!")
     response.delete_cookie('cart')  # Replace 'cookie_name' with the name of the cookie you want to clear

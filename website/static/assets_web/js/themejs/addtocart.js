@@ -14,7 +14,7 @@
 			
 			AddToCartAjax(product_id,quantity)
 		
-			addProductNotice('Product added to Cart', '<img src="'+product_image+'" alt="">', '<h3><a href="#">'+product_name+'</a> added to <a href="#">shopping cart</a>!</h3>', 'success');
+			addProductNotice('Product added to Cart', '<img src="'+product_image+'" alt="">', '<h3><a href="/view-cart/">'+product_name+'</a> added to <a href="#">shopping cart</a>!</h3>', 'success');
 		}
 	}
 
@@ -55,9 +55,7 @@
 			contentType: 'application/json', // Content type of the request payload
 			data: {product_id:product_id,quantity:quantity}, // Convert your data to JSON format
 			success: function(response) {
-			  // Handle the response data
-			  
-			  console.log(response);
+			  AppendToCart(response)			  
 			},
 			error: function(error) {
 				
@@ -66,4 +64,49 @@
 			}
 		  });
 		  
+	}
+
+	function AppendToCart(response){
+		// Assuming the JSON response is stored in a variable named `response`
+var cartData = response.cart_data;
+console.log(cartData)
+
+// Get the container element where you want to display the cart items
+var container = $("#cart .dropdown-menu tbody");
+
+// Clear the existing cart items
+container.empty();
+
+// Iterate over the cartData array using jQuery's $.each() function
+$.each(cartData, function(index, cart) {
+  // Create a table row for each cart item
+		var row = $("<tr>");
+
+		// Create and append the table cells with the cart item details
+		var imageCell = $("<td>", { class: "text-center", style: "width:70px" });
+		var imageLink = $("<a>", { href: "product.html" });
+		var image = $("<img>", { src: cart.image, style: "width:70px", alt: cart.product_name, title: cart.product_name, class: "preview" });
+		imageLink.append(image);
+		imageCell.append(imageLink);
+		row.append(imageCell);
+
+		var nameCell = $("<td>", { class: "text-left" }).html('<a class="cart_product_name" href="product.html">' + cart.product_name + '</a>');
+		row.append(nameCell);
+
+		var quantityCell = $("<td>", { class: "text-center" }).text(cart.quantity);
+		row.append(quantityCell);
+
+		var priceCell = $("<td>", { class: "text-center" }).text("Rs." + cart.free_membership_price);
+		row.append(priceCell);
+
+		var editCell = $("<td>", { class: "text-right" }).html('<a href="product.html" class="fa fa-edit"></a>');
+		row.append(editCell);
+
+		var deleteCell = $("<td>", { class: "text-right" }).html('<a onclick="cart.remove(\'2\');" class="fa fa-times fa-delete"></a>');
+		row.append(deleteCell);
+
+		// Append the row to the container
+		container.append(row);
+		});
+
 	}
