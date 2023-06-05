@@ -32,6 +32,7 @@ urlpatterns = [
 
     # path('cart/', views.Cart, name='Cart'),
     path('cart/', views.Cart, name='Cart'),
+    path('view-cart/', views.ViewCart, name='ViewCart'),
 
     path('cartQuantityUpdate', views.cartQuantityUpdate, name="cartQuantityUpdate"), #ajax
     path('checkout/', views.CheckOut, name='CheckOut'),

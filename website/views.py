@@ -298,6 +298,10 @@ def Cart(request):
     response.delete_cookie('cart')  # Replace 'cookie_name' with the name of the cookie you want to clear
     return response
 
+def ViewCart(request):
+    return HttpResponse("hello")
+    return render(request,"")
+
    
 
 def cartQuantityUpdate(request):

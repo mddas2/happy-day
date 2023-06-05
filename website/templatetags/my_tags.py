@@ -1,4 +1,5 @@
 from django import template
+import json
 
 register = template.Library()
 
@@ -7,10 +8,30 @@ def break_loop():
    raise StopIteration("Loop was stopped by custom tag")
 
 @register.simple_tag
-def calculate_cart_price(cart_data):
+def getCartData(request):
+    cart_data_str = request.COOKIES.get('cart')
+    cart_data = json.loads(cart_data_str) if cart_data_str else []
+    return cart_data
+
+@register.simple_tag
+def calculate_cart_price(request):
+   cart_data_str = request.COOKIES.get('cart')
+   cart_data = json.loads(cart_data_str) if cart_data_str else []
+
    total_price = 0
    for data in cart_data:
       quantity = data['quantity']
       price = data['free_membership_price']
       total_price = int(quantity)*(price+total_price)
    return total_price
+
+@register.simple_tag
+def is_greater_cart(request):
+   cart_data_str = request.COOKIES.get('cart')
+   cart_data = json.loads(cart_data_str) if cart_data_str else []
+
+   if(len(cart_data)>0):
+      return True
+   else:
+      return False
+
