@@ -183,8 +183,9 @@
 										</div>
 									</div>
 									<div class="cart">
-										<input type="button" data-toggle="tooltip" title="" value="Add to Cart" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" onclick="cart.add('42', '1');" data-original-title="Add to Cart">
+										<input type="button" data-toggle="tooltip" title="" value="Add to Cart" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg" onclick="cart.add('{{product.id}}','{{product.name}}','{{product.image1.url}}','1');" data-original-title="Add to Cart">
 									</div>
+									
 									<div class="add-to-links wish_comp">
 										<ul class="blank list-inline">
 											<li class="wishlist">

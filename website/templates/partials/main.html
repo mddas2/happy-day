@@ -554,9 +554,7 @@
                                                   </div>
                                                   <div class="right-block">
                                                       <div class="button-group so-quickview cartinfo--left">
-                                                        
-                                                            
-                                                                                                                    
+                                                                                                              
                                                             <button type="button" class="addToCart" title="Add to cart"
                                                                 onclick="cart.add('{{flash_product.id}}','{{flash_product.name}}','{{flash_product.image1.url}}','1');">
                                                                 <span>Add to cart </span>
@@ -703,10 +701,11 @@
                                                 </div>
                                                   <div class="right-block">
                                                       <div class="button-group so-quickview cartinfo--left">
+                                                          
                                                           <button type="button" class="addToCart" title="Add to cart"
-                                                              onclick="cart.add('60 ');">
-                                                              <span>Add to cart </span>
-                                                          </button>
+                                                                onclick="cart.add('{{product.id}}','{{product.name}}','{{product.image1.url}}','1');">
+                                                                <span>Add to cart </span>
+                                                            </button>
                                                           <button type="button" class="wishlist btn-button"
                                                               title="Add to Wish List"
                                                               onclick="wishlist.add('60');"><i
@@ -846,10 +845,12 @@
                                                           </div>
                                                           <div class="right-block">
                                                               <div class="button-group so-quickview cartinfo--left">
-                                                                  <button type="button" class="addToCart"
-                                                                      title="Add to cart" onclick="cart.add('60 ');">
-                                                                      <span>Add to cart </span>
-                                                                  </button>
+                                                                   
+                                                                <button type="button" class="addToCart" title="Add to cart"
+                                                                    onclick="cart.add('{{pror.id}}','{{pror.name}}','{{pror.image1.url}}','1');">
+                                                                    <span>Add to cart </span>
+                                                                </button>
+
                                                                   <button type="button" class="wishlist btn-button"
                                                                       title="Add to Wish List"
                                                                       onclick="wishlist.add('60');"><i
