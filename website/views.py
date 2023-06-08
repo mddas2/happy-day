@@ -349,6 +349,8 @@ def CheckOut(request):
 
     cart_data_str = request.COOKIES.get('cart')
     cart_data = json.loads(cart_data_str) if cart_data_str else []
+    if request.POST:
+        return HttpResponse("cart going to add")
     data = {
          'cart_data':cart_data,
     }
