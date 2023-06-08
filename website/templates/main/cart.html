@@ -81,16 +81,19 @@
                         <td class="text-right">
                             <strong>Total:</strong>
                         </td>
-                        <td class="text-right">{% calculate_cart_price request %}</td>
+                        <td class="text-right">
+                            {% calculate_cart_price request as cart_price %}
+                            {{cart_price.total_free_membership_price}}
+                        </td>
                     </tr>
-                </tbody>
+                </tbody>s
             </table>
         </div>
     </div>
 
      <div class="buttons">
         <div class="pull-left"><a href="index.html" class="btn btn-primary">Continue Shopping</a></div>
-        <div class="pull-right"><a href="checkout.html" class="btn btn-primary">Checkout</a></div>
+        <div class="pull-right"><a href="{% url 'CheckOut' %}" class="btn btn-primary">Checkout</a></div>
       </div>
     </div>
     <!--Middle Part End -->
