@@ -15,6 +15,7 @@
         <div id="content" class="col-sm-12">
             <h2 class="title">Checkout</h2>
             <form action="#" method="POST">
+                {% csrf_token %}
                 <div class="so-onepagecheckout row">
                     <div class="col-left col-sm-3">
                         <div class="panel panel-default">
@@ -25,17 +26,17 @@
                             <div class="panel-body">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" value="register" name="account">
+                                        <input type="radio" value="register" name="account_type">
                                         Register Account</label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" checked="checked" value="guest" name="account">
+                                        <input type="radio" checked="checked" value="guest" name="account_type">
                                         Guest Checkout</label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" value="returning" name="account">
+                                        <input type="radio" value="returning" name="account_type">
                                         Returning Customer</label>
                                 </div>
                             </div>
@@ -47,7 +48,7 @@
                             <div class="panel-body">
                                 <fieldset id="account">
                                     <div class="form-group required">
-                                        <label for="input-payment-firstname" class="control-label">First
+                                        <label for="input-payment-firstname" class="control-label" name="firstname">First
                                             Name</label>
                                         <input type="text" class="form-control" id="input-payment-firstname"
                                             placeholder="First Name" value="" name="firstname">
@@ -65,13 +66,9 @@
                                     <div class="form-group required">
                                         <label for="input-payment-telephone" class="control-label">Telephone</label>
                                         <input type="text" class="form-control" id="input-payment-telephone"
-                                            placeholder="Telephone" value="" name="telephone">
+                                            placeholder="Telephone" value="" name="phone">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="input-payment-fax" class="control-label">Fax</label>
-                                        <input type="text" class="form-control" id="input-payment-fax"
-                                            placeholder="Fax" value="" name="fax">
-                                    </div>
+                                 
                                 </fieldset>
                             </div>
                         </div>
@@ -106,47 +103,18 @@
                                         <input type="text" class="form-control" id="input-payment-postcode"
                                             placeholder="Post Code" value="" name="postcode">
                                     </div>
-                                    <div class="form-group required">
-                                        <label for="input-payment-country" class="control-label">Country</label>
-                                        <select class="form-control" id="input-payment-country" name="country_id">
-                                            <option value=""> --- Please Select --- </option>
-                                            <option value="244">Aaland Islands</option>
-                                            <option value="1">Afghanistan</option>
-                                            <option value="2">Albania</option>
-                                            <option value="3">Algeria</option>
-                                            <option value="4">American Samoa</option>
-                                            <option value="5">Andorra</option>
-                                            <option value="6">Angola</option>
-                                            <option value="7">Anguilla</option>
-                                            <option value="8">Antarctica</option>
-                                            <option value="9">Antigua and Barbuda</option>
-                                            <option value="10">Argentina</option>
-                                            <option value="11">Armenia</option>
-                                            <option value="12">Aruba</option>
-                                            <option value="252">Ascension Island (British)</option>
-                                            <option value="13">Australia</option>
-                                            <option value="14">Austria</option>
-                                            <option value="15">Azerbaijan</option>
-                                            <option value="16">Bahamas</option>
-                                            <option value="17">Bahrain</option>
-
-                                        </select>
-                                    </div>
+                                    
                                     <div class="form-group required">
                                         <label for="input-payment-zone" class="control-label">Region / State</label>
-                                        <select class="form-control" id="input-payment-zone" name="zone_id">
+                                        <select class="form-control" id="input-payment-zone" name="state">
                                             <option value=""> --- Please Select --- </option>
-                                            <option value="3513">Aberdeen</option>
-                                            <option value="3514">Aberdeenshire</option>
-                                            <option value="3515">Anglesey</option>
-                                            <option value="3516">Angus</option>
-                                            <option value="3517">Argyll and Bute</option>
-                                            <option value="3518">Bedfordshire</option>
-                                            <option value="3519">Berkshire</option>
-                                            <option value="3520">Blaenau Gwent</option>
-                                            <option value="3521">Bridgend</option>
-                                            <option value="3522">Bristol</option>
-
+                                            <option value="3513">Province 1</option>
+                                            <option value="3514">Province 2</option>
+                                            <option value="3515">Province 3</option>
+                                            <option value="3516">Province 4</option>
+                                            <option value="3516">Province 5</option>
+                                            <option value="3516">Province 6</option>
+                                            <option value="3516">Province 7</option>
                                         </select>
                                     </div>
                                     <div class="checkbox">
@@ -262,31 +230,7 @@
                                                 <tfoot>
                                                     {% calculate_cart_price request as cart_price %}
                                                 
-                                                    
-                                                    <!-- <tr>
-                                                        <td class="text-right" colspan="3"><strong>Flat Shipping
-                                                                Rate:</strong></td>
-                                                        <td class="text-right">$4.69.00</td>
-                                                        <td class="text-right">$4.69.00</td>
-                                                        <td class="text-right">$4.69.00</td>
-                                                    
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-right" colspan="3"><strong>Eco Tax
-                                                                (-2.00):</strong></td>
-                                                        <td class="text-right">$3.75.00</td>
-                                                        <td class="text-right">$3.75.00</td>
-                                                        <td class="text-right">$3.75.00</td>
-                                                        
-                                                    </tr> -->
-                                                    <!-- <tr>
-                                                        <td class="text-right" colspan="3"><strong>VAT
-                                                                (20%):</strong></td>
-                                                        <td class="text-right">$19.68</td>
-                                                        <td class="text-right">$19.68</td>
-                                                        <td class="text-right">$19.68</td>
-                                                        
-                                                    </tr> -->
+                                                   
                                                     <tr>
                                                         <td class="text-right" colspan="3"><strong>Total:</strong>
                                                         </td>
