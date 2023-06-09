@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views,my_profile
+from . import views,my_profile,checkout
 from .includes import Action,search,user_auth,user_account
 
 
@@ -35,7 +35,7 @@ urlpatterns = [
     path('view-cart/', views.ViewCart, name='ViewCart'),
 
     path('cartQuantityUpdate', views.cartQuantityUpdate, name="cartQuantityUpdate"), #ajax
-    path('checkout/', views.CheckOut, name='CheckOut'),
+    path('checkout/', checkout.CheckOut, name='CheckOut'),
     # # path('checkout/<int:id>', views.CheckOut, name='CheckOut'), #not importent before userlogin
 
     # #user account

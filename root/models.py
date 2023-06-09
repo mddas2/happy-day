@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.humanize.templatetags import humanize
 from datetime import datetime, timedelta
 from django.utils import timezone 
+from account.models import CustomUser
 
 
 # Create your models here.
@@ -130,21 +131,30 @@ class ExcelFileUpload(models.Model):
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
 class Shipping(models.Model):
-    user_id = models.CharField(max_length=200)
+    user = models.ForeignKey(CustomUser,related_name="shipping",on_delete=models.CASCADE)
+    order_id = models
     name = models.CharField(max_length=205)
     phone = models.CharField(max_length=205)
     email = models.CharField(max_length=205)
+
+    company_name = models.CharField(max_length=205)
+    address_1 = models.CharField(max_length=205)
+    address_2 = models.CharField(max_length=205)
+    city = models.CharField(max_length=205)
+    postcode = models.CharField(max_length=205)
+    state = models.CharField(max_length=205)
+
     shpping_address = models.CharField(max_length=2055)
 
 class Order(models.Model):
     # product_id = models.IntegerField(default=0)
-    get_shipping_address = models.ForeignKey(Shipping,related_name="order",on_delete=models.DO_NOTHING,null=True)
+    
     product = models.ForeignKey(Products,related_name="order",on_delete=models.CASCADE,null=True)
     product_details = models.TextField(max_length=5000)
     user_id = models.IntegerField(null=False)
     email = models.CharField(max_length=300,null=True)
-    user_detail = models.CharField(max_length=300)
-    shipping_address = models.CharField(max_length=2055)
+   
+    
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
     phone = models.CharField(max_length=25,null=True)

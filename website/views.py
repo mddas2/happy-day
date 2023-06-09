@@ -18,6 +18,7 @@ from email.mime.application import MIMEApplication
 from email.mime.image import MIMEImage
 import os
 from pathlib import Path
+from . import my_form
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
@@ -343,18 +344,6 @@ def read_template(filename):
         template_file_content = template_file.read()
     return template_file_content
 
- # ishere field [ 1(TRUE) =>wishlist) ], [ 0(false) => cart)]  , 2=> order
-@login_required(login_url=settings.CLIENT_LOGIN_URL)
-def CheckOut(request):
-
-    cart_data_str = request.COOKIES.get('cart')
-    cart_data = json.loads(cart_data_str) if cart_data_str else []
-    if request.POST:
-        return HttpResponse("cart going to add")
-    data = {
-         'cart_data':cart_data,
-    }
-    return render(request, 'main/checkout.html',data)
 
 def Custom(request):
     try:

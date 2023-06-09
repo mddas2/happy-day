@@ -16,6 +16,17 @@
             <h2 class="title">Checkout</h2>
             <form action="#" method="POST">
                 {% csrf_token %}
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field in form %}
+                            {% if field.errors %}
+                                <li>{{ field.label }}: {{ field.errors|join:", " }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
                 <div class="so-onepagecheckout row">
                     <div class="col-left col-sm-3">
                         <div class="panel panel-default">
@@ -50,23 +61,19 @@
                                     <div class="form-group required">
                                         <label for="input-payment-firstname" class="control-label" name="firstname">First
                                             Name</label>
-                                        <input type="text" class="form-control" id="input-payment-firstname"
-                                            placeholder="First Name" value="" name="firstname">
+                                            {{ form.firstname }}
                                     </div>
                                     <div class="form-group required">
                                         <label for="input-payment-lastname" class="control-label">Last Name</label>
-                                        <input type="text" class="form-control" id="input-payment-lastname"
-                                            placeholder="Last Name" value="" name="lastname">
+                                           {{ form.lastname }}
                                     </div>
                                     <div class="form-group required">
                                         <label for="input-payment-email" class="control-label">E-Mail</label>
-                                        <input type="text" class="form-control" id="input-payment-email"
-                                            placeholder="E-Mail" value="" name="email">
+                                        {{ form.email }}
                                     </div>
                                     <div class="form-group required">
                                         <label for="input-payment-telephone" class="control-label">Telephone</label>
-                                        <input type="text" class="form-control" id="input-payment-telephone"
-                                            placeholder="Telephone" value="" name="phone">
+                                        {{ form.phone }}
                                     </div>
                                  
                                 </fieldset>
@@ -80,28 +87,23 @@
                                 <fieldset id="address" class="required">
                                     <div class="form-group">
                                         <label for="input-payment-company" class="control-label">Company</label>
-                                        <input type="text" class="form-control" id="input-payment-company"
-                                            placeholder="Company" value="" name="company">
+                                        {{ form.company }}
                                     </div>
                                     <div class="form-group required">
                                         <label for="input-payment-address-1" class="control-label">Address 1</label>
-                                        <input type="text" class="form-control" id="input-payment-address-1"
-                                            placeholder="Address 1" value="" name="address_1">
+                                         {{ form.address_1 }}
                                     </div>
                                     <div class="form-group">
                                         <label for="input-payment-address-2" class="control-label">Address 2</label>
-                                        <input type="text" class="form-control" id="input-payment-address-2"
-                                            placeholder="Address 2" value="" name="address_2">
+                                         {{ form.address_2 }}
                                     </div>
                                     <div class="form-group required">
                                         <label for="input-payment-city" class="control-label">City</label>
-                                        <input type="text" class="form-control" id="input-payment-city"
-                                            placeholder="City" value="" name="city">
+                                         {{ form.address_city }}
                                     </div>
                                     <div class="form-group required">
                                         <label for="input-payment-postcode" class="control-label">Post Code</label>
-                                        <input type="text" class="form-control" id="input-payment-postcode"
-                                            placeholder="Post Code" value="" name="postcode">
+                                        {{ form.postcode }}
                                     </div>
                                     
                                     <div class="form-group required">
