@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input onclick='window.location.href=`{% url "ClientLogin" %}?next=/{% url "CheckOut" %}`' type="radio" value="login" name="account_type">
+                                        <input onclick='window.location.href=`{% url "ClientLogin" %}?next={% url "CheckOut" %}`' type="radio" value="login" name="account_type">
                                         Login</label>
                                 </div>
                             </div>

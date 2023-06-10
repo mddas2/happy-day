@@ -17,7 +17,15 @@ def Login(request):
         user = authenticate(request=request,username=email, password=password)
         if user is not None:
             login(request,user,backend='django.contrib.auth.backends.ModelBackend') 
-            return redirect('website.index') 
+            next_url  = request.GET.get('next')
+            if next_url:
+                try:
+                    return redirect(next_url)  # Redirect to the specified 'next' URL
+                except:
+                    return redirect('website.index') 
+            else:
+                # return HttpResponse("next not found")
+                return redirect('website.index') 
         else:
             try:
                 user_login_attempt = AccessAttempt.objects.filter(username=email).first().failures_since_start
@@ -27,7 +35,8 @@ def Login(request):
 
             # return HttpResponse(login_attempt_left)
             messages.error(request, "incorrect user or password")
-
+    next = request.GET.get('next')
+    data['next'] = next
     return render(request, 'client_dashboard/login.html',data)
 
 def Logout(request):

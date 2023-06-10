@@ -56,8 +56,8 @@ urlpatterns = [
 
     
     path('menu/<str:category_name>', views.Category, name='Category'),
-    path('<str:menu>', views.Menu, name='Menu'),#127.0.0.1:8000/dhanusha here is only one slug.slug name is dhanusha . which is menu
-    path('<str:menu>/<str:submenu>', views.SubMenu, name='Submenu'),#127.0.0.1:8000/dhanusha/janakpur . here is two slug . main slug(menu) is dhanusha. and second slug(submenu) is janakpur.
+    # path('<str:menu>', views.Menu, name='Menu'),#127.0.0.1:8000/dhanusha here is only one slug.slug name is dhanusha . which is menu
+    # path('<str:menu>/<str:submenu>', views.SubMenu, name='Submenu'),#127.0.0.1:8000/dhanusha/janakpur . here is two slug . main slug(menu) is dhanusha. and second slug(submenu) is janakpur.
 
 
 ]

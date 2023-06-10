@@ -14,7 +14,7 @@
 
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="login-from">
-                            <form action="{% url 'ClientLogin' %}" method="POST" class="login-page-area">
+                            <form action="{% url 'ClientLogin' %}?next={{next}}" method="POST" class="login-page-area">
                                 {% csrf_token %}
                                 <div class="con">
                                     <header class="head-form">
