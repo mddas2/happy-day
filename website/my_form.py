@@ -5,7 +5,7 @@ class CheckOutForm(forms.Form):
     account_type = forms.CharField(max_length=100)
 
     firstname = forms.CharField(
-        max_length=50,required=False,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'})
+        max_length=50,required=True,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'})
     )
     lastname = forms.CharField(
         max_length=50,
@@ -51,10 +51,7 @@ class CheckOutForm(forms.Form):
         max_length=50,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Shipping Address'})
     )
-    free_shipping = forms.CharField(
-        max_length=50,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Free Shipping'})
-    )
+ 
     cash_on_delivery = forms.CharField(
         max_length=50,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Cash on Delivery'})
@@ -77,7 +74,7 @@ class CheckOutForm(forms.Form):
 
         shipping_address=self.cleaned_data['shipping_address'],
 
-        free_shipping=self.cleaned_data['free_shipping'],
+        # free_shipping=self.cleaned_data['free_shipping'],
         cash_on_delivery=self.cleaned_data['cash_on_delivery'],
 
         user_obj = {
@@ -89,7 +86,7 @@ class CheckOutForm(forms.Form):
         custom_user = CustomUser.objects.create(**user_obj)
 
         shipping_obj = {
-            'name':firstname+" "+ lastname,
+            'name':str(firstname)+" "+ str(lastname),
             'phone':phone,
             'email': email,
             'user_id'

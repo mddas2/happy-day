@@ -4,7 +4,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render
 
-@login_required(login_url=settings.CLIENT_LOGIN_URL)
+# @login_required(login_url=settings.CLIENT_LOGIN_URL)
 def CheckOut(request):
     from .my_form import CheckOutForm
     cart_data_str = request.COOKIES.get('cart')
@@ -12,7 +12,7 @@ def CheckOut(request):
     if request.POST:
         form = CheckOutForm(request.POST)
         if form.is_valid():
-            form.save()            
+            form.save(cart_data)            
             return HttpResponse("cart going to add")  
           
     else:
