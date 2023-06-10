@@ -12,8 +12,13 @@ def CheckOut(request):
     if request.POST:
         form = CheckOutForm(request.POST)
         if form.is_valid():
-            form.save(cart_data)            
-            return HttpResponse("cart going to add")  
+            status = form.save(cart_data)            
+            if status == True:
+                from django.shortcuts import redirect
+                response = redirect('website.index')
+                response = HttpResponse("Cookie cleared!")
+                response.delete_cookie('cart')  # Replace 'cookie_name' with the name of the cookie you want to clear
+                return response
           
     else:
         form = CheckOutForm()

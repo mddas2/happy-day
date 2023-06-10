@@ -133,24 +133,33 @@ class ExcelFileUpload(models.Model):
 
 class Order(models.Model):
     # product_id = models.IntegerField(default=0)
-    
+    user = models.ForeignKey(CustomUser,related_name="order",on_delete=models.DO_NOTHING,null=True)
     product = models.ForeignKey(Products,related_name="order",on_delete=models.CASCADE,null=True)
     product_details = models.TextField(max_length=5000)
-    user_id = models.IntegerField(null=False)
-    email = models.CharField(max_length=300,null=True)
-   
+    order_id = models.CharField(max_length=100,default=None)
+
+    free_membership_price = models.IntegerField(null=True)
+    platinum_membership_price = models.IntegerField(null=True)
+    b2b_membership_price = models.IntegerField(null=True)
+
+    image = models.ImageField(upload_to='user/order', null=True)
+    quantity = models.IntegerField(null=True)
+    brand =  models.CharField(max_length=100,default=None)
+    
+
     
     created_at = models.DateTimeField(auto_now=True,null=True)
     updated_at = models.DateTimeField(auto_now=True,null=True)
-    phone = models.CharField(max_length=25,null=True)
+ 
     pdc = models.CharField(max_length=10,null=True) # p>pending , d=delivered , c=cancled
+    
     def get_date(self):
         return humanize.naturaltime(self.updated_at)    
 
 class Shipping(models.Model):
    
     user = models.ForeignKey(CustomUser,related_name="shipping",on_delete=models.CASCADE,null=True)
-    order = models.OneToOneField(Order,related_name="shipping",on_delete=models.CASCADE,null=True)
+    order = models.CharField(max_length=121,null=True)
     name = models.CharField(max_length=205,null=True)
     phone = models.CharField(max_length=205,null=True)
     email = models.CharField(max_length=205,null=True)
