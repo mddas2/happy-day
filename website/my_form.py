@@ -102,7 +102,7 @@ class CheckOutForm(forms.Form):
             'shipping_address':shipping_address
         }
         cart_data = cart_data
-        order_obj = 
+        # order_obj = 
         return True
 
     

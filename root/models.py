@@ -130,21 +130,6 @@ class ExcelFileUpload(models.Model):
     excel_file_upload = models.FileField(upload_to='excel')
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
-class Shipping(models.Model):
-    user = models.ForeignKey(CustomUser,related_name="shipping",on_delete=models.CASCADE)
-    order_id = models
-    name = models.CharField(max_length=205)
-    phone = models.CharField(max_length=205)
-    email = models.CharField(max_length=205)
-
-    company_name = models.CharField(max_length=205)
-    address_1 = models.CharField(max_length=205)
-    address_2 = models.CharField(max_length=205)
-    city = models.CharField(max_length=205)
-    postcode = models.CharField(max_length=205)
-    state = models.CharField(max_length=205)
-
-    shpping_address = models.CharField(max_length=2055)
 
 class Order(models.Model):
     # product_id = models.IntegerField(default=0)
@@ -161,6 +146,24 @@ class Order(models.Model):
     pdc = models.CharField(max_length=10,null=True) # p>pending , d=delivered , c=cancled
     def get_date(self):
         return humanize.naturaltime(self.updated_at)    
+
+class Shipping(models.Model):
+   
+    user = models.ForeignKey(CustomUser,related_name="shipping",on_delete=models.CASCADE,null=True)
+    order = models.OneToOneField(Order,related_name="shipping",on_delete=models.CASCADE,null=True)
+    name = models.CharField(max_length=205,null=True)
+    phone = models.CharField(max_length=205,null=True)
+    email = models.CharField(max_length=205,null=True)
+
+    company_name = models.CharField(max_length=205,null=True)
+    address_1 = models.CharField(max_length=205,null=True)
+    address_2 = models.CharField(max_length=205,null=True)
+    city = models.CharField(max_length=205,null=True)
+    postcode = models.CharField(max_length=205,null=True)
+    state = models.CharField(max_length=205,null=True)
+
+    shpping_address = models.CharField(max_length=2055,null=True)
+
 
 class GlobalSettings(models.Model):
     site_name = models.CharField(max_length=255)
@@ -218,22 +221,22 @@ class Blog(models.Model):
     def get_date(self):
         return humanize.naturaltime(self.updated_at)
 
-class Wishlist(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.DO_NOTHING,null=True)
-    product = models.ForeignKey('Products',on_delete=models.CASCADE)
-    ishere = models.SmallIntegerField(default=True)   # ishere field 1 =>wishlist |||| 0 => cart ||| 2=> order
-    color = models.CharField(max_length=50, null=True)
-    size = models.CharField(max_length=50, null=True)
-    quantity = models.IntegerField(null=True,default=1)
-    temp_id = models.BigIntegerField(null=True)
+# class Wishlist(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.DO_NOTHING,null=True)
+#     product = models.ForeignKey('Products',on_delete=models.CASCADE)
+#     ishere = models.SmallIntegerField(default=True)   # ishere field 1 =>wishlist |||| 0 => cart ||| 2=> order
+#     color = models.CharField(max_length=50, null=True)
+#     size = models.CharField(max_length=50, null=True)
+#     quantity = models.IntegerField(null=True,default=1)
+#     temp_id = models.BigIntegerField(null=True)
 
-class Review(models.Model):
-    product = models.ForeignKey('Products',related_name="review",on_delete=models.CASCADE) 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.DO_NOTHING,null=True)
-    str_choice = [(0,0),(1,1),(2,2),(3,3),(4,4),(5,5)]
-    star = models.CharField(max_length=50,choices=str_choice,default=0)
-    created_at = models.DateTimeField(auto_now=True,null=True) 
-    updated_at = models.DateTimeField(auto_now=True,null=True) 
+# class Review(models.Model):
+#     product = models.ForeignKey('Products',related_name="review",on_delete=models.CASCADE) 
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.DO_NOTHING,null=True)
+#     str_choice = [(0,0),(1,1),(2,2),(3,3),(4,4),(5,5)]
+#     star = models.CharField(max_length=50,choices=str_choice,default=0)
+#     created_at = models.DateTimeField(auto_now=True,null=True) 
+#     updated_at = models.DateTimeField(auto_now=True,null=True) 
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=50, null=True)
@@ -246,12 +249,13 @@ class ContactUs(models.Model):
     def get_date(self):
         return humanize.naturaltime(self.updated_at)
     
-class MemberShipType(models.Model):
-    code_name = models.CharField(max_length=50, null=False)
-    name = models.CharField(max_length=50, null=True)
-    discount =  models.IntegerField(null=True,default = 0)
-    is_shipping_free = models.BooleanField(default=False)
-    discount_shipping_apply = models.BooleanField(default=False)
+class ShippingAddress(models.Model):
+    country = models.CharField(max_length=255 , null=True)
+    district = models.CharField(max_length=255 , null=True)
+    state = models.CharField(max_length=255 , null=True)
+    city = models.CharField(max_length=255 , null=True)
+    company_name = models.CharField(max_length=255 , null=True)
+    mobile_number = models.CharField(max_length=255 , null=True)
 
 
 

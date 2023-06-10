@@ -1,5 +1,5 @@
 from django.template.defaulttags import register
-from root.models import *
+# from root.models import *
 from account.models import CustomUser
 from django.db.models import Q
 from django.db.models import Count
@@ -43,27 +43,4 @@ def str_rm(string,num=50):
 # check product_id instances witn user_id
 # count
 #return
-
-@register.filter()
-def get_star(p_id):
-    result = Review.objects.filter(product_id=p_id).values('star').annotate(count=Count('star')).order_by('-count')
-
-    if result.exists():
-        max_count = result.first()['count']
-        max_star = result.filter(count=max_count).first()['star']
-
-    else:
-        max_star = 0
-    return int(max_star)
-
-
-@register.filter()
-def get_star_review(p_id):
-    result = Review.objects.filter(product_id=p_id).values('star').annotate(count=Count('star')).order_by('-count')
-
-    if result.exists():
-        max_count = result.first()['count']
-    else:
-        max_count = 0
-    return int(max_count)
 

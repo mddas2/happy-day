@@ -1,6 +1,12 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from root.models import MemberShipType
+
+class MemberShipType(models.Model):
+    code_name = models.CharField(max_length=50, null=False)
+    name = models.CharField(max_length=50, null=True)
+    discount =  models.IntegerField(null=True,default = 0)
+    is_shipping_free = models.BooleanField(default=False)
+    discount_shipping_apply = models.BooleanField(default=False)
 
 class CustomUser(AbstractUser):    
     phone = models.CharField(max_length=255 , null=True)
@@ -45,10 +51,4 @@ class CustomUser(AbstractUser):
         else:
             return 'None'
 
-class ShippingAddress(models.Model):
-    country = models.CharField(max_length=255 , null=True)
-    district = models.CharField(max_length=255 , null=True)
-    state = models.CharField(max_length=255 , null=True)
-    city = models.CharField(max_length=255 , null=True)
-    company_name = models.CharField(max_length=255 , null=True)
-    mobile_number = models.CharField(max_length=255 , null=True)
+
