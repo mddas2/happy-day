@@ -16,7 +16,6 @@ def CheckOut(request):
             if status == True:
                 from django.shortcuts import redirect
                 response = redirect('website.index')
-                response = HttpResponse("Cookie cleared!")
                 response.delete_cookie('cart')  # Replace 'cookie_name' with the name of the cookie you want to clear
                 return response
           
