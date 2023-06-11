@@ -148,14 +148,9 @@ def Category(request,category_name):
     related_product = Products.objects.filter(category_id=1,status=1).order_by('-updated_at')
     # print(product.category_id)
     global_data = GlobalSettings.objects.first()
-    c_id = 1
-    wishvalue = Wishlist.objects.filter(temp_id=c_id,ishere=True)
-    cartvalue = Wishlist.objects.filter(temp_id=c_id,ishere=False)
-    wishvalue = len(wishvalue)
-    cartvalue = len(cartvalue)
    
 
-    data = {'body_type':body_type,'products':products,'global_data':global_data,'customers':customers,'categories':Categories,'wishvalue':wishvalue, 'cartvalue':cartvalue, 'latest_products':latest_product,'menus':menus,'c_id':c_id,'related_product':related_product}
+    data = {'body_type':body_type,'products':products,'global_data':global_data,'customers':customers,'categories':Categories,'latest_products':latest_product,'menus':menus,'related_product':related_product}
     return render(request, 'main/sale_group.html',data)
 
 def SingleProductView(request,product_name):
