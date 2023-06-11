@@ -159,7 +159,7 @@ class Order(models.Model):
 class Shipping(models.Model):
    
     user = models.ForeignKey(CustomUser,related_name="shipping",on_delete=models.CASCADE,null=True)
-    order = models.CharField(max_length=121,null=True)
+    order_id = models.CharField(max_length=121,null=True)
     name = models.CharField(max_length=205,null=True)
     phone = models.CharField(max_length=205,null=True)
     email = models.CharField(max_length=205,null=True)

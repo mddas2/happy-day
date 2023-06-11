@@ -3,17 +3,28 @@ from account.models import CustomUser
 from root.models import Shipping,Order
 
 class CheckOutForm(forms.Form):
-    def __init__(self, request, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
-        self.request = request
-        user = self.request.user       
+        user = self.request.user if self.request and self.request.user.is_authenticated else None       
         if user and user.is_authenticated:
             self.fields['firstname'].initial = user.first_name
             self.fields['lastname'].initial = user.last_name
             self.fields['email'].initial = user.email
             self.fields['phone'].initial = user.phone
 
-    account_type = forms.CharField(max_length=100)
+            shipping_address_obj =  user.shipping.all()
+            if shipping_address_obj.count()>0:
+                shipping_address_obj = shipping_address_obj.last()                  
+                self.fields['company'].initial = shipping_address_obj.company_name
+                self.fields['address_1'].initial = shipping_address_obj.address_1
+                self.fields['address_2'].initial = shipping_address_obj.address_2
+                self.fields['city'].initial = shipping_address_obj.city
+                self.fields['postcode'].initial = shipping_address_obj.postcode
+                self.fields['state'].initial = shipping_address_obj.state
+        
+
+    account_type = forms.CharField(max_length=100,required=False)
 
     firstname = forms.CharField(
         max_length=50,required=True,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'})
@@ -89,9 +100,7 @@ class CheckOutForm(forms.Form):
 
         # free_shipping=self.cleaned_data['free_shipping'],
         cash_on_delivery=self.cleaned_data['cash_on_delivery'],
-        check_user = CustomUser.objects.filter(email=email)
-        if check_user.count()>0:
-            raise forms.ValidationError("A user with this email already exists.")
+        
 
         user_obj = {
             'first_name' : firstname[0],
@@ -99,8 +108,11 @@ class CheckOutForm(forms.Form):
             'email' : email[0],
             'phone' : phone[0],
         }
-        
-        custom_user = CustomUser.objects.create(**user_obj)
+
+        if not self.request.user.is_authenticated:
+            custom_user = CustomUser.objects.create(**user_obj)
+        else:
+            custom_user = CustomUser.objects.get(email =  email[0])
 
         order_id = generate_order_id()
         shipping_ob = False
@@ -135,17 +147,17 @@ class CheckOutForm(forms.Form):
 
             if order:
                 shipping_obj = {
-                    'name':firstname,
-                    'phone':phone,
-                    'email': email,
-                    'user':custom_user,
-                    'company_name':company,
-                    'address_1' : address_1,
-                    'address_2' : address_2,
-                    'city' : city,
-                    'postcode':postcode,
-                    'state':state,
-                    'order':order_id
+                    'name':firstname[0],
+                    'phone':phone[0],
+                    'email': email[0],
+                    'user':custom_user[0],
+                    'company_name':company[0],
+                    'address_1' : address_1[0],
+                    'address_2' : address_2[0],
+                    'city' : city[0],
+                    'postcode':postcode[0],
+                    'state':state[0],
+                    'order_id':order_id[0]
                 }
 
                 shipping_ob = Shipping.objects.create(**shipping_obj)
