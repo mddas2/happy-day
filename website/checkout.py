@@ -10,7 +10,7 @@ def CheckOut(request):
     cart_data_str = request.COOKIES.get('cart')
     cart_data = json.loads(cart_data_str) if cart_data_str else []
     if request.POST:
-        form = CheckOutForm(request.POST)
+        form = CheckOutForm(request.POST,request)
         if form.is_valid():
             status = form.save(cart_data)            
             if status == True:
@@ -21,7 +21,8 @@ def CheckOut(request):
                 return response
           
     else:
-        form = CheckOutForm()
+        form = CheckOutForm(request)
+
     data = {
          'cart_data':cart_data,
          'form':form

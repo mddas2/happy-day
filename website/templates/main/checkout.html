@@ -29,29 +29,31 @@
             {% endif %}
                 <div class="so-onepagecheckout row">
                     <div class="col-left col-sm-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><i class="fa fa-sign-in"></i> Create an Account or Login
-                                </h4>
+                        {% if not user.is_authenticated %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><i class="fa fa-sign-in"></i> Create an Account or Login
+                                    </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" value="register" name="account_type">
+                                            Register Account</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" checked="checked" value="guest" name="account_type">
+                                            Guest Checkout</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input onclick='window.location.href=`{% url "ClientLogin" %}?next={% url "CheckOut" %}`' type="radio" value="login" name="account_type">
+                                            Login</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" value="register" name="account_type">
-                                        Register Account</label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" checked="checked" value="guest" name="account_type">
-                                        Guest Checkout</label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input onclick='window.location.href=`{% url "ClientLogin" %}?next={% url "CheckOut" %}`' type="radio" value="login" name="account_type">
-                                        Login</label>
-                                </div>
-                            </div>
-                        </div>
+                        {% endif %}
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><i class="fa fa-user"></i> Your Personal Details</h4>
@@ -131,32 +133,6 @@
                     </div>
                     <div class="col-right col-sm-9">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="panel panel-default no-padding">
-                                
-                                    <div class="col-sm-6  checkout-payment-methods">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title"><i class="fa fa-credit-card"></i> Payment Method
-                                            </h4>
-                                        </div>
-                                        <div class="panel-body">
-                                            <p>Please select the preferred payment method to use on this order.</p>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" checked="checked"
-                                                        name="cash_on_delivery">Cash On Delivery</label>
-                                            </div>
-
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="Paypal">Paypal</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
                             <div class="col-sm-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -245,6 +221,30 @@
                                             <div class="pull-right">
                                                 <input type="submit" class="btn btn-primary" id="button-confirm"
                                                     value="Confirm Order">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="panel panel-default no-padding">
+                                
+                                    <div class="col-sm-6  checkout-payment-methods">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><i class="fa fa-credit-card"></i> Payment Method
+                                            </h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>Please select the preferred payment method to use on this order.</p>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" checked="checked"
+                                                        name="cash_on_delivery">Cash On Delivery</label>
+                                            </div>
+
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="Paypal">Paypal</label>
                                             </div>
                                         </div>
                                     </div>

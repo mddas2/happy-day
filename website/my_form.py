@@ -3,6 +3,16 @@ from account.models import CustomUser
 from root.models import Shipping,Order
 
 class CheckOutForm(forms.Form):
+    def __init__(self, request, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+        user = self.request.user       
+        if user and user.is_authenticated:
+            self.fields['firstname'].initial = user.first_name
+            self.fields['lastname'].initial = user.last_name
+            self.fields['email'].initial = user.email
+            self.fields['phone'].initial = user.phone
+
     account_type = forms.CharField(max_length=100)
 
     firstname = forms.CharField(

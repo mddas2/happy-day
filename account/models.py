@@ -21,7 +21,7 @@ class CustomUser(AbstractUser):
     username = models.EmailField(max_length=255, unique=False)  
     apply_role_type = models.IntegerField(null=True) 
     image = models.ImageField(upload_to='user/profile', null=True)
-    c_id = models.BigIntegerField(null=True)
+    
 
     membership = models.ForeignKey(MemberShipType,related_name="users",on_delete=models.CASCADE,null=True)
 
