@@ -38,11 +38,6 @@
                                 <div class="panel-body">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" value="register" name="account_type">
-                                            Register Account</label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
                                             <input type="radio" checked="checked" value="guest" name="account_type">
                                             Guest Checkout</label>
                                     </div>
@@ -77,6 +72,12 @@
                                         <label for="input-payment-telephone" class="control-label">Telephone</label>
                                         {{ form.phone }}
                                     </div>
+                                    {% if not request.user.is_authenticated %}
+                                        <div class="form-group required">
+                                            <label for="input-payment-telephone" class="control-label">Password</label>
+                                            {{ form.password }}
+                                        </div>
+                                    {% endif %}
                                  
                                 </fieldset>
                             </div>

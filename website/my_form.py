@@ -41,6 +41,10 @@ class CheckOutForm(forms.Form):
         max_length=50,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'})
     )
+    password = forms.CharField(
+        max_length=50,required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'})
+    )
     #
 
     company = forms.CharField(
@@ -88,6 +92,12 @@ class CheckOutForm(forms.Form):
         lastname=self.cleaned_data['lastname'],
         email=self.cleaned_data['email'],
         phone=self.cleaned_data['phone'],
+    
+        if self.request.user.is_authenticated:
+            password = self.cleaned_data['password']
+            password=password
+        else:
+            password  = phone[0]
 
         company=self.cleaned_data['company'],
         address_1=self.cleaned_data['address_1'],
@@ -107,6 +117,7 @@ class CheckOutForm(forms.Form):
             'last_name' : lastname[0],
             'email' : email[0],
             'phone' : phone[0],
+            'password':password
         }
 
         if not self.request.user.is_authenticated:
@@ -150,7 +161,7 @@ class CheckOutForm(forms.Form):
                     'name':firstname[0],
                     'phone':phone[0],
                     'email': email[0],
-                    'user':custom_user[0],
+                    'user':custom_user,
                     'company_name':company[0],
                     'address_1' : address_1[0],
                     'address_2' : address_2[0],
